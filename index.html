@@ -56,9 +56,9 @@
 
         .topic-select {
             width: 100%;
-            padding: 10px 14px;
+            padding: 12px 14px;
             font-family: 'Nunito', sans-serif;
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: #0f172a;
             background-color: #ffffff;
@@ -78,7 +78,7 @@
         .game-card {
             background: #ffffff;
             border-radius: 14px;
-            padding: 12px 8px;
+            padding: 14px 8px;
             border: 2px solid #e2e8f0;
             display: flex;
             flex-direction: column;
@@ -95,13 +95,13 @@
         }
 
         .game-icon-box {
-            width: 42px;
-            height: 42px;
+            width: 48px;
+            height: 48px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             margin-bottom: 6px;
         }
 
@@ -110,7 +110,7 @@
         .card-spelling .game-icon-box { background: #dcfce7; }
 
         .game-title {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 800;
             color: #0f172a;
             line-height: 1.1;
@@ -121,7 +121,7 @@
             display: none;
             background: #ffffff;
             border-radius: 16px;
-            padding: 16px 12px;
+            padding: 20px 16px;
             border: 2px solid var(--primary);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             margin-bottom: 20px;
@@ -131,13 +131,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
             border-bottom: 1px solid #e2e8f0;
         }
 
         .game-arena-title {
-            font-size: 1rem;
+            font-size: 1.15rem;
             font-weight: 800;
             color: #1e293b;
         }
@@ -147,11 +147,11 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 700;
             color: #475569;
             background: #f1f5f9;
-            padding: 4px 8px;
+            padding: 6px 10px;
             border-radius: 20px;
         }
 
@@ -201,8 +201,8 @@
         .flashcard-container {
             perspective: 1000px;
             width: 100%;
-            min-height: 230px;
-            margin: 0 auto 12px auto;
+            min-height: 320px;
+            margin: 0 auto 16px auto;
             cursor: pointer;
         }
 
@@ -210,7 +210,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            min-height: 230px;
+            min-height: 320px;
             text-align: center;
             transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
             transform-style: preserve-3d;
@@ -230,7 +230,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 14px;
+            padding: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             border: 2px solid #3b82f6;
         }
@@ -241,15 +241,15 @@
         }
 
         .flashcard-front .vi-meaning {
-            font-size: 1.35rem;
+            font-size: 1.65rem;
             font-weight: 800;
             color: #1d4ed8;
         }
 
         .flashcard-hint {
             position: absolute;
-            bottom: 10px;
-            font-size: 0.75rem;
+            bottom: 12px;
+            font-size: 0.8rem;
             color: #94a3b8;
             font-weight: 600;
         }
@@ -264,21 +264,22 @@
         .flashcard-back .word-header {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            margin-bottom: 8px;
         }
 
         .flashcard-back .word-en {
-            font-size: 1.45rem;
+            font-size: 1.75rem;
             font-weight: 800;
             color: #059669;
         }
 
         .pos-badge {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 800;
             color: #0284c7;
             background: #e0f2fe;
-            padding: 2px 6px;
+            padding: 3px 8px;
             border-radius: 6px;
             font-style: italic;
         }
@@ -286,41 +287,41 @@
         .btn-audio {
             background: #e0e7ff;
             border: none;
-            width: 30px;
-            height: 30px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .flashcard-back .ipa {
-            font-size: 0.88rem;
+            font-size: 0.95rem;
             color: #64748b;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         .flashcard-back .vi-meaning-back {
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: #334155;
             background: #f1f5f9;
-            padding: 3px 10px;
+            padding: 5px 12px;
             border-radius: 6px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .flashcard-back .example-box {
-            font-size: 0.92rem;
-            line-height: 1.35;
+            font-size: 0.98rem;
+            line-height: 1.45;
             color: #1e293b;
             font-style: italic;
             background: #f0fdf4;
             border-left: 4px solid #10b981;
-            padding: 8px 10px;
+            padding: 10px 12px;
             border-radius: 6px;
             text-align: left;
             width: 100%;
@@ -328,31 +329,31 @@
 
         .btn-action {
             width: 100%;
-            padding: 10px;
+            padding: 14px;
             border-radius: 10px;
             border: none;
             background: var(--primary);
             color: #ffffff;
             font-family: 'Nunito', sans-serif;
             font-weight: 800;
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             cursor: pointer;
-            margin-top: 8px;
+            margin-top: 12px;
         }
 
         /* Nút Xem Đáp Án (Màu cam nổi bật) */
         .btn-show-answer {
             width: 100%;
-            padding: 9px;
+            padding: 12px;
             border-radius: 10px;
             border: none;
             background: #f59e0b;
             color: #ffffff;
             font-family: 'Nunito', sans-serif;
             font-weight: 800;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             cursor: pointer;
-            margin-top: 8px;
+            margin-top: 10px;
             display: none; /* Mặc định ẩn, hiện sau 30s */
         }
 
@@ -360,20 +361,25 @@
         .quiz-options-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
         .btn-quiz-opt {
-            padding: 12px 10px;
+            padding: 16px 12px;
             border-radius: 10px;
             border: 2px solid #e2e8f0;
             background: #fff;
             font-family: 'Nunito';
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             cursor: pointer;
-            text-align: left;
+            text-align: center;
             transition: all 0.2s ease;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-quiz-opt.correct {
@@ -390,15 +396,44 @@
 
         .quiz-example-feedback, .spelling-example-feedback {
             display: none;
-            margin-bottom: 12px;
-            font-size: 0.92rem;
-            line-height: 1.35;
+            margin-bottom: 16px;
+            font-size: 0.98rem;
+            line-height: 1.45;
             color: #15803d;
             background: #dcfce7;
-            padding: 8px 10px;
+            padding: 12px 14px;
             border-radius: 8px;
             text-align: left;
             border-left: 4px solid #22c55e;
+        }
+
+        /* Style Điền Từ */
+        .spelling-question {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 16px;
+            background: #f1f5f9;
+            padding: 16px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .spelling-input-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .spelling-input-box input {
+            flex: 1;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Nunito', sans-serif;
         }
 
         /* HOẠT CẢNH */
@@ -510,441 +545,473 @@
                 <option value="crime">8. Crime (Tội phạm)</option>
                 <option value="media">9. Media (Truyền thông)</option>
                 <option value="arts">10. Arts (Nghệ thuật)</option>
-                <option value="globalization">11. Globalization (Toàn cầu hóa)</option>
-                <option value="family">12. Family (Gia đình)</option>
-                <option value="housing">13. Housing (Nhà ở)</option>
-                <option value="money">14. Money (Tiền tệ)</option>
-                <option value="science">15. Science (Khoa học)</option>
             </select>
         </div>
 
-        <!-- 3 Thẻ Chọn Game -->
-        <main class="game-cards-grid">
-            <div class="game-card card-flashcard" onclick="startGame('flashcard')">
-                <div class="game-icon-box">🃏</div>
+        <!-- Lựa Chọn Kiểu Game -->
+        <div class="game-cards-grid">
+            <!-- Flashcard -->
+            <div class="game-card card-flashcard" id="flashcardCard">
+                <div class="game-icon-box">🎴</div>
                 <div class="game-title">Flashcard</div>
             </div>
-            <div class="game-card card-quiz" onclick="startGame('quiz6')">
-                <div class="game-icon-box">🎯</div>
+            <!-- Quiz -->
+            <div class="game-card card-quiz" id="quizCard">
+                <div class="game-icon-box">❓</div>
                 <div class="game-title">Trắc Nghiệm</div>
             </div>
-            <div class="game-card card-spelling" onclick="startGame('spelling')">
-                <div class="game-icon-box">✍️</div>
+            <!-- Spelling -->
+            <div class="game-card card-spelling" id="spellingCard">
+                <div class="game-icon-box">✏️</div>
                 <div class="game-title">Điền Từ</div>
             </div>
-        </main>
+        </div>
 
-        <!-- Khung Chơi Game (Đã bỏ nút Đóng ✖) -->
-        <section id="gameArena" class="game-arena">
+        <!-- GAME ARENA: FLASHCARD -->
+        <div class="game-arena" id="flashcardArena">
             <div class="game-arena-header">
-                <h2 id="gameArenaTitle" class="game-arena-title">Màn chơi</h2>
-                
-                <!-- Nút Toggle Bật/Tắt Auto Next -->
+                <div class="game-arena-title">🎴 Flashcard</div>
                 <div class="auto-next-control">
-                    <span>Tự chuyển</span>
+                    <span>Auto Next</span>
                     <label class="switch">
-                        <input type="checkbox" id="autoNextToggle" checked>
+                        <input type="checkbox" id="autoNextToggle">
                         <span class="slider"></span>
                     </label>
                 </div>
             </div>
-            <div id="gameArenaContent"></div>
-        </section>
 
-        <!-- Khối Kết Nối Với Thầy Danh -->
-        <section class="contact-section">
-            <h2>Kết nối với thầy Danh</h2>
+            <div class="flashcard-container" id="flashcardContainer">
+                <div class="flashcard-inner">
+                    <!-- Front -->
+                    <div class="flashcard-front">
+                        <div class="vi-meaning" id="cardViMeaning">Nhấp để lật thẻ</div>
+                        <div class="flashcard-hint">Nhấp vào thẻ để xem từ tiếng Anh</div>
+                    </div>
+                    <!-- Back -->
+                    <div class="flashcard-back">
+                        <div class="word-header">
+                            <div class="word-en" id="cardWordEn">Word</div>
+                            <button class="btn-audio" id="audioBtn" title="Nghe phát âm">🔊</button>
+                        </div>
+                        <div class="pos-badge" id="cardPOS">noun</div>
+                        <div class="ipa" id="cardIPA">/wɜːrd/</div>
+                        <div class="vi-meaning-back" id="cardViMeaningBack">Ý nghĩa Tiếng Việt</div>
+                        <div class="example-box" id="cardExample">Ví dụ: ...</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-action" id="nextFlashcardBtn">Từ Tiếp Theo ➜</button>
+            <button class="btn-show-answer" id="showAnswerBtn">Xem Đáp Án</button>
+        </div>
+
+        <!-- GAME ARENA: QUIZ -->
+        <div class="game-arena" id="quizArena">
+            <div class="game-arena-header">
+                <div class="game-arena-title">❓ Trắc Nghiệm</div>
+                <div class="auto-next-control">
+                    <span>Auto Next</span>
+                    <label class="switch">
+                        <input type="checkbox" id="autoNextToggleQuiz">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="quiz-example-feedback" id="quizExampleFeedback"></div>
+
+            <div class="quiz-question" id="quizQuestion" style="font-size: 1.2rem; font-weight: 700; color: #1e293b; margin-bottom: 18px; background: #f1f5f9; padding: 14px; border-radius: 10px; text-align: center;"></div>
+
+            <div class="quiz-options-grid" id="quizOptions"></div>
+
+            <button class="btn-action" id="nextQuizBtn">Câu Tiếp Theo ➜</button>
+        </div>
+
+        <!-- GAME ARENA: SPELLING -->
+        <div class="game-arena" id="spellingArena">
+            <div class="game-arena-header">
+                <div class="game-arena-title">✏️ Điền Từ</div>
+                <div class="auto-next-control">
+                    <span>Auto Next</span>
+                    <label class="switch">
+                        <input type="checkbox" id="autoNextToggleSpelling">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="spelling-example-feedback" id="spellingExampleFeedback"></div>
+
+            <div class="spelling-question" id="spellingMeaning"></div>
+
+            <div class="spelling-input-box">
+                <input type="text" id="spellingInput" placeholder="Nhập từ tiếng Anh..." autocomplete="off">
+            </div>
+
+            <button class="btn-action" id="checkSpellingBtn">Kiểm Tra ✓</button>
+            <button class="btn-action" id="nextSpellingBtn" style="display: none; background: #10b981;">Từ Tiếp Theo ➜</button>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h2>💬 Kết Nối Với Thầy Danh</h2>
             <div class="social-buttons">
-                <a href="https://zalo.me/0911594794" target="_blank" class="btn-social btn-zalo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="zalo-logo">
-                    Zalo: 0911594794
+                <a href="https://zalo.me/danhlearning" target="_blank" class="btn-social btn-zalo">
+                    <span>Zalo</span>
                 </a>
-                
-                <a href="https://www.facebook.com/cong.danh.0210" target="_blank" class="btn-social btn-fb">
+                <a href="https://facebook.com/danhlearning" target="_blank" class="btn-social btn-fb">
                     <svg class="fb-icon" viewBox="0 0 24 24">
-                        <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
-                    Facebook
                 </a>
             </div>
-        </section>
-
+        </div>
     </div>
 
     <script>
+        // ========== DỮ LIỆU TỬ VỰNG ==========
         const vocabularyData = {
+            all: [
+                { id: 1, en: "Determine", vi: "Xác định, quyết định", pos: "verb", ipa: "/dɪˈtɜːrmɪn/", example: "The study aims to determine the effects of climate change.", topic: "all" },
+                { id: 2, en: "Significant", vi: "Có ý nghĩa, quan trọng", pos: "adj", ipa: "/sɪɡˈnɪfɪkənt/", example: "There has been a significant increase in student enrollment.", topic: "all" },
+                { id: 3, en: "Implement", vi: "Thực hiện, áp dụng", pos: "verb", ipa: "/ˈɪmpləment/", example: "The government will implement new policies next year.", topic: "all" },
+                { id: 4, en: "Analyze", vi: "Phân tích", pos: "verb", ipa: "/ˈænəlaɪz/", example: "We need to analyze the data carefully.", topic: "all" },
+                { id: 5, en: "Evaluate", vi: "Đánh giá", pos: "verb", ipa: "/ɪˈvæljueɪt/", example: "The teacher will evaluate the student's performance.", topic: "all" }
+            ],
             education: [
-                { word: "Curriculum", pos: "n", ipa: "/kəˈrɪkjələm/", meaning: "Chương trình học", defEn: "the subjects comprising a course of study in a school or college.", example: "The school curriculum has been updated to include coding." },
-                { word: "Pedagogy", pos: "n", ipa: "/ˈpedəɡɒdʒi/", meaning: "Phương pháp giảng dạy", defEn: "the method and practice of teaching.", example: "Modern pedagogy focuses on student-centered learning." },
-                { word: "Literacy", pos: "n", ipa: "/ˈlɪtərəsi/", meaning: "Trình độ biết đọc biết viết", defEn: "the ability to read and write.", example: "Adult literacy programs have seen great success." },
-                { word: "Qualification", pos: "n", ipa: "/ˌkwɒlɪfɪˈkeɪʃn/", meaning: "Bằng cấp, chứng chỉ", defEn: "an official record of achievement or competence.", example: "He has the necessary academic qualifications for the job." },
-                { word: "Tuition", pos: "n", ipa: "/tjuˈɪʃn/", meaning: "Học phí", defEn: "a sum of money charged for teaching by a college or university.", example: "Tuition fees have increased significantly this year." }
+                { id: 101, en: "Scholar", vi: "Học giả, học sinh xuất sắc", pos: "noun", ipa: "/ˈskɒlər/", example: "He is a respected scholar in his field.", topic: "education" },
+                { id: 102, en: "Curriculum", vi: "Chương trình học", pos: "noun", ipa: "/kəˈrɪkjələm/", example: "The school updated its curriculum last year.", topic: "education" }
             ],
             environment: [
-                { word: "Biodiversity", pos: "n", ipa: "/ˌbaɪəʊdaɪˈvɜːsəti/", meaning: "Đa dạng sinh học", defEn: "the variety of plant and animal life in the world.", example: "The Amazon rainforest is famous for its rich biodiversity." },
-                { word: "Deforestation", pos: "n", ipa: "/ˌdiːˌfɒrɪˈsteɪʃn/", meaning: "Nạn phá rừng", defEn: "the action of clearing a wide area of trees.", example: "Deforestation threatens many endangered species." },
-                { word: "Contamination", pos: "n", ipa: "/kənˌtæmɪˈneɪʃn/", meaning: "Sự ô nhiễm", defEn: "the action of making something impure or unsuitable.", example: "Water contamination is a major public health concern." },
-                { word: "Ecosystem", pos: "n", ipa: "/ˈiːkəʊsɪstəm/", meaning: "Hệ sinh thái", defEn: "a biological community of interacting organisms.", example: "Pollution causes severe damage to the marine ecosystem." },
-                { word: "Sustainability", pos: "n", ipa: "/səˌsteɪnəˈbɪləti/", meaning: "Phát triển bền vững", defEn: "the ability to be maintained at a certain rate or level.", example: "Environmental sustainability should be a global goal." }
+                { id: 201, en: "Ecosystem", vi: "Hệ sinh thái", pos: "noun", ipa: "/ˈiːkoʊsɪstəm/", example: "Rainforests are important ecosystems.", topic: "environment" },
+                { id: 202, en: "Sustainable", vi: "Bền vững", pos: "adj", ipa: "/səˈsteɪnəbl/", example: "We need sustainable solutions to climate change.", topic: "environment" }
             ],
             technology: [
-                { word: "Automation", pos: "n", ipa: "/ˌɔːtəˈmeɪʃn/", meaning: "Tự động hóa", defEn: "the use of largely automatic equipment in a system.", example: "Automation has streamlined factory production lines." },
-                { word: "Breakthrough", pos: "n", ipa: "/ˈbreɪkθruː/", meaning: "Bước đột phá", defEn: "a sudden, dramatic, and important discovery.", example: "Scientists made a major breakthrough in renewable energy." },
-                { word: "Cybersecurity", pos: "n", ipa: "/ˈsaɪbəsɪkjʊərəti/", meaning: "An ninh mạng", defEn: "measures taken to protect computers against criminal use.", example: "Companies invest heavily in cybersecurity to protect data." },
-                { word: "Innovation", pos: "n", ipa: "/ˌɪnəˈveɪʃn/", meaning: "Sự đổi mới, sáng tạo", defEn: "a new method, idea, or product.", example: "Technological innovation drives economic growth." },
-                { word: "Obsolete", pos: "adj", ipa: "/ˈɒbsəliːt/", meaning: "Lỗi thời, lạc hậu", defEn: "no longer produced or used; out of date.", example: "Floppy disks became obsolete years ago." }
+                { id: 301, en: "Algorithm", vi: "Thuật toán", pos: "noun", ipa: "/ˈælɡərɪðəm/", example: "The algorithm processes data very quickly.", topic: "technology" },
+                { id: 302, en: "Innovation", vi: "Sự đổi mới, sáng tạo", pos: "noun", ipa: "/ˌɪnəˈveɪʃən/", example: "Innovation is key to business success.", topic: "technology" }
             ],
             health: [
-                { word: "Sedentary", pos: "adj", ipa: "/ˈsedntri/", meaning: "Ít vận động", defEn: "tending to spend much time seated; somewhat inactive.", example: "A sedentary lifestyle increases the risk of heart disease." },
-                { word: "Chronic", pos: "adj", ipa: "/ˈkrɒnɪk/", meaning: "Mãn tính", defEn: "persisting for a long time or constantly recurring.", example: "She suffers from chronic back pain." },
-                { word: "Nutritious", pos: "adj", ipa: "/njuːˈtrɪʃəs/", meaning: "Bổ dưỡng", defEn: "efficient as food; nourishing.", example: "Vegetables are a crucial part of a nutritious diet." },
-                { word: "Epidemic", pos: "n", ipa: "/ˌepɪˈdemɪk/", meaning: "Bệnh dịch", defEn: "a widespread occurrence of an infectious disease.", example: "The flu epidemic spread rapidly across the country." },
-                { word: "Immunity", pos: "n", ipa: "/ɪˈmjuːnəti/", meaning: "Hệ miễn dịch", defEn: "the ability of an organism to resist a particular infection.", example: "Vaccines help build immunity against dangerous viruses." }
+                { id: 401, en: "Symptom", vi: "Triệu chứng", pos: "noun", ipa: "/ˈsɪmptəm/", example: "Common symptoms include fever and fatigue.", topic: "health" },
+                { id: 402, en: "Medication", vi: "Thuốc men", pos: "noun", ipa: "/ˌmedɪˈkeɪʃən/", example: "Always take medication as prescribed.", topic: "health" }
+            ],
+            work: [
+                { id: 501, en: "Responsibility", vi: "Trách nhiệm", pos: "noun", ipa: "/rɪˌspɒnsəˈbɪləti/", example: "My main responsibility is managing the team.", topic: "work" },
+                { id: 502, en: "Collaborate", vi: "Hợp tác", pos: "verb", ipa: "/kəˈlæbəreɪt/", example: "We collaborate with other departments regularly.", topic: "work" }
+            ],
+            society: [
+                { id: 601, en: "Community", vi: "Cộng đồng", pos: "noun", ipa: "/kəˈmjuːnəti/", example: "Strong communities support their members.", topic: "society" },
+                { id: 602, en: "Culture", vi: "Văn hóa", pos: "noun", ipa: "/ˈkʌltʃər/", example: "Each culture has unique traditions.", topic: "society" }
+            ],
+            travel: [
+                { id: 701, en: "Destination", vi: "Địa điểm đến", pos: "noun", ipa: "/ˌdestɪˈneɪʃən/", example: "Paris is a popular tourist destination.", topic: "travel" },
+                { id: 702, en: "Journey", vi: "Hành trình", pos: "noun", ipa: "/ˈdʒɜːrni/", example: "The journey took three days.", topic: "travel" }
+            ],
+            crime: [
+                { id: 801, en: "Evidence", vi: "Bằng chứng", pos: "noun", ipa: "/ˈevɪdəns/", example: "The evidence was presented in court.", topic: "crime" },
+                { id: 802, en: "Suspect", vi: "Nghi phạm", pos: "noun", ipa: "/ˈsʌspekt/", example: "Police arrested the main suspect.", topic: "crime" }
+            ],
+            media: [
+                { id: 901, en: "Broadcast", vi: "Phát sóng", pos: "verb/noun", ipa: "/ˈbrɔːdkæst/", example: "The event was broadcast live on television.", topic: "media" },
+                { id: 902, en: "Audience", vi: "Khán giả", pos: "noun", ipa: "/ˈɔːdiəns/", example: "The audience applauded the performance.", topic: "media" }
+            ],
+            arts: [
+                { id: 1001, en: "Masterpiece", vi: "Kiệt tác", pos: "noun", ipa: "/ˈmæstərpiːs/", example: "The painting is considered a masterpiece.", topic: "arts" },
+                { id: 1002, en: "Gallery", vi: "Phòng trưng bày", pos: "noun", ipa: "/ˈɡæləri/", example: "The art gallery opens at 10 AM.", topic: "arts" }
             ]
         };
 
-        let currentWordObj = null;
-        let currentGameMode = '';
-        let isTransitioning = false;
-        let spellingTimer = null;
+        // ========== BIẾN TOÀN CỤC ==========
+        let currentTopic = 'all';
+        let currentGameMode = null;
+        let currentWordIndex = 0;
+        let currentWords = [];
+        let score = { correct: 0, total: 0 };
 
-        // 🔊 BỘ PHÁT ÂM VỚI TỐC ĐỘ ĐỌC CHẬM (rate = 0.75)
-        function speakWord(text) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US';
-                utterance.rate = 0.75;
-                window.speechSynthesis.speak(utterance);
-            }
+        // ========== KHỞI TẠO ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTopicData('all');
+            attachEventListeners();
+        });
+
+        function loadTopicData(topic) {
+            currentTopic = topic;
+            currentWords = vocabularyData[topic] || vocabularyData.all;
+            currentWordIndex = 0;
+            score = { correct: 0, total: 0 };
         }
 
-        // 🎵 HIỆU ỨNG ÂM THANH CẢI TIẾN
-        function playSoundEffect(type) {
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                
-                if (type === 'correct') {
-                    // Âm thanh ĐÚNG: Dãy 3 nốt cao vui vẻ (C-E-G như hợp âm vui)
-                    playCorrectSequence(ctx);
-                } else {
-                    // Âm thanh SAI: Nốt thấp tiếc nuối
-                    playWrongSequence(ctx);
+        function attachEventListeners() {
+            // Topic Select
+            document.getElementById('topicSelect').addEventListener('change', (e) => {
+                loadTopicData(e.target.value);
+            });
+
+            // Game Card Clicks
+            document.getElementById('flashcardCard').addEventListener('click', () => startGame('flashcard'));
+            document.getElementById('quizCard').addEventListener('click', () => startGame('quiz'));
+            document.getElementById('spellingCard').addEventListener('click', () => startGame('spelling'));
+
+            // Flashcard Events
+            document.getElementById('flashcardContainer').addEventListener('click', toggleFlashcard);
+            document.getElementById('nextFlashcardBtn').addEventListener('click', nextFlashcard);
+            document.getElementById('audioBtn').addEventListener('click', playAudio);
+
+            // Quiz Events
+            document.getElementById('nextQuizBtn').addEventListener('click', nextQuiz);
+
+            // Spelling Events
+            document.getElementById('checkSpellingBtn').addEventListener('click', checkSpelling);
+            document.getElementById('nextSpellingBtn').addEventListener('click', nextSpelling);
+            document.getElementById('spellingInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') checkSpelling();
+            });
+
+            // Auto Next Toggles
+            document.getElementById('autoNextToggle').addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    autoAdvanceFlashcard();
                 }
-            } catch(e) {}
+            });
         }
 
-        function playCorrectSequence(ctx) {
-            // Nốt 1: C5 (523.25 Hz) - vui vẻ
-            let osc1 = ctx.createOscillator();
-            let gain1 = ctx.createGain();
-            osc1.connect(gain1);
-            gain1.connect(ctx.destination);
-            osc1.frequency.value = 523.25;
-            osc1.type = 'sine';
-            gain1.gain.setValueAtTime(0.3, ctx.currentTime);
-            gain1.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
-            osc1.start();
-            osc1.stop(ctx.currentTime + 0.15);
-
-            // Nốt 2: E5 (659.25 Hz) - cao hơn
-            let osc2 = ctx.createOscillator();
-            let gain2 = ctx.createGain();
-            osc2.connect(gain2);
-            gain2.connect(ctx.destination);
-            osc2.frequency.value = 659.25;
-            osc2.type = 'sine';
-            gain2.gain.setValueAtTime(0, ctx.currentTime + 0.15);
-            gain2.gain.setValueAtTime(0.3, ctx.currentTime + 0.15);
-            gain2.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-            osc2.start(ctx.currentTime + 0.15);
-            osc2.stop(ctx.currentTime + 0.3);
-
-            // Nốt 3: G5 (783.99 Hz) - cao nhất
-            let osc3 = ctx.createOscillator();
-            let gain3 = ctx.createGain();
-            osc3.connect(gain3);
-            gain3.connect(ctx.destination);
-            osc3.frequency.value = 783.99;
-            osc3.type = 'sine';
-            gain3.gain.setValueAtTime(0, ctx.currentTime + 0.3);
-            gain3.gain.setValueAtTime(0.3, ctx.currentTime + 0.3);
-            gain3.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
-            osc3.start(ctx.currentTime + 0.3);
-            osc3.stop(ctx.currentTime + 0.5);
-        }
-
-        function playWrongSequence(ctx) {
-            // Âm thanh SAI: Hai nốt thấp tiếc nuối
-            let osc1 = ctx.createOscillator();
-            let gain1 = ctx.createGain();
-            osc1.connect(gain1);
-            gain1.connect(ctx.destination);
-            osc1.frequency.value = 300;
-            osc1.type = 'sine';
-            gain1.gain.setValueAtTime(0.3, ctx.currentTime);
-            gain1.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
-            osc1.start();
-            osc1.stop(ctx.currentTime + 0.2);
-
-            // Nốt 2 - thấp hơn nốt 1
-            let osc2 = ctx.createOscillator();
-            let gain2 = ctx.createGain();
-            osc2.connect(gain2);
-            gain2.connect(ctx.destination);
-            osc2.frequency.value = 240;
-            osc2.type = 'sine';
-            gain2.gain.setValueAtTime(0, ctx.currentTime + 0.2);
-            gain2.gain.setValueAtTime(0.3, ctx.currentTime + 0.2);
-            gain2.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
-            osc2.start(ctx.currentTime + 0.2);
-            osc2.stop(ctx.currentTime + 0.4);
-        }
-
-        function triggerFeedback(isCorrect) {
-            const arena = document.getElementById('gameArena');
-            const bgClass = isCorrect ? 'flash-success' : 'flash-error';
-            const animClass = isCorrect ? 'anim-bounce' : 'anim-shake';
-
-            document.body.classList.add(bgClass);
-            arena.classList.add(animClass);
-
-            playSoundEffect(isCorrect ? 'correct' : 'wrong');
-
-            setTimeout(() => {
-                document.body.classList.remove(bgClass);
-                arena.classList.remove(animClass);
-            }, 400);
-        }
-
-        function getVocabularyList(topicKey) {
-            if (topicKey === 'all') {
-                let allWords = [];
-                Object.keys(vocabularyData).forEach(key => {
-                    allWords = allWords.concat(vocabularyData[key]);
-                });
-                return allWords;
-            }
-            return vocabularyData[topicKey] || vocabularyData['education'];
-        }
-
-        function clearSpellingTimer() {
-            if (spellingTimer) {
-                clearTimeout(spellingTimer);
-                spellingTimer = null;
-            }
-        }
-
+        // ========== FLASHCARD GAME ==========
         function startGame(mode) {
-            isTransitioning = false;
-            clearSpellingTimer();
+            hideAllArenas();
             currentGameMode = mode;
-            const topicKey = document.getElementById('topicSelect').value;
-            const words = getVocabularyList(topicKey);
-
-            const arena = document.getElementById('gameArena');
-            const arenaTitle = document.getElementById('gameArenaTitle');
-            const arenaContent = document.getElementById('gameArenaContent');
-
-            arena.style.display = 'block';
+            currentWordIndex = 0;
 
             if (mode === 'flashcard') {
-                arenaTitle.innerText = "🃏 Flashcard";
-                renderFlashcard(words, arenaContent);
-            } else if (mode === 'quiz6') {
-                arenaTitle.innerText = "🎯 Trắc Nghiệm";
-                renderQuiz(words, arenaContent);
+                document.getElementById('flashcardArena').style.display = 'block';
+                showFlashcard();
+            } else if (mode === 'quiz') {
+                document.getElementById('quizArena').style.display = 'block';
+                showQuiz();
             } else if (mode === 'spelling') {
-                arenaTitle.innerText = "✍️ Điền Từ";
-                renderSpelling(words, arenaContent);
+                document.getElementById('spellingArena').style.display = 'block';
+                showSpelling();
             }
         }
 
-        function isAutoNextEnabled() {
-            return document.getElementById('autoNextToggle').checked;
+        function hideAllArenas() {
+            document.getElementById('flashcardArena').style.display = 'none';
+            document.getElementById('quizArena').style.display = 'none';
+            document.getElementById('spellingArena').style.display = 'none';
         }
 
-        // FLASHCARD
-        function renderFlashcard(words, container) {
-            currentWordObj = words[Math.floor(Math.random() * words.length)];
-            container.innerHTML = `
-                <div class="flashcard-container" id="cardContainer" onclick="flipCard(this, '${currentWordObj.word}')">
-                    <div class="flashcard-inner">
-                        <div class="flashcard-front">
-                            <span class="vi-meaning">${currentWordObj.meaning}</span>
-                            <span class="flashcard-hint">👆 Chạm để xem đáp án</span>
-                        </div>
-                        <div class="flashcard-back">
-                            <div class="word-header">
-                                <span class="word-en">${currentWordObj.word}</span>
-                                <span class="pos-badge">[${currentWordObj.pos}]</span>
-                                <button class="btn-audio" onclick="event.stopPropagation(); speakWord('${currentWordObj.word}')">🔊</button>
-                            </div>
-                            <span class="ipa">${currentWordObj.ipa}</span>
-                            <span class="vi-meaning-back">${currentWordObj.meaning}</span>
-                            <div class="example-box">
-                                💡 <b>Ex:</b> "${currentWordObj.example}"
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn-action" onclick="startGame('flashcard')">Từ Tiếp Theo ➔</button>
-            `;
-        }
-
-        function flipCard(element, word) {
-            const isFlipped = element.classList.toggle('flipped');
-            if (isFlipped) speakWord(word);
-        }
-
-        // TRẮC NGHIỆM
-        function renderQuiz(words, container) {
-            currentWordObj = words[Math.floor(Math.random() * words.length)];
-
-            let options = [currentWordObj.meaning];
-            let allList = getVocabularyList('all');
-            while (options.length < 6 && options.length < allList.length) {
-                let randomMeaning = allList[Math.floor(Math.random() * allList.length)].meaning;
-                if (!options.includes(randomMeaning)) options.push(randomMeaning);
+        function showFlashcard() {
+            if (currentWordIndex >= currentWords.length) {
+                alert(`Hoàn thành! Bạn đã học ${currentWords.length} từ vựng.`);
+                hideAllArenas();
+                return;
             }
-            options.sort(() => Math.random() - 0.5);
 
-            let optionsHtml = options.map((opt, idx) => `
-                <button class="btn-quiz-opt" onclick="checkQuizAnswer(this, '${opt}', '${currentWordObj.meaning}')">
-                    ${idx + 1}. ${opt}
-                </button>
-            `).join('');
+            const word = currentWords[currentWordIndex];
+            document.getElementById('cardViMeaning').textContent = word.vi;
+            document.getElementById('cardWordEn').textContent = word.en;
+            document.getElementById('cardPOS').textContent = word.pos;
+            document.getElementById('cardIPA').textContent = word.ipa;
+            document.getElementById('cardViMeaningBack').textContent = word.vi;
+            document.getElementById('cardExample').textContent = `Ví dụ: ${word.example}`;
 
-            container.innerHTML = `
-                <div style="text-align: center; margin-bottom: 12px;">
-                    <p style="font-size: 1.3rem; font-weight: 800; color: #2563eb;">
-                        ${currentWordObj.word} <span style="font-size: 0.95rem; color: #64748b; font-weight: 700;">${currentWordObj.ipa}</span>
-                    </p>
-                    <div id="quizExampleFeedback" class="quiz-example-feedback" style="margin-top: 8px;">
-                        💡 <b>Ex:</b> "${currentWordObj.example}"
-                    </div>
-                </div>
-                <div class="quiz-options-grid">${optionsHtml}</div>
-                <div id="quizNextBtnBox" style="display: none; margin-top: 10px;">
-                    <button class="btn-action" onclick="startGame('quiz6')">Từ Tiếp Theo ➔</button>
-                </div>
-            `;
-        }
+            const container = document.getElementById('flashcardContainer');
+            container.classList.remove('flipped');
 
-        function checkQuizAnswer(btn, selected, correct) {
-            if (isTransitioning) return;
-
-            if (selected === correct) {
-                isTransitioning = true;
-                btn.classList.add('correct');
-                
-                const quizExampleBox = document.getElementById('quizExampleFeedback');
-                if (quizExampleBox) quizExampleBox.style.display = 'block';
-
-                triggerFeedback(true);
-                speakWord(currentWordObj.word);
-
-                if (isAutoNextEnabled()) {
-                    setTimeout(() => startGame('quiz6'), 2000);
-                } else {
-                    document.getElementById('quizNextBtnBox').style.display = 'block';
-                }
-            } else {
-                btn.classList.add('wrong');
-                triggerFeedback(false);
-            }
-        }
-
-        // ĐIỀN TỪ (Tự hiện nút xem đáp án sau 30 giây)
-        function renderSpelling(words, container) {
-            currentWordObj = words[Math.floor(Math.random() * words.length)];
-            container.innerHTML = `
-                <div style="text-align: center;">
-                    <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 2px;">Gõ từ tiếng Anh tương ứng với gợi ý:</p>
-                    <p style="font-size: 1.15rem; font-weight: 800; color: #059669; margin-bottom: 2px;">"${currentWordObj.meaning}"</p>
-                    <p style="font-size: 0.82rem; color: #475569; font-style: italic; background: #f1f5f9; padding: 4px 8px; border-radius: 6px; margin-bottom: 12px;">
-                        📌 <b>Def:</b> ${currentWordObj.defEn}
-                    </p>
-                    
-                    <input type="text" id="spellingInput" placeholder="Nhập từ..." 
-                           style="padding: 10px; width: 100%; font-family: 'Nunito'; font-size: 1rem; border-radius: 8px; border: 2px solid #cbd5e1; margin-bottom: 10px; text-align: center;"
-                           onkeypress="if(event.key === 'Enter') handleSpellingCheck()">
-                    
-                    <div id="spellingExampleFeedback" class="spelling-example-feedback">
-                        💡 <b>Ex:</b> "${currentWordObj.example}"
-                    </div>
-
-                    <button id="spellingSubmitBtn" class="btn-action" onclick="handleSpellingCheck()">Kiểm Tra</button>
-                    <button id="spellingShowAnswerBtn" class="btn-show-answer" onclick="revealSpellingAnswer()">Xem Đáp Án 💡</button>
-                </div>
-            `;
-
+            // Show answer button after 30s
+            document.getElementById('showAnswerBtn').style.display = 'none';
             setTimeout(() => {
-                const input = document.getElementById('spellingInput');
-                if(input) input.focus();
-            }, 100);
-
-            spellingTimer = setTimeout(() => {
-                const showAnswerBtn = document.getElementById('spellingShowAnswerBtn');
-                if (showAnswerBtn && !isTransitioning) {
-                    showAnswerBtn.style.display = 'block';
+                if (currentGameMode === 'flashcard' && currentWordIndex < currentWords.length) {
+                    document.getElementById('showAnswerBtn').style.display = 'block';
                 }
             }, 30000);
         }
 
-        function revealSpellingAnswer() {
-            clearSpellingTimer();
-            const input = document.getElementById('spellingInput');
-            const exampleBox = document.getElementById('spellingExampleFeedback');
-            const submitBtn = document.getElementById('spellingSubmitBtn');
-            const showAnswerBtn = document.getElementById('spellingShowAnswerBtn');
-
-            input.value = currentWordObj.word;
-            input.style.borderColor = '#f59e0b';
-            input.style.backgroundColor = '#fef3c7';
-
-            if (exampleBox) exampleBox.style.display = 'block';
-            if (showAnswerBtn) showAnswerBtn.style.display = 'none';
-
-            speakWord(currentWordObj.word);
-
-            submitBtn.innerText = "Từ Tiếp Theo ➔";
-            submitBtn.onclick = () => startGame('spelling');
+        function toggleFlashcard() {
+            document.getElementById('flashcardContainer').classList.toggle('flipped');
         }
 
-        function handleSpellingCheck() {
-            if (isTransitioning) return;
-            const input = document.getElementById('spellingInput');
-            const exampleBox = document.getElementById('spellingExampleFeedback');
-            const submitBtn = document.getElementById('spellingSubmitBtn');
-            const showAnswerBtn = document.getElementById('spellingShowAnswerBtn');
-            const val = input.value.trim();
+        function nextFlashcard() {
+            currentWordIndex++;
+            if (currentWordIndex >= currentWords.length) {
+                alert(`Hoàn thành! Bạn đã học ${currentWords.length} từ vựng.`);
+                hideAllArenas();
+                return;
+            }
+            showFlashcard();
 
-            if (val.toLowerCase() === currentWordObj.word.toLowerCase()) {
-                isTransitioning = true;
-                clearSpellingTimer();
-
-                input.style.borderColor = '#22c55e';
-                input.style.backgroundColor = '#dcfce7';
-                
-                if (exampleBox) exampleBox.style.display = 'block';
-                if (showAnswerBtn) showAnswerBtn.style.display = 'none';
-
-                triggerFeedback(true);
-                speakWord(currentWordObj.word);
-
-                if (isAutoNextEnabled()) {
-                    setTimeout(() => startGame('spelling'), 2000);
-                } else {
-                    submitBtn.innerText = "Từ Tiếp Theo ➔";
-                    submitBtn.onclick = () => startGame('spelling');
-                }
-            } else {
-                input.style.borderColor = '#ef4444';
-                input.style.backgroundColor = '#fee2e2';
-                triggerFeedback(false);
+            if (document.getElementById('autoNextToggle').checked) {
+                autoAdvanceFlashcard();
             }
         }
+
+        function autoAdvanceFlashcard() {
+            setTimeout(() => {
+                if (currentGameMode === 'flashcard') {
+                    nextFlashcard();
+                }
+            }, 5000);
+        }
+
+        function playAudio() {
+            const word = currentWords[currentWordIndex];
+            const utterance = new SpeechSynthesisUtterance(word.en);
+            utterance.rate = 0.8;
+            speechSynthesis.speak(utterance);
+        }
+
+        // ========== QUIZ GAME ==========
+        function showQuiz() {
+            if (currentWordIndex >= currentWords.length) {
+                alert(`Hoàn thành Quiz! Bạn đúng ${score.correct}/${score.total} câu.`);
+                hideAllArenas();
+                return;
+            }
+
+            const word = currentWords[currentWordIndex];
+            document.getElementById('quizQuestion').textContent = `Chọn ý nghĩa của từ: "${word.en}"`;
+
+            const options = generateQuizOptions(word);
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = '';
+
+            options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-quiz-opt';
+                btn.textContent = option.text;
+                btn.addEventListener('click', () => checkQuizAnswer(option.correct, word.vi));
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('nextQuizBtn').style.display = 'none';
+            document.getElementById('quizExampleFeedback').style.display = 'none';
+        }
+
+        function generateQuizOptions(word) {
+            const options = [
+                { text: word.vi, correct: true },
+                { text: currentWords[(currentWordIndex + 1) % currentWords.length].vi, correct: false },
+                { text: currentWords[(currentWordIndex + 2) % currentWords.length].vi, correct: false },
+                { text: currentWords[(currentWordIndex + 3) % currentWords.length].vi, correct: false }
+            ];
+            return options.sort(() => Math.random() - 0.5);
+        }
+
+        function checkQuizAnswer(isCorrect, correctAnswer) {
+            score.total++;
+            const buttons = document.querySelectorAll('.btn-quiz-opt');
+            buttons.forEach((btn, index) => {
+                if (btn.textContent === correctAnswer) {
+                    btn.classList.add('correct');
+                } else if (btn.classList.contains('correct') === false && !isCorrect && btn === event.target) {
+                    btn.classList.add('wrong');
+                }
+                btn.disabled = true;
+            });
+
+            if (isCorrect) {
+                score.correct++;
+                playCorrectSound();
+            } else {
+                playWrongSound();
+            }
+
+            document.getElementById('quizExampleFeedback').style.display = 'block';
+            document.getElementById('quizExampleFeedback').textContent = currentWords[currentWordIndex].example;
+            document.getElementById('nextQuizBtn').style.display = 'block';
+        }
+
+        function nextQuiz() {
+            currentWordIndex++;
+            showQuiz();
+        }
+
+        // ========== SPELLING GAME ==========
+        function showSpelling() {
+            if (currentWordIndex >= currentWords.length) {
+                alert(`Hoàn thành Spelling! Bạn đúng ${score.correct}/${score.total} câu.`);
+                hideAllArenas();
+                return;
+            }
+
+            const word = currentWords[currentWordIndex];
+            document.getElementById('spellingMeaning').textContent = word.vi;
+            document.getElementById('spellingInput').value = '';
+            document.getElementById('spellingInput').focus();
+            document.getElementById('checkSpellingBtn').style.display = 'block';
+            document.getElementById('nextSpellingBtn').style.display = 'none';
+            document.getElementById('spellingExampleFeedback').style.display = 'none';
+        }
+
+        function checkSpelling() {
+            const userInput = document.getElementById('spellingInput').value.trim().toLowerCase();
+            const correctWord = currentWords[currentWordIndex].en.toLowerCase();
+
+            score.total++;
+            const isCorrect = userInput === correctWord;
+
+            if (isCorrect) {
+                score.correct++;
+                playCorrectSound();
+                document.getElementById('spellingInput').classList.add('flash-success');
+            } else {
+                playWrongSound();
+                document.getElementById('spellingInput').classList.add('flash-error');
+            }
+
+            document.getElementById('spellingExampleFeedback').style.display = 'block';
+            document.getElementById('spellingExampleFeedback').textContent = isCorrect ? 
+                `✓ Chính xác! Ví dụ: ${currentWords[currentWordIndex].example}` :
+                `✗ Sai! Đáp án đúng là: "${correctWord}". Ví dụ: ${currentWords[currentWordIndex].example}`;
+
+            document.getElementById('checkSpellingBtn').style.display = 'none';
+            document.getElementById('nextSpellingBtn').style.display = 'block';
+        }
+
+        function nextSpelling() {
+            currentWordIndex++;
+            showSpelling();
+        }
+
+        // ========== ÂM THANH ==========
+        function playCorrectSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const notes = [523.25, 659.25, 783.99]; // C5, E5, G5
+            let startTime = audioContext.currentTime;
+
+            notes.forEach((freq, index) => {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0.3, startTime + index * 0.15);
+                gain.gain.setTargetAtTime(0, startTime + index * 0.15 + 0.1, 0.05);
+
+                osc.start(startTime + index * 0.15);
+                osc.stop(startTime + index * 0.15 + 0.2);
+            });
+        }
+
+        function playWrongSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const notes = [300, 240]; // Low notes
+            let startTime = audioContext.currentTime;
+
+            notes.forEach((freq, index) => {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0.3, startTime + index * 0.15);
+                gain.gain.setTargetAtTime(0, startTime + index * 0.15 + 0.1, 0.05);
+
+                osc.start(startTime + index * 0.15);
+                osc.stop(startTime + index * 0.15 + 0.2);
+            });
+        }
     </script>
+
 </body>
 </html>
