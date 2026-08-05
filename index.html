@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luyện IELTS cùng thầy Danh</title>
     <!-- Font Nunito từ Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,87 +24,61 @@
             padding: 0;
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
+        body {
             font-family: 'Nunito', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            padding: 12px;
+            padding: 16px 12px;
+            line-height: 1.4;
             transition: background-color 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
 
         .container {
-            max-width: 100%;
-            width: 100%;
+            max-width: 420px;
             margin: 0 auto;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
         }
 
-        /* HEADER */
         header {
             text-align: center;
-            margin-bottom: 20px;
-            padding-top: 8px;
+            margin-bottom: 16px;
         }
 
         header h1 {
             font-weight: 800;
             color: var(--primary);
-            font-size: 1.8rem;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
+            font-size: 1.4rem;
         }
 
         /* 1. Menu Thanh Sổ Xuống Compact */
         .dropdown-wrapper {
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .topic-select {
             width: 100%;
-            padding: 14px 16px;
+            padding: 10px 14px;
             font-family: 'Nunito', sans-serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
             color: #0f172a;
             background-color: #ffffff;
             border: 2px solid #cbd5e1;
-            border-radius: 12px;
+            border-radius: 10px;
             outline: none;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-            transition: all 0.2s ease;
-            appearance: none;
         }
 
-        .topic-select:active, .topic-select:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        /* 2. Thẻ Chọn Game - Cải thiện cho màn hình lớn */
+        /* 2. Thẻ Chọn Game */
         .game-cards-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
         }
 
         .game-card {
             background: #ffffff;
-            border-radius: 16px;
-            padding: 20px 12px;
+            border-radius: 14px;
+            padding: 12px 8px;
             border: 2px solid #e2e8f0;
             display: flex;
             flex-direction: column;
@@ -112,27 +86,23 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            min-height: 130px;
-            justify-content: center;
         }
 
         .game-card:active {
-            transform: scale(0.95);
+            transform: scale(0.96);
             border-color: var(--primary);
             background: #eff6ff;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
         }
 
         .game-icon-box {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 10px;
+            font-size: 1.4rem;
+            margin-bottom: 6px;
         }
 
         .card-flashcard .game-icon-box { background: #fef3c7; }
@@ -140,37 +110,34 @@
         .card-spelling .game-icon-box { background: #dcfce7; }
 
         .game-title {
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 800;
             color: #0f172a;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         /* 3. Khung Chơi Game */
         .game-arena {
             display: none;
             background: #ffffff;
-            border-radius: 18px;
-            padding: 20px 16px;
+            border-radius: 16px;
+            padding: 16px 12px;
             border: 2px solid var(--primary);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             margin-bottom: 20px;
-            flex: 1;
-            min-height: 400px;
-            overflow-y: auto;
         }
 
         .game-arena-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .game-arena-title {
-            font-size: 1.4rem;
+            font-size: 1rem;
             font-weight: 800;
             color: #1e293b;
         }
@@ -179,21 +146,20 @@
         .auto-next-control {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
+            gap: 6px;
+            font-size: 0.8rem;
             font-weight: 700;
             color: #475569;
             background: #f1f5f9;
-            padding: 6px 12px;
-            border-radius: 24px;
-            white-space: nowrap;
+            padding: 4px 8px;
+            border-radius: 20px;
         }
 
         .switch {
             position: relative;
             display: inline-block;
-            width: 40px;
-            height: 22px;
+            width: 34px;
+            height: 18px;
         }
 
         .switch input {
@@ -214,8 +180,8 @@
         .slider:before {
             position: absolute;
             content: "";
-            height: 16px;
-            width: 16px;
+            height: 12px;
+            width: 12px;
             left: 3px;
             bottom: 3px;
             background-color: white;
@@ -228,15 +194,15 @@
         }
 
         input:checked + .slider:before {
-            transform: translateX(18px);
+            transform: translateX(16px);
         }
 
         /* 4. FLASHCARD 2 MẶT */
         .flashcard-container {
             perspective: 1000px;
             width: 100%;
-            min-height: 280px;
-            margin: 0 auto 16px auto;
+            min-height: 230px;
+            margin: 0 auto 12px auto;
             cursor: pointer;
         }
 
@@ -244,7 +210,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            min-height: 280px;
+            min-height: 230px;
             text-align: center;
             transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
             transform-style: preserve-3d;
@@ -259,33 +225,32 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 16px;
+            border-radius: 14px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             border: 2px solid #3b82f6;
         }
 
         .flashcard-front {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            background: #f0f9ff;
             color: #1e3a8a;
         }
 
         .flashcard-front .vi-meaning {
-            font-size: 1.6rem;
+            font-size: 1.35rem;
             font-weight: 800;
             color: #1d4ed8;
-            word-wrap: break-word;
         }
 
         .flashcard-hint {
             position: absolute;
-            bottom: 14px;
-            font-size: 0.85rem;
-            color: #64748b;
+            bottom: 10px;
+            font-size: 0.75rem;
+            color: #94a3b8;
             font-weight: 600;
         }
 
@@ -299,198 +264,141 @@
         .flashcard-back .word-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 8px;
+            gap: 6px;
         }
 
         .flashcard-back .word-en {
-            font-size: 1.7rem;
+            font-size: 1.45rem;
             font-weight: 800;
             color: #059669;
         }
 
         .pos-badge {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 800;
             color: #0284c7;
             background: #e0f2fe;
-            padding: 4px 10px;
-            border-radius: 8px;
+            padding: 2px 6px;
+            border-radius: 6px;
             font-style: italic;
         }
 
         .btn-audio {
             background: #e0e7ff;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .btn-audio:active {
-            transform: scale(0.95);
-            background: #c7d2fe;
         }
 
         .flashcard-back .ipa {
-            font-size: 1rem;
+            font-size: 0.88rem;
             color: #64748b;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .flashcard-back .vi-meaning-back {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 700;
             color: #334155;
             background: #f1f5f9;
-            padding: 6px 14px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            padding: 3px 10px;
+            border-radius: 6px;
+            margin-bottom: 8px;
         }
 
         .flashcard-back .example-box {
-            font-size: 0.98rem;
-            line-height: 1.4;
+            font-size: 0.92rem;
+            line-height: 1.35;
             color: #1e293b;
             font-style: italic;
             background: #f0fdf4;
             border-left: 4px solid #10b981;
-            padding: 10px 12px;
-            border-radius: 8px;
+            padding: 8px 10px;
+            border-radius: 6px;
             text-align: left;
             width: 100%;
         }
 
         .btn-action {
             width: 100%;
-            padding: 14px 16px;
-            border-radius: 12px;
+            padding: 10px;
+            border-radius: 10px;
             border: none;
             background: var(--primary);
             color: #ffffff;
             font-family: 'Nunito', sans-serif;
             font-weight: 800;
-            font-size: 1rem;
+            font-size: 0.95rem;
             cursor: pointer;
-            margin-top: 12px;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-            transition: all 0.2s ease;
-        }
-
-        .btn-action:active {
-            transform: scale(0.98);
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+            margin-top: 8px;
         }
 
         /* Nút Xem Đáp Án (Màu cam nổi bật) */
         .btn-show-answer {
             width: 100%;
-            padding: 14px 16px;
-            border-radius: 12px;
+            padding: 9px;
+            border-radius: 10px;
             border: none;
             background: #f59e0b;
             color: #ffffff;
             font-family: 'Nunito', sans-serif;
             font-weight: 800;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
-            margin-top: 12px;
-            display: none;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
-            transition: all 0.2s ease;
-        }
-
-        .btn-show-answer:active {
-            transform: scale(0.98);
+            margin-top: 8px;
+            display: none; /* Mặc định ẩn, hiện sau 30s */
         }
 
         /* Style Trắc Nghiệm */
         .quiz-options-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-            margin-bottom: 12px;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
         }
 
         .btn-quiz-opt {
-            padding: 14px 14px;
-            border-radius: 12px;
+            padding: 12px 10px;
+            border-radius: 10px;
             border: 2px solid #e2e8f0;
             background: #fff;
             font-family: 'Nunito';
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             cursor: pointer;
             text-align: left;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-        }
-
-        .btn-quiz-opt:active {
-            transform: scale(0.98);
         }
 
         .btn-quiz-opt.correct {
             background: #dcfce7 !important;
             border-color: #22c55e !important;
             color: #15803d !important;
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2) !important;
         }
 
         .btn-quiz-opt.wrong {
             background: #fee2e2 !important;
             border-color: #ef4444 !important;
             color: #b91c1c !important;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2) !important;
         }
 
         .quiz-example-feedback, .spelling-example-feedback {
             display: none;
-            margin-bottom: 14px;
-            font-size: 0.98rem;
-            line-height: 1.4;
+            margin-bottom: 12px;
+            font-size: 0.92rem;
+            line-height: 1.35;
             color: #15803d;
             background: #dcfce7;
-            padding: 12px 14px;
-            border-radius: 10px;
+            padding: 8px 10px;
+            border-radius: 8px;
             text-align: left;
             border-left: 4px solid #22c55e;
-        }
-
-        .quiz-word-display {
-            text-align: center;
-            margin-bottom: 16px;
-            padding: 16px;
-            background: #eff6ff;
-            border-radius: 12px;
-            border: 2px solid #bfdbfe;
-        }
-
-        .quiz-word-display p {
-            margin: 0;
-        }
-
-        .quiz-word-main {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #2563eb;
-            margin-bottom: 6px;
-        }
-
-        .quiz-word-ipa {
-            font-size: 1rem;
-            color: #64748b;
-            font-weight: 700;
         }
 
         /* HOẠT CẢNH */
@@ -502,7 +410,7 @@
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-10px); }
         }
 
         .anim-shake { animation: shake 0.4s ease-in-out; }
@@ -513,17 +421,17 @@
         /* Khối Kết Nối Với Thầy Danh */
         .contact-section {
             text-align: center;
-            padding: 22px 14px;
+            padding: 20px 10px;
             background: white;
             border-radius: 16px;
             border: 1px solid #e2e8f0;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            margin-top: 16px;
+            margin-top: 10px;
         }
 
         .contact-section h2 {
-            font-size: 1.3rem;
-            margin-bottom: 16px;
+            font-size: 1.2rem;
+            margin-bottom: 14px;
             color: var(--text-main);
             font-weight: 800;
         }
@@ -531,7 +439,7 @@
         .social-buttons {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
@@ -539,21 +447,20 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 18px;
+            padding: 8px 16px;
             border-radius: 30px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 700;
             text-decoration: none;
             background-color: white;
             transition: all 0.3s ease;
-            min-height: 44px;
         }
 
         .btn-zalo {
             color: var(--zalo-color);
-            border: 2px solid var(--zalo-color);
+            border: 1.5px solid var(--zalo-color);
         }
-        .btn-zalo:active {
+        .btn-zalo:hover {
             background-color: var(--zalo-color);
             color: white;
         }
@@ -565,9 +472,9 @@
 
         .btn-fb {
             color: var(--fb-color);
-            border: 2px solid var(--fb-color);
+            border: 1.5px solid var(--fb-color);
         }
-        .btn-fb:active {
+        .btn-fb:hover {
             background-color: var(--fb-color);
             color: white;
         }
@@ -577,43 +484,8 @@
             fill: var(--fb-color);
             transition: fill 0.3s;
         }
-        .btn-fb:active .fb-icon {
+        .btn-fb:hover .fb-icon {
             fill: white;
-        }
-
-        /* INPUT STYLING FOR SPELLING GAME */
-        #spellingInput {
-            padding: 14px 16px !important;
-            width: 100% !important;
-            font-family: 'Nunito' !important;
-            font-size: 1.1rem !important;
-            border-radius: 12px !important;
-            border: 2px solid #cbd5e1 !important;
-            margin-bottom: 12px !important;
-            text-align: center !important;
-            background-color: #fff !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04) !important;
-            transition: all 0.2s ease !important;
-        }
-
-        #spellingInput:focus {
-            border-color: var(--primary) !important;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
-        }
-
-        /* Responsive adjustments */
-        @media (min-width: 768px) {
-            .game-cards-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .quiz-options-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            header h1 {
-                font-size: 2rem;
-            }
         }
     </style>
 </head>
@@ -621,7 +493,7 @@
 
     <div class="container">
         <header>
-            <h1>🎓 Luyện IELTS cùng thầy Danh</h1>
+            <h1>Luyện IELTS cùng thầy Danh</h1>
         </header>
 
         <!-- Menu Thanh Sổ Xuống -->
@@ -662,7 +534,7 @@
             </div>
         </main>
 
-        <!-- Khung Chơi Game -->
+        <!-- Khung Chơi Game (Đã bỏ nút Đóng ✖) -->
         <section id="gameArena" class="game-arena">
             <div class="game-arena-header">
                 <h2 id="gameArenaTitle" class="game-arena-title">Màn chơi</h2>
@@ -681,11 +553,11 @@
 
         <!-- Khối Kết Nối Với Thầy Danh -->
         <section class="contact-section">
-            <h2>💬 Kết nối với thầy Danh</h2>
+            <h2>Kết nối với thầy Danh</h2>
             <div class="social-buttons">
                 <a href="https://zalo.me/0911594794" target="_blank" class="btn-social btn-zalo">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="zalo-logo">
-                    Zalo
+                    Zalo: 0911594794
                 </a>
                 
                 <a href="https://www.facebook.com/cong.danh.0210" target="_blank" class="btn-social btn-fb">
@@ -734,8 +606,9 @@
         let currentWordObj = null;
         let currentGameMode = '';
         let isTransitioning = false;
-        let spellingTimer = null;
+        let spellingTimer = null; // Bộ đếm thời gian 30s cho Game Điền Từ
 
+        // 🔊 BỘ PHÁT ÂM VỚI TỐC ĐỘ ĐỌC CHẬM (rate = 0.75)
         function speakWord(text) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
@@ -808,7 +681,7 @@
 
         function startGame(mode) {
             isTransitioning = false;
-            clearSpellingTimer();
+            clearSpellingTimer(); // Xóa đếm ngược cũ nếu có
             currentGameMode = mode;
             const topicKey = document.getElementById('topicSelect').value;
             const words = getVocabularyList(topicKey);
@@ -817,8 +690,7 @@
             const arenaTitle = document.getElementById('gameArenaTitle');
             const arenaContent = document.getElementById('gameArenaContent');
 
-            arena.style.display = 'flex';
-            arena.style.flexDirection = 'column';
+            arena.style.display = 'block';
 
             if (mode === 'flashcard') {
                 arenaTitle.innerText = "🃏 Flashcard";
@@ -836,6 +708,7 @@
             return document.getElementById('autoNextToggle').checked;
         }
 
+        // FLASHCARD
         function renderFlashcard(words, container) {
             currentWordObj = words[Math.floor(Math.random() * words.length)];
             container.innerHTML = `
@@ -868,6 +741,7 @@
             if (isFlipped) speakWord(word);
         }
 
+        // TRẮC NGHIỆM
         function renderQuiz(words, container) {
             currentWordObj = words[Math.floor(Math.random() * words.length)];
 
@@ -886,12 +760,13 @@
             `).join('');
 
             container.innerHTML = `
-                <div class="quiz-word-display">
-                    <p class="quiz-word-main">${currentWordObj.word}</p>
-                    <p class="quiz-word-ipa">${currentWordObj.ipa}</p>
-                </div>
-                <div id="quizExampleFeedback" class="quiz-example-feedback">
-                    💡 <b>Ex:</b> "${currentWordObj.example}"
+                <div style="text-align: center; margin-bottom: 12px;">
+                    <p style="font-size: 1.3rem; font-weight: 800; color: #2563eb;">
+                        ${currentWordObj.word} <span style="font-size: 0.95rem; color: #64748b; font-weight: 700;">${currentWordObj.ipa}</span>
+                    </p>
+                    <div id="quizExampleFeedback" class="quiz-example-feedback" style="margin-top: 8px;">
+                        💡 <b>Ex:</b> "${currentWordObj.example}"
+                    </div>
                 </div>
                 <div class="quiz-options-grid">${optionsHtml}</div>
                 <div id="quizNextBtnBox" style="display: none; margin-top: 10px;">
@@ -924,17 +799,19 @@
             }
         }
 
+        // ĐIỀN TỪ (Tự hiện nút xem đáp án sau 30 giây)
         function renderSpelling(words, container) {
             currentWordObj = words[Math.floor(Math.random() * words.length)];
             container.innerHTML = `
                 <div style="text-align: center;">
-                    <p style="font-size: 0.95rem; color: #64748b; margin-bottom: 4px;">Gõ từ tiếng Anh tương ứng với gợi ý:</p>
-                    <p style="font-size: 1.3rem; font-weight: 800; color: #059669; margin-bottom: 8px;">"${currentWordObj.meaning}"</p>
-                    <p style="font-size: 0.9rem; color: #475569; font-style: italic; background: #f1f5f9; padding: 10px 12px; border-radius: 8px; margin-bottom: 14px;">
+                    <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 2px;">Gõ từ tiếng Anh tương ứng với gợi ý:</p>
+                    <p style="font-size: 1.15rem; font-weight: 800; color: #059669; margin-bottom: 2px;">"${currentWordObj.meaning}"</p>
+                    <p style="font-size: 0.82rem; color: #475569; font-style: italic; background: #f1f5f9; padding: 4px 8px; border-radius: 6px; margin-bottom: 12px;">
                         📌 <b>Def:</b> ${currentWordObj.defEn}
                     </p>
                     
                     <input type="text" id="spellingInput" placeholder="Nhập từ..." 
+                           style="padding: 10px; width: 100%; font-family: 'Nunito'; font-size: 1rem; border-radius: 8px; border: 2px solid #cbd5e1; margin-bottom: 10px; text-align: center;"
                            onkeypress="if(event.key === 'Enter') handleSpellingCheck()">
                     
                     <div id="spellingExampleFeedback" class="spelling-example-feedback">
@@ -951,6 +828,7 @@
                 if(input) input.focus();
             }, 100);
 
+            // Đếm ngược 30s tự hiện nút Xem Đáp Án
             spellingTimer = setTimeout(() => {
                 const showAnswerBtn = document.getElementById('spellingShowAnswerBtn');
                 if (showAnswerBtn && !isTransitioning) {
@@ -989,7 +867,7 @@
 
             if (val.toLowerCase() === currentWordObj.word.toLowerCase()) {
                 isTransitioning = true;
-                clearSpellingTimer();
+                clearSpellingTimer(); // Hủy đếm ngược 30s khi làm đúng
 
                 input.style.borderColor = '#22c55e';
                 input.style.backgroundColor = '#dcfce7';
