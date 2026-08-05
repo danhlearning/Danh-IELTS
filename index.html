@@ -143,7 +143,7 @@
         .fb-icon { width: 18px; height: 18px; fill: var(--fb-color); transition: fill 0.3s; }
         .btn-fb:hover .fb-icon { fill: white; }
 
-        /* KHU VỰC ADMIN DÀNH RIÊNG FOR THẦY DANH */
+        /* KHU VỰC CÔNG CỤ QUẢN TRỊ ADMIN */
         .admin-box {
             background: white; border-radius: 16px; padding: 14px;
             border: 2px solid #ea580c; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-top: 16px;
@@ -277,7 +277,7 @@
         const ADMIN_PASSWORD = "1903"; // Mật khẩu Admin
         const GITHUB_TOKEN = "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"; // Token GitHub nhúng sẵn
         
-        // ⚠️ THAY 2 DÒNG DƯỚI THÀNH USERNAME VÀ REPO CỦA BẠN TRÊN GITHUB
+        // ⚠️ VUI LÒNG THAY 2 DÒNG DƯỚI THÀNH USERNAME VÀ REPO CỦA BẠN TRÊN GITHUB
         const GITHUB_USERNAME = "TEN_TAIKHOAN_GITHUB_CUA_BAN";
         const GITHUB_REPO = "TEN_KHO_LUU_TRU_CUA_BAN";
         const FILE_PATH = "vocabulary.json";
@@ -606,7 +606,7 @@
             }
         }
 
-        // --- CÁC HÀM XỬ LÝ ADMIN & IMPORT GITHUB ---
+        // --- CÁC HÀM XỬ LÝ ADMIN & IMPORT GITHUB (CÓ XỬ LÝ LỌC TRÙNG) ---
         function loginAdmin() {
             const pass = document.getElementById('adminPassInput').value.trim();
             if (pass === ADMIN_PASSWORD) {
@@ -654,7 +654,7 @@ Trả về duy nhất MẢNG JSON hợp lệ (không kèm markdown \`\`\`json, k
             });
         }
 
-        // 2. NHẬN MẢNG JSON VÀ ĐẨY LÊN GITHUB REST API
+        // 2. NHẬN MẢNG JSON VÀ ĐẨY LÊN GITHUB REST API (TỰ ĐỘNG LỌC TỪ TRÙNG LẶP)
         async function importJsonToGitHub() {
             let rawJson = document.getElementById('jsonInputArea').value.trim();
             if (!rawJson) return alert("Vui lòng dán chuỗi JSON vào ô nhập!");
@@ -690,8 +690,27 @@ Trả về duy nhất MẢNG JSON hợp lệ (không kèm markdown \`\`\`json, k
                     currentWords = JSON.parse(contentUtf8);
                 }
 
-                // Nối từ vựng cũ và từ vựng mới
-                const finalWordsList = [...currentWords, ...parsedWords];
+                // --- BỘ LỌC TỪ TRÙNG LẶP ---
+                const existingWordsSet = new Set(currentWords.map(item => item.word.toLowerCase().trim()));
+                let duplicateCount = 0;
+
+                const uniqueNewWords = parsedWords.filter(item => {
+                    if (!item.word) return false;
+                    const wordClean = item.word.toLowerCase().trim();
+                    if (existingWordsSet.has(wordClean)) {
+                        duplicateCount++;
+                        return false; // Đã tồn tại -> Bỏ qua
+                    }
+                    existingWordsSet.add(wordClean);
+                    return true; // Từ mới hợp lệ
+                });
+
+                if (uniqueNewWords.length === 0) {
+                    return alert(`⚠️ Tất cả ${duplicateCount} từ vựng bạn dán ĐÃ TỒN TẠI trên GitHub! Không có từ mới nào được thêm.`);
+                }
+
+                // Trộn mảng từ cũ và từ mới ĐÃ LỌC
+                const finalWordsList = [...currentWords, ...uniqueNewWords];
                 const updatedJsonString = JSON.stringify(finalWordsList, null, 2);
                 
                 // Mã hóa UTF-8 sang Base64 an toàn cho tiếng Việt
@@ -705,14 +724,19 @@ Trả về duy nhất MẢNG JSON hợp lệ (không kèm markdown \`\`\`json, k
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        message: "Feat: Admin imported new vocabulary from JSON",
+                        message: "Feat: Admin imported new unique vocabulary",
                         content: base64Content,
                         sha: sha ? sha : undefined
                     })
                 });
 
                 if (putRes.ok) {
-                    alert(`🎉 [Admin] Đã Import thành công ${parsedWords.length} từ vựng mới vào GitHub!`);
+                    let alertMsg = `🎉 [Admin] Đã Import thành công ${uniqueNewWords.length} từ vựng mới vào GitHub!`;
+                    if (duplicateCount > 0) {
+                        alertMsg += `\n(Đã tự động lọc bỏ ${duplicateCount} từ bị trùng lặp).`;
+                    }
+                    alert(alertMsg);
+
                     document.getElementById('jsonInputArea').value = '';
                     document.getElementById('topicPromptInput').value = '';
                 } else {
