@@ -243,8 +243,12 @@
         <section class="admin-box">
             <!-- 1. Form Đăng Nhập -->
             <div id="adminLoginForm">
-                <label>🔐 Đăng nhập Admin để Import Từ Vựng:</label>
-                <input type="password" id="adminPassInput" placeholder="Nhập mật khẩu Admin..." onkeypress="if(event.key==='Enter') loginAdmin()">
+                <label>🔐 Mật khẩu Admin:</label>
+                <input type="password" id="adminPassInput" placeholder="Nhập 1903...">
+                
+                <label>🔑 GitHub Access Token (ghp_...):</label>
+                <input type="password" id="adminTokenInput" placeholder="Dán token của bạn vào đây..." onkeypress="if(event.key==='Enter') loginAdmin()">
+                
                 <button class="btn-admin-login" onclick="loginAdmin()">Đăng Nhập Admin</button>
             </div>
 
@@ -258,7 +262,7 @@
                     <label style="color: #c2410c;">BƯỚC 1: Tạo Prompt gửi ChatGPT/Gemini</label>
                     <input type="text" id="topicPromptInput" placeholder="Ví dụ: 5 từ vựng IELTS chủ đề Environment">
                     <button class="btn-copy-prompt" onclick="copyPromptToClipboard()">📋 Copy Prompt Chuẩn JSON</button>
-                    <small style="color: #64748b; font-size: 0.75rem;">(Bấm nút trên ➔ Mở Gemini/ChatGPT Dán vào ➔ Copy mảng JSON trả về)</small>
+                    <small style="color: #64748b; font-size: 0.75rem;">(Bấm nút trên ➔ Mở Gemini/ChatGPT Dán vào ➔ Copy mảng JSON nhận được)</small>
                 </div>
 
                 <!-- BƯỚC B: DÁN JSON VÀ IMPORT -->
@@ -273,13 +277,12 @@
     </div>
 
     <script>
-        // CẤU HÌNH THÔNG TIN BẢO MẬT ADMIN & GITHUB API
+        // CẤU HÌNH THÔNG TIN ADMIN & GITHUB API
         const ADMIN_PASSWORD = "1903"; // Mật khẩu Admin
-        const GITHUB_TOKEN = "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"; // Token GitHub nhúng sẵn
         
-        // ⚠️ VUI LÒNG THAY 2 DÒNG DƯỚI THÀNH USERNAME VÀ REPO CỦA BẠN TRÊN GITHUB
+        // ⚠️ THÔNG TIN REPO CỦA BẠN TRÊN GITHUB
         const GITHUB_USERNAME = "danhlearning";
-        const GITHUB_REPO = "Danh-IELTS";
+        const GITHUB_REPO = "danhlearning.github.io"; // Thay bằng tên repo chính xác nếu khác
         const FILE_PATH = "vocabulary.json";
 
         const vocabularyData = {
@@ -471,7 +474,7 @@
 
             let optionsHtml = options.map((opt, idx) => `
                 <button class="btn-quiz-opt" onclick="checkQuizAnswer(this, '${opt}', '${currentWordObj.meaning}')">
-                    ${idx + 1}.${opt}
+                    ${idx + 1}. ${opt}
                 </button>
             `).join('');
 
@@ -606,16 +609,26 @@
             }
         }
 
-        // --- CÁC HÀM XỬ LÝ ADMIN & IMPORT GITHUB (CÓ XỬ LÝ LỌC TRÙNG) ---
+        // --- CÁC HÀM XỬ LÝ ADMIN & IMPORT GITHUB (LƯU TOKEN PHIÊN TẠM THỜI) ---
         function loginAdmin() {
             const pass = document.getElementById('adminPassInput').value.trim();
-            if (pass === ADMIN_PASSWORD) {
-                sessionStorage.setItem('isAdminLoggedIn', 'true');
-                showAdminDashboard();
-                document.getElementById('adminPassInput').value = '';
-            } else {
-                alert("❌ Mật khẩu Admin không chính xác!");
+            const tokenInput = document.getElementById('adminTokenInput').value.trim();
+
+            if (pass !== ADMIN_PASSWORD) {
+                return alert("❌ Mật khẩu Admin không chính xác!");
             }
+
+            if (!tokenInput.startsWith("ghp_") && !tokenInput.startsWith("github_pat_")) {
+                return alert("❌ Vui lòng nhập đúng định dạng GitHub Personal Access Token!");
+            }
+
+            // Lưu trạng thái & Token tạm thời vào sessionStorage (Xóa khi đóng Tab)
+            sessionStorage.setItem('isAdminLoggedIn', 'true');
+            sessionStorage.setItem('gh_token', tokenInput);
+
+            showAdminDashboard();
+            document.getElementById('adminPassInput').value = '';
+            document.getElementById('adminTokenInput').value = '';
         }
 
         function showAdminDashboard() {
@@ -625,6 +638,7 @@
 
         function logoutAdmin() {
             sessionStorage.removeItem('isAdminLoggedIn');
+            sessionStorage.removeItem('gh_token');
             document.getElementById('adminLoginForm').style.display = 'block';
             document.getElementById('adminDashboard').style.display = 'none';
         }
@@ -654,12 +668,17 @@ Trả về duy nhất MẢNG JSON hợp lệ (không kèm markdown \`\`\`json, k
             });
         }
 
-        // 2. NHẬN MẢNG JSON VÀ ĐẨY LÊN GITHUB REST API (TỰ ĐỘNG LỌC TỪ TRÙNG LẶP)
+        // 2. NHẬN MẢNG JSON VÀ ĐẨY LÊN GITHUB REST API
         async function importJsonToGitHub() {
+            const GITHUB_TOKEN = sessionStorage.getItem('gh_token');
+            if (!GITHUB_TOKEN) {
+                alert("Phiên đăng nhập hết hạn! Vui lòng đăng nhập lại Admin.");
+                return logoutAdmin();
+            }
+
             let rawJson = document.getElementById('jsonInputArea').value.trim();
             if (!rawJson) return alert("Vui lòng dán chuỗi JSON vào ô nhập!");
 
-            // Xử lý làm sạch chuỗi nếu lỡ dán kèm markdown ```json
             rawJson = rawJson.replace(/```json/g, '').replace(/```/g, '').trim();
 
             let parsedWords = [];
@@ -672,7 +691,7 @@ Trả về duy nhất MẢNG JSON hợp lệ (không kèm markdown \`\`\`json, k
                 return alert("❌ Lỗi cấu trúc JSON không hợp lệ! Vui lòng kiểm tra lại dữ liệu.");
             }
 
-            const apiUrl = `[https://api.github.com/repos/$](https://api.github.com/repos/$){GITHUB_USERNAME}/${GITHUB_REPO}/contents/${FILE_PATH}`;
+            const apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/contents/${FILE_PATH}`;
 
             try {
                 let sha = "";
@@ -699,24 +718,22 @@ Trả về duy nhất MẢNG JSON hợp lệ (không kèm markdown \`\`\`json, k
                     const wordClean = item.word.toLowerCase().trim();
                     if (existingWordsSet.has(wordClean)) {
                         duplicateCount++;
-                        return false; // Đã tồn tại -> Bỏ qua
+                        return false;
                     }
                     existingWordsSet.add(wordClean);
-                    return true; // Từ mới hợp lệ
+                    return true;
                 });
 
                 if (uniqueNewWords.length === 0) {
-                    return alert(`⚠️ Tất cả ${duplicateCount} từ vựng bạn dán ĐÃ TỒN TẠI trên GitHub! Không có từ mới nào được thêm.`);
+                    return alert(`⚠️ Tất cả ${duplicateCount} từ vựng bạn dán ĐÃ TỒN TẠI trên GitHub! Không thêm từ nào.`);
                 }
 
-                // Trộn mảng từ cũ và từ mới ĐÃ LỌC
                 const finalWordsList = [...currentWords, ...uniqueNewWords];
                 const updatedJsonString = JSON.stringify(finalWordsList, null, 2);
                 
-                // Mã hóa UTF-8 sang Base64 an toàn cho tiếng Việt
                 const base64Content = btoa(unescape(encodeURIComponent(updatedJsonString)));
 
-                // Gửi PUT request để ghi đè file trên Repo
+                // Gửi request cập nhật
                 const putRes = await fetch(apiUrl, {
                     method: 'PUT',
                     headers: {
