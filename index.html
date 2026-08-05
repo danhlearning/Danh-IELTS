@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luyện IELTS cùng thầy Danh</title>
+    <!-- Font Nunito từ Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg-color: #f8fafc;
+            --text-main: #1e293b;
+            --zalo-color: #0068ff;
+            --fb-color: #1877f2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 16px 12px;
+            line-height: 1.4;
+            transition: background-color 0.3s ease;
+        }
+
+        .container {
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        header h1 {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+
+        /* 1. Menu Thanh Sổ Xuống Compact */
+        .dropdown-wrapper {
+            margin-bottom: 16px;
+        }
+
+        .topic-select {
+            width: 100%;
+            padding: 10px 14px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #0f172a;
+            background-color: #ffffff;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        /* 2. Thẻ Chọn Game */
+        .game-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .game-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 12px 8px;
+            border: 2px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .game-card:active {
+            transform: scale(0.96);
+            border-color: var(--primary);
+            background: #eff6ff;
+        }
+
+        .game-icon-box {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 6px;
+        }
+
+        .card-flashcard .game-icon-box { background: #fef3c7; }
+        .card-quiz .game-icon-box { background: #dbeafe; }
+        .card-spelling .game-icon-box { background: #dcfce7; }
+
+        .game-title {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.1;
+        }
+
+        /* 3. Khung Chơi Game */
+        .game-arena {
+            display: none;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 16px 12px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+
+        .game-arena-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .game-arena-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #1e293b;
+        }
+
+        /* Nút Bật/Tắt Auto Next */
+        .auto-next-control {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #475569;
+            background: #f1f5f9;
+            padding: 4px 8px;
+            border-radius: 20px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 18px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #cbd5e1;
+            transition: .3s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2563eb;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(16px);
+        }
+
+        /* 4. FLASHCARD 2 MẶT */
+        .flashcard-container {
+            perspective: 1000px;
+            width: 100%;
+            min-height: 230px;
+            margin: 0 auto 12px auto;
+            cursor: pointer;
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 230px;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flashcard-container.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 2px solid #3b82f6;
+        }
+
+        .flashcard-front {
+            background: #f0f9ff;
+            color: #1e3a8a;
+        }
+
+        .flashcard-front .vi-meaning {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #1d4ed8;
+        }
+
+        .flashcard-hint {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .flashcard-back {
+            background: #ffffff;
+            color: #0f172a;
+            transform: rotateY(180deg);
+            border-color: #10b981;
+        }
+
+        .flashcard-back .word-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .flashcard-back .word-en {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #059669;
+        }
+
+        .pos-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #0284c7;
+            background: #e0f2fe;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-style: italic;
+        }
+
+        .btn-audio {
+            background: #e0e7ff;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flashcard-back .ipa {
+            font-size: 0.88rem;
+            color: #64748b;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .flashcard-back .vi-meaning-back {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #334155;
+            background: #f1f5f9;
+            padding: 3px 10px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .flashcard-back .example-box {
+            font-size: 0.92rem;
+            line-height: 1.35;
+            color: #1e293b;
+            font-style: italic;
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 8px 10px;
+            border-radius: 6px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            background: var(--primary);
+            color: #ffffff;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        /* Nút Xem Đáp Án (Màu cam nổi bật) */
+        .btn-show-answer {
+            width: 100%;
+            padding: 9px;
+            border-radius: 10px;
+            border: none;
+            background: #f59e0b;
+            color: #ffffff;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 8px;
+            display: none; /* Mặc định ẩn, hiện sau 30s */
+        }
+
+        /* Style Trắc Nghiệm */
+        .quiz-options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .btn-quiz-opt {
+            padding: 12px 10px;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+            background: #fff;
+            font-family: 'Nunito';
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+        }
+
+        .btn-quiz-opt.correct {
+            background: #dcfce7 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+        }
+
+        .btn-quiz-opt.wrong {
+            background: #fee2e2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+        }
+
+        .quiz-example-feedback, .spelling-example-feedback {
+            display: none;
+            margin-bottom: 12px;
+            font-size: 0.92rem;
+            line-height: 1.35;
+            color: #15803d;
+            background: #dcfce7;
+            padding: 8px 10px;
+            border-radius: 8px;
+            text-align: left;
+            border-left: 4px solid #22c55e;
+        }
+
+        /* HOẠT CẢNH */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .anim-shake { animation: shake 0.4s ease-in-out; }
+        .anim-bounce { animation: bounce 0.4s ease-in-out; }
+        .flash-success { background-color: #d1fae5 !important; }
+        .flash-error { background-color: #ffe4e6 !important; }
+
+        /* Khối Kết Nối Với Thầy Danh */
+        .contact-section {
+            text-align: center;
+            padding: 20px 10px;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-top: 10px;
+        }
+
+        .contact-section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-social {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-zalo {
+            color: var(--zalo-color);
+            border: 1.5px solid var(--zalo-color);
+        }
+        .btn-zalo:hover {
+            background-color: var(--zalo-color);
+            color: white;
+        }
+        .zalo-logo {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .btn-fb {
+            color: var(--fb-color);
+            border: 1.5px solid var(--fb-color);
+        }
+        .btn-fb:hover {
+            background-color: var(--fb-color);
+            color: white;
+        }
+        .fb-icon {
+            width: 18px;
+            height: 18px;
+            fill: var(--fb-color);
+            transition: fill 0.3s;
+        }
+        .btn-fb:hover .fb-icon {
+            fill: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Luyện IELTS cùng thầy Danh</h1>
+        </header>
+
+        <!-- Menu Thanh Sổ Xuống -->
+        <div class="dropdown-wrapper">
+            <select id="topicSelect" class="topic-select">
+                <option value="all">🔥 Luyện Tập Tổng Hợp</option>
+                <option value="education">1. Education (Giáo dục)</option>
+                <option value="environment">2. Environment (Môi trường)</option>
+                <option value="technology">3. Technology (Công nghệ)</option>
+                <option value="health">4. Health (Sức khỏe)</option>
+                <option value="work">5. Work (Công việc)</option>
+                <option value="society">6. Society (Xã hội)</option>
+                <option value="travel">7. Travel (Du lịch)</option>
+                <option value="crime">8. Crime (Tội phạm)</option>
+                <option value="media">9. Media (Truyền thông)</option>
+                <option value="arts">10. Arts (Nghệ thuật)</option>
+                <option value="globalization">11. Globalization (Toàn cầu hóa)</option>
+                <option value="family">12. Family (Gia đình)</option>
+                <option value="housing">13. Housing (Nhà ở)</option>
+                <option value="money">14. Money (Tiền tệ)</option>
+                <option value="science">15. Science (Khoa học)</option>
+            </select>
+        </div>
+
+        <!-- 3 Thẻ Chọn Game -->
+        <main class="game-cards-grid">
+            <div class="game-card card-flashcard" onclick="startGame('flashcard')">
+                <div class="game-icon-box">🃏</div>
+                <div class="game-title">Flashcard</div>
+            </div>
+            <div class="game-card card-quiz" onclick="startGame('quiz6')">
+                <div class="game-icon-box">🎯</div>
+                <div class="game-title">Trắc Nghiệm</div>
+            </div>
+            <div class="game-card card-spelling" onclick="startGame('spelling')">
+                <div class="game-icon-box">✍️</div>
+                <div class="game-title">Điền Từ</div>
+            </div>
+        </main>
+
+        <!-- Khung Chơi Game (Đã bỏ nút Đóng ✖) -->
+        <section id="gameArena" class="game-arena">
+            <div class="game-arena-header">
+                <h2 id="gameArenaTitle" class="game-arena-title">Màn chơi</h2>
+                
+                <!-- Nút Toggle Bật/Tắt Auto Next -->
+                <div class="auto-next-control">
+                    <span>Tự chuyển</span>
+                    <label class="switch">
+                        <input type="checkbox" id="autoNextToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            <div id="gameArenaContent"></div>
+        </section>
+
+        <!-- Khối Kết Nối Với Thầy Danh -->
+        <section class="contact-section">
+            <h2>Kết nối với thầy Danh</h2>
+            <div class="social-buttons">
+                <a href="https://zalo.me/0911594794" target="_blank" class="btn-social btn-zalo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="zalo-logo">
+                    Zalo: 0911594794
+                </a>
+                
+                <a href="https://www.facebook.com/cong.danh.0210" target="_blank" class="btn-social btn-fb">
+                    <svg class="fb-icon" viewBox="0 0 24 24">
+                        <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                    </svg>
+                    Facebook
+                </a>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const vocabularyData = {
+            education: [
+                { word: "Curriculum", pos: "n", ipa: "/kəˈrɪkjələm/", meaning: "Chương trình học", defEn: "the subjects comprising a course of study in a school or college.", example: "The school curriculum has been updated to include coding." },
+                { word: "Pedagogy", pos: "n", ipa: "/ˈpedəɡɒdʒi/", meaning: "Phương pháp giảng dạy", defEn: "the method and practice of teaching.", example: "Modern pedagogy focuses on student-centered learning." },
+                { word: "Literacy", pos: "n", ipa: "/ˈlɪtərəsi/", meaning: "Trình độ biết đọc biết viết", defEn: "the ability to read and write.", example: "Adult literacy programs have seen great success." },
+                { word: "Qualification", pos: "n", ipa: "/ˌkwɒlɪfɪˈkeɪʃn/", meaning: "Bằng cấp, chứng chỉ", defEn: "an official record of achievement or competence.", example: "He has the necessary academic qualifications for the job." },
+                { word: "Tuition", pos: "n", ipa: "/tjuˈɪʃn/", meaning: "Học phí", defEn: "a sum of money charged for teaching by a college or university.", example: "Tuition fees have increased significantly this year." }
+            ],
+            environment: [
+                { word: "Biodiversity", pos: "n", ipa: "/ˌbaɪəʊdaɪˈvɜːsəti/", meaning: "Đa dạng sinh học", defEn: "the variety of plant and animal life in the world.", example: "The Amazon rainforest is famous for its rich biodiversity." },
+                { word: "Deforestation", pos: "n", ipa: "/ˌdiːˌfɒrɪˈsteɪʃn/", meaning: "Nạn phá rừng", defEn: "the action of clearing a wide area of trees.", example: "Deforestation threatens many endangered species." },
+                { word: "Contamination", pos: "n", ipa: "/kənˌtæmɪˈneɪʃn/", meaning: "Sự ô nhiễm", defEn: "the action of making something impure or unsuitable.", example: "Water contamination is a major public health concern." },
+                { word: "Ecosystem", pos: "n", ipa: "/ˈiːkəʊsɪstəm/", meaning: "Hệ sinh thái", defEn: "a biological community of interacting organisms.", example: "Pollution causes severe damage to the marine ecosystem." },
+                { word: "Sustainability", pos: "n", ipa: "/səˌsteɪnəˈbɪləti/", meaning: "Phát triển bền vững", defEn: "the ability to be maintained at a certain rate or level.", example: "Environmental sustainability should be a global goal." }
+            ],
+            technology: [
+                { word: "Automation", pos: "n", ipa: "/ˌɔːtəˈmeɪʃn/", meaning: "Tự động hóa", defEn: "the use of largely automatic equipment in a system.", example: "Automation has streamlined factory production lines." },
+                { word: "Breakthrough", pos: "n", ipa: "/ˈbreɪkθruː/", meaning: "Bước đột phá", defEn: "a sudden, dramatic, and important discovery.", example: "Scientists made a major breakthrough in renewable energy." },
+                { word: "Cybersecurity", pos: "n", ipa: "/ˈsaɪbəsɪkjʊərəti/", meaning: "An ninh mạng", defEn: "measures taken to protect computers against criminal use.", example: "Companies invest heavily in cybersecurity to protect data." },
+                { word: "Innovation", pos: "n", ipa: "/ˌɪnəˈveɪʃn/", meaning: "Sự đổi mới, sáng tạo", defEn: "a new method, idea, or product.", example: "Technological innovation drives economic growth." },
+                { word: "Obsolete", pos: "adj", ipa: "/ˈɒbsəliːt/", meaning: "Lỗi thời, lạc hậu", defEn: "no longer produced or used; out of date.", example: "Floppy disks became obsolete years ago." }
+            ],
+            health: [
+                { word: "Sedentary", pos: "adj", ipa: "/ˈsedntri/", meaning: "Ít vận động", defEn: "tending to spend much time seated; somewhat inactive.", example: "A sedentary lifestyle increases the risk of heart disease." },
+                { word: "Chronic", pos: "adj", ipa: "/ˈkrɒnɪk/", meaning: "Mãn tính", defEn: "persisting for a long time or constantly recurring.", example: "She suffers from chronic back pain." },
+                { word: "Nutritious", pos: "adj", ipa: "/njuːˈtrɪʃəs/", meaning: "Bổ dưỡng", defEn: "efficient as food; nourishing.", example: "Vegetables are a crucial part of a nutritious diet." },
+                { word: "Epidemic", pos: "n", ipa: "/ˌepɪˈdemɪk/", meaning: "Bệnh dịch", defEn: "a widespread occurrence of an infectious disease.", example: "The flu epidemic spread rapidly across the country." },
+                { word: "Immunity", pos: "n", ipa: "/ɪˈmjuːnəti/", meaning: "Hệ miễn dịch", defEn: "the ability of an organism to resist a particular infection.", example: "Vaccines help build immunity against dangerous viruses." }
+            ]
+        };
+
+        let currentWordObj = null;
+        let currentGameMode = '';
+        let isTransitioning = false;
+        let spellingTimer = null; // Bộ đếm thời gian 30s cho Game Điền Từ
+
+        // 🔊 BỘ PHÁT ÂM VỚI TỐC ĐỘ ĐỌC CHẬM (rate = 0.75)
+        function speakWord(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.75;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function playSoundEffect(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'correct') {
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.3);
+                } else {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(150, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.25);
+                }
+            } catch(e) {}
+        }
+
+        function triggerFeedback(isCorrect) {
+            const arena = document.getElementById('gameArena');
+            const bgClass = isCorrect ? 'flash-success' : 'flash-error';
+            const animClass = isCorrect ? 'anim-bounce' : 'anim-shake';
+
+            document.body.classList.add(bgClass);
+            arena.classList.add(animClass);
+
+            playSoundEffect(isCorrect ? 'correct' : 'wrong');
+
+            setTimeout(() => {
+                document.body.classList.remove(bgClass);
+                arena.classList.remove(animClass);
+            }, 400);
+        }
+
+        function getVocabularyList(topicKey) {
+            if (topicKey === 'all') {
+                let allWords = [];
+                Object.keys(vocabularyData).forEach(key => {
+                    allWords = allWords.concat(vocabularyData[key]);
+                });
+                return allWords;
+            }
+            return vocabularyData[topicKey] || vocabularyData['education'];
+        }
+
+        function clearSpellingTimer() {
+            if (spellingTimer) {
+                clearTimeout(spellingTimer);
+                spellingTimer = null;
+            }
+        }
+
+        function startGame(mode) {
+            isTransitioning = false;
+            clearSpellingTimer(); // Xóa đếm ngược cũ nếu có
+            currentGameMode = mode;
+            const topicKey = document.getElementById('topicSelect').value;
+            const words = getVocabularyList(topicKey);
+
+            const arena = document.getElementById('gameArena');
+            const arenaTitle = document.getElementById('gameArenaTitle');
+            const arenaContent = document.getElementById('gameArenaContent');
+
+            arena.style.display = 'block';
+
+            if (mode === 'flashcard') {
+                arenaTitle.innerText = "🃏 Flashcard";
+                renderFlashcard(words, arenaContent);
+            } else if (mode === 'quiz6') {
+                arenaTitle.innerText = "🎯 Trắc Nghiệm";
+                renderQuiz(words, arenaContent);
+            } else if (mode === 'spelling') {
+                arenaTitle.innerText = "✍️ Điền Từ";
+                renderSpelling(words, arenaContent);
+            }
+        }
+
+        function isAutoNextEnabled() {
+            return document.getElementById('autoNextToggle').checked;
+        }
+
+        // FLASHCARD
+        function renderFlashcard(words, container) {
+            currentWordObj = words[Math.floor(Math.random() * words.length)];
+            container.innerHTML = `
+                <div class="flashcard-container" id="cardContainer" onclick="flipCard(this, '${currentWordObj.word}')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <span class="vi-meaning">${currentWordObj.meaning}</span>
+                            <span class="flashcard-hint">👆 Chạm để xem đáp án</span>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="word-header">
+                                <span class="word-en">${currentWordObj.word}</span>
+                                <span class="pos-badge">[${currentWordObj.pos}]</span>
+                                <button class="btn-audio" onclick="event.stopPropagation(); speakWord('${currentWordObj.word}')">🔊</button>
+                            </div>
+                            <span class="ipa">${currentWordObj.ipa}</span>
+                            <span class="vi-meaning-back">${currentWordObj.meaning}</span>
+                            <div class="example-box">
+                                💡 <b>Ex:</b> "${currentWordObj.example}"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-action" onclick="startGame('flashcard')">Từ Tiếp Theo ➔</button>
+            `;
+        }
+
+        function flipCard(element, word) {
+            const isFlipped = element.classList.toggle('flipped');
+            if (isFlipped) speakWord(word);
+        }
+
+        // TRẮC NGHIỆM
+        function renderQuiz(words, container) {
+            currentWordObj = words[Math.floor(Math.random() * words.length)];
+
+            let options = [currentWordObj.meaning];
+            let allList = getVocabularyList('all');
+            while (options.length < 6 && options.length < allList.length) {
+                let randomMeaning = allList[Math.floor(Math.random() * allList.length)].meaning;
+                if (!options.includes(randomMeaning)) options.push(randomMeaning);
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            let optionsHtml = options.map((opt, idx) => `
+                <button class="btn-quiz-opt" onclick="checkQuizAnswer(this, '${opt}', '${currentWordObj.meaning}')">
+                    ${idx + 1}. ${opt}
+                </button>
+            `).join('');
+
+            container.innerHTML = `
+                <div style="text-align: center; margin-bottom: 12px;">
+                    <p style="font-size: 1.3rem; font-weight: 800; color: #2563eb;">
+                        ${currentWordObj.word} <span style="font-size: 0.95rem; color: #64748b; font-weight: 700;">${currentWordObj.ipa}</span>
+                    </p>
+                    <div id="quizExampleFeedback" class="quiz-example-feedback" style="margin-top: 8px;">
+                        💡 <b>Ex:</b> "${currentWordObj.example}"
+                    </div>
+                </div>
+                <div class="quiz-options-grid">${optionsHtml}</div>
+                <div id="quizNextBtnBox" style="display: none; margin-top: 10px;">
+                    <button class="btn-action" onclick="startGame('quiz6')">Từ Tiếp Theo ➔</button>
+                </div>
+            `;
+        }
+
+        function checkQuizAnswer(btn, selected, correct) {
+            if (isTransitioning) return;
+
+            if (selected === correct) {
+                isTransitioning = true;
+                btn.classList.add('correct');
+                
+                const quizExampleBox = document.getElementById('quizExampleFeedback');
+                if (quizExampleBox) quizExampleBox.style.display = 'block';
+
+                triggerFeedback(true);
+                speakWord(currentWordObj.word);
+
+                if (isAutoNextEnabled()) {
+                    setTimeout(() => startGame('quiz6'), 2000);
+                } else {
+                    document.getElementById('quizNextBtnBox').style.display = 'block';
+                }
+            } else {
+                btn.classList.add('wrong');
+                triggerFeedback(false);
+            }
+        }
+
+        // ĐIỀN TỪ (Tự hiện nút xem đáp án sau 30 giây)
+        function renderSpelling(words, container) {
+            currentWordObj = words[Math.floor(Math.random() * words.length)];
+            container.innerHTML = `
+                <div style="text-align: center;">
+                    <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 2px;">Gõ từ tiếng Anh tương ứng với gợi ý:</p>
+                    <p style="font-size: 1.15rem; font-weight: 800; color: #059669; margin-bottom: 2px;">"${currentWordObj.meaning}"</p>
+                    <p style="font-size: 0.82rem; color: #475569; font-style: italic; background: #f1f5f9; padding: 4px 8px; border-radius: 6px; margin-bottom: 12px;">
+                        📌 <b>Def:</b> ${currentWordObj.defEn}
+                    </p>
+                    
+                    <input type="text" id="spellingInput" placeholder="Nhập từ..." 
+                           style="padding: 10px; width: 100%; font-family: 'Nunito'; font-size: 1rem; border-radius: 8px; border: 2px solid #cbd5e1; margin-bottom: 10px; text-align: center;"
+                           onkeypress="if(event.key === 'Enter') handleSpellingCheck()">
+                    
+                    <div id="spellingExampleFeedback" class="spelling-example-feedback">
+                        💡 <b>Ex:</b> "${currentWordObj.example}"
+                    </div>
+
+                    <button id="spellingSubmitBtn" class="btn-action" onclick="handleSpellingCheck()">Kiểm Tra</button>
+                    <button id="spellingShowAnswerBtn" class="btn-show-answer" onclick="revealSpellingAnswer()">Xem Đáp Án 💡</button>
+                </div>
+            `;
+
+            setTimeout(() => {
+                const input = document.getElementById('spellingInput');
+                if(input) input.focus();
+            }, 100);
+
+            // Đếm ngược 30s tự hiện nút Xem Đáp Án
+            spellingTimer = setTimeout(() => {
+                const showAnswerBtn = document.getElementById('spellingShowAnswerBtn');
+                if (showAnswerBtn && !isTransitioning) {
+                    showAnswerBtn.style.display = 'block';
+                }
+            }, 30000);
+        }
+
+        function revealSpellingAnswer() {
+            clearSpellingTimer();
+            const input = document.getElementById('spellingInput');
+            const exampleBox = document.getElementById('spellingExampleFeedback');
+            const submitBtn = document.getElementById('spellingSubmitBtn');
+            const showAnswerBtn = document.getElementById('spellingShowAnswerBtn');
+
+            input.value = currentWordObj.word;
+            input.style.borderColor = '#f59e0b';
+            input.style.backgroundColor = '#fef3c7';
+
+            if (exampleBox) exampleBox.style.display = 'block';
+            if (showAnswerBtn) showAnswerBtn.style.display = 'none';
+
+            speakWord(currentWordObj.word);
+
+            submitBtn.innerText = "Từ Tiếp Theo ➔";
+            submitBtn.onclick = () => startGame('spelling');
+        }
+
+        function handleSpellingCheck() {
+            if (isTransitioning) return;
+            const input = document.getElementById('spellingInput');
+            const exampleBox = document.getElementById('spellingExampleFeedback');
+            const submitBtn = document.getElementById('spellingSubmitBtn');
+            const showAnswerBtn = document.getElementById('spellingShowAnswerBtn');
+            const val = input.value.trim();
+
+            if (val.toLowerCase() === currentWordObj.word.toLowerCase()) {
+                isTransitioning = true;
+                clearSpellingTimer(); // Hủy đếm ngược 30s khi làm đúng
+
+                input.style.borderColor = '#22c55e';
+                input.style.backgroundColor = '#dcfce7';
+                
+                if (exampleBox) exampleBox.style.display = 'block';
+                if (showAnswerBtn) showAnswerBtn.style.display = 'none';
+
+                triggerFeedback(true);
+                speakWord(currentWordObj.word);
+
+                if (isAutoNextEnabled()) {
+                    setTimeout(() => startGame('spelling'), 2000);
+                } else {
+                    submitBtn.innerText = "Từ Tiếp Theo ➔";
+                    submitBtn.onclick = () => startGame('spelling');
+                }
+            } else {
+                input.style.borderColor = '#ef4444';
+                input.style.backgroundColor = '#fee2e2';
+                triggerFeedback(false);
+            }
+        }
+    </script>
+</body>
+</html>
