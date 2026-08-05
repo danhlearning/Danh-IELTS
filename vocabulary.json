@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "word": "Curriculum",
+    "pos": "n",
+    "ipa": "/kəˈrɪkjələm/",
+    "meaning": "Chương trình học",
+    "defEn": "The subjects comprising a course of study in a school or college.",
+    "example": "The school curriculum has been updated to include coding."
+  },
+  {
+    "word": "Pedagogy",
+    "pos": "n",
+    "ipa": "/ˈpedəɡɒdʒi/",
+    "meaning": "Phương pháp giảng dạy",
+    "defEn": "The method and practice of teaching, especially as an academic subject.",
+    "example": "Modern pedagogy emphasizes student-centered learning over traditional lecturing."
+  },
+  {
+    "word": "Literacy",
+    "pos": "n",
+    "ipa": "/ˈlɪtərəsi/",
+    "meaning": "Trình độ biết đọc, biết viết",
+    "defEn": "The ability to read and write.",
+    "example": "Government initiatives have significantly improved the adult literacy rate."
+  },
+  {
+    "word": "Tertiary",
+    "pos": "adj",
+    "ipa": "/ˈtɜːʃəri/",
+    "meaning": "Thuộc cấp đại học, cao đẳng",
+    "defEn": "Relating to education at college or university level.",
+    "example": "More students are pursuing tertiary education to enhance their career prospects."
+  },
+  {
+    "word": "Discipline",
+    "pos": "n",
+    "ipa": "/ˈdɪsəplɪn/",
+    "meaning": "Ngành học, môn học chuyên ngành",
+    "defEn": "A branch of knowledge, typically one studied in higher education.",
+    "example": "Neuroscience is an interdisciplinary field combining several academic disciplines."
+  }
+]
