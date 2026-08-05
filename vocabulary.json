@@ -38,5 +38,85 @@
     "meaning": "Ngành học, môn học chuyên ngành",
     "defEn": "A branch of knowledge, typically one studied in higher education.",
     "example": "Neuroscience is an interdisciplinary field combining several academic disciplines."
+  },
+  {
+    "word": "Assignment",
+    "pos": "n",
+    "ipa": "/əˈsaɪnmənt/",
+    "meaning": "Bài tập, nhiệm vụ được giao",
+    "defEn": "a piece of work or task given to someone as part of a course of study.",
+    "example": "Students are required to submit their written assignments by Friday."
+  },
+  {
+    "word": "Certificate",
+    "pos": "n",
+    "ipa": "/səˈtɪfɪkət/",
+    "meaning": "Chứng chỉ, bằng cấp",
+    "defEn": "an official document showing that you have completed a course or passed an exam.",
+    "example": "Upon completing the training course, graduates receive a vocational certificate."
+  },
+  {
+    "word": "Concentrate",
+    "pos": "v",
+    "ipa": "/ˈkɒnsntreɪt/",
+    "meaning": "Tập trung",
+    "defEn": "to give all your attention to something.",
+    "example": "Noise in the study room makes it difficult for students to concentrate."
+  },
+  {
+    "word": "Degree",
+    "pos": "n",
+    "ipa": "/dɪˈɡriː/",
+    "meaning": "Bằng đại học",
+    "defEn": "a qualification given to a student who has completed a course of study at a college or university.",
+    "example": "Holding a university degree can open up better career opportunities."
+  },
+  {
+    "word": "Educate",
+    "pos": "v",
+    "ipa": "/ˈedʒukeɪt/",
+    "meaning": "Giáo dục, đào tạo",
+    "defEn": "to give intellectual, moral, and social instruction to someone.",
+    "example": "Schools play a vital role in educating young people about environment protection."
+  },
+  {
+    "word": "Knowledge",
+    "pos": "n",
+    "ipa": "/ˈnɒlɪdʒ/",
+    "meaning": "Kiến thức",
+    "defEn": "information, skills, and understanding gained through experience or education.",
+    "example": "Practical training helps students apply theoretical knowledge to real situations."
+  },
+  {
+    "word": "Lecture",
+    "pos": "n",
+    "ipa": "/ˈlektʃə(r)/",
+    "meaning": "Bài giảng đại học",
+    "defEn": "a talk or presentation given to a group of people to teach them about a subject.",
+    "example": "Attending university lectures regularly is essential for academic success."
+  },
+  {
+    "word": "Qualification",
+    "pos": "n",
+    "ipa": "/ˌkwɒlɪfɪˈkeɪʃn/",
+    "meaning": "Bằng cấp, chứng chỉ chuyên môn",
+    "defEn": "an official record showing that you have finished a training course or have a particular skill.",
+    "example": "Employers often look for candidates with relevant educational qualifications."
+  },
+  {
+    "word": "Revise",
+    "pos": "v",
+    "ipa": "/rɪˈvaɪz/",
+    "meaning": "Ôn tập",
+    "defEn": "to study again something you have already learned in preparation for an exam.",
+    "example": "It is important to revise key topics carefully before taking the final exam."
+  },
+  {
+    "word": "Subject",
+    "pos": "n",
+    "ipa": "/ˈsʌbdʒɪkt/",
+    "meaning": "Môn học",
+    "defEn": "an area of knowledge that is studied in a school, college, or university.",
+    "example": "Mathematics and English are compulsory subjects in primary education."
   }
 ]
