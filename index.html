@@ -18,11 +18,7 @@
             --fb-color: #1877f2;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Nunito', sans-serif;
@@ -33,460 +29,136 @@
             transition: background-color 0.3s ease;
         }
 
-        .container {
-            max-width: 420px;
-            margin: 0 auto;
-        }
+        .container { max-width: 420px; margin: 0 auto; }
 
-        header {
-            text-align: center;
-            margin-bottom: 16px;
-        }
+        header { text-align: center; margin-bottom: 16px; }
+        header h1 { font-weight: 800; color: var(--primary); font-size: 1.4rem; }
 
-        header h1 {
-            font-weight: 800;
-            color: var(--primary);
-            font-size: 1.4rem;
-        }
-
-        /* 1. Menu Thanh Sổ Xuống Compact */
-        .dropdown-wrapper {
-            margin-bottom: 16px;
-        }
-
+        /* Menu Thanh Sổ Xuống */
+        .dropdown-wrapper { margin-bottom: 16px; }
         .topic-select {
-            width: 100%;
-            padding: 10px 14px;
-            font-family: 'Nunito', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #0f172a;
-            background-color: #ffffff;
-            border: 2px solid #cbd5e1;
-            border-radius: 10px;
-            outline: none;
+            width: 100%; padding: 10px 14px; font-family: 'Nunito', sans-serif;
+            font-size: 0.95rem; font-weight: 700; color: #0f172a;
+            background-color: #ffffff; border: 2px solid #cbd5e1; border-radius: 10px; outline: none;
         }
 
-        /* 2. Thẻ Chọn Game */
-        .game-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
+        /* Thẻ Chọn Game */
+        .game-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
         .game-card {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 12px 8px;
-            border: 2px solid #e2e8f0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            background: #ffffff; border-radius: 14px; padding: 12px 8px; border: 2px solid #e2e8f0;
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            cursor: pointer; transition: all 0.2s ease;
         }
-
-        .game-card:active {
-            transform: scale(0.96);
-            border-color: var(--primary);
-            background: #eff6ff;
-        }
-
+        .game-card:active { transform: scale(0.96); border-color: var(--primary); background: #eff6ff; }
         .game-icon-box {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            margin-bottom: 6px;
+            width: 42px; height: 42px; border-radius: 10px; display: flex;
+            align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 6px;
         }
-
         .card-flashcard .game-icon-box { background: #fef3c7; }
         .card-quiz .game-icon-box { background: #dbeafe; }
         .card-spelling .game-icon-box { background: #dcfce7; }
+        .game-title { font-size: 0.85rem; font-weight: 800; color: #0f172a; line-height: 1.1; }
 
-        .game-title {
-            font-size: 0.85rem;
-            font-weight: 800;
-            color: #0f172a;
-            line-height: 1.1;
-        }
-
-        /* 3. Khung Chơi Game */
+        /* Khung Chơi Game */
         .game-arena {
-            display: none;
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 16px 12px;
-            border: 2px solid var(--primary);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            margin-bottom: 20px;
+            display: none; background: #ffffff; border-radius: 16px; padding: 16px 12px;
+            border: 2px solid var(--primary); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); margin-bottom: 20px;
         }
-
         .game-arena-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #e2e8f0;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #e2e8f0;
         }
+        .game-arena-title { font-size: 1rem; font-weight: 800; color: #1e293b; }
 
-        .game-arena-title {
-            font-size: 1rem;
-            font-weight: 800;
-            color: #1e293b;
-        }
-
-        /* Nút Bật/Tắt Auto Next */
+        /* Auto Next Switch */
         .auto-next-control {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #475569;
-            background: #f1f5f9;
-            padding: 4px 8px;
-            border-radius: 20px;
+            display: flex; align-items: center; gap: 6px; font-size: 0.8rem;
+            font-weight: 700; color: #475569; background: #f1f5f9; padding: 4px 8px; border-radius: 20px;
         }
-
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 34px;
-            height: 18px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
+        .switch { position: relative; display: inline-block; width: 34px; height: 18px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
         .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #cbd5e1;
-            transition: .3s;
-            border-radius: 20px;
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #cbd5e1; transition: .3s; border-radius: 20px;
         }
-
         .slider:before {
-            position: absolute;
-            content: "";
-            height: 12px;
-            width: 12px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .3s;
-            border-radius: 50%;
+            position: absolute; content: ""; height: 12px; width: 12px; left: 3px; bottom: 3px;
+            background-color: white; transition: .3s; border-radius: 50%;
         }
+        input:checked + .slider { background-color: #2563eb; }
+        input:checked + .slider:before { transform: translateX(16px); }
 
-        input:checked + .slider {
-            background-color: #2563eb;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(16px);
-        }
-
-        /* 4. FLASHCARD 2 MẶT */
-        .flashcard-container {
-            perspective: 1000px;
-            width: 100%;
-            min-height: 230px;
-            margin: 0 auto 12px auto;
-            cursor: pointer;
-        }
-
+        /* Flashcard */
+        .flashcard-container { perspective: 1000px; width: 100%; min-height: 230px; margin: 0 auto 12px auto; cursor: pointer; }
         .flashcard-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            min-height: 230px;
-            text-align: center;
-            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
-            transform-style: preserve-3d;
+            position: relative; width: 100%; height: 100%; min-height: 230px; text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d;
         }
-
-        .flashcard-container.flipped .flashcard-inner {
-            transform: rotateY(180deg);
-        }
-
+        .flashcard-container.flipped .flashcard-inner { transform: rotateY(180deg); }
         .flashcard-front, .flashcard-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 14px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border: 2px solid #3b82f6;
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+            border-radius: 14px; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 2px solid #3b82f6;
         }
+        .flashcard-front { background: #f0f9ff; color: #1e3a8a; }
+        .flashcard-front .vi-meaning { font-size: 1.35rem; font-weight: 800; color: #1d4ed8; }
+        .flashcard-hint { position: absolute; bottom: 10px; font-size: 0.75rem; color: #94a3b8; font-weight: 600; }
+        .flashcard-back { background: #ffffff; color: #0f172a; transform: rotateY(180deg); border-color: #10b981; }
+        .flashcard-back .word-header { display: flex; align-items: center; gap: 6px; }
+        .flashcard-back .word-en { font-size: 1.45rem; font-weight: 800; color: #059669; }
+        .pos-badge { font-size: 0.75rem; font-weight: 800; color: #0284c7; background: #e0f2fe; padding: 2px 6px; border-radius: 6px; font-style: italic; }
+        .btn-audio { background: #e0e7ff; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; }
+        .flashcard-back .ipa { font-size: 0.88rem; color: #64748b; font-weight: 700; margin-bottom: 4px; }
+        .flashcard-back .vi-meaning-back { font-size: 0.95rem; font-weight: 700; color: #334155; background: #f1f5f9; padding: 3px 10px; border-radius: 6px; margin-bottom: 8px; }
+        .flashcard-back .example-box { font-size: 0.92rem; line-height: 1.35; color: #1e293b; font-style: italic; background: #f0fdf4; border-left: 4px solid #10b981; padding: 8px 10px; border-radius: 6px; text-align: left; width: 100%; }
 
-        .flashcard-front {
-            background: #f0f9ff;
-            color: #1e3a8a;
-        }
+        .btn-action { width: 100%; padding: 10px; border-radius: 10px; border: none; background: var(--primary); color: #ffffff; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem; cursor: pointer; margin-top: 8px; }
+        .btn-show-answer { width: 100%; padding: 9px; border-radius: 10px; border: none; background: #f59e0b; color: #ffffff; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9rem; cursor: pointer; margin-top: 8px; display: none; }
 
-        .flashcard-front .vi-meaning {
-            font-size: 1.35rem;
-            font-weight: 800;
-            color: #1d4ed8;
-        }
+        /* Quiz */
+        .quiz-options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .btn-quiz-opt { padding: 12px 10px; border-radius: 10px; border: 2px solid #e2e8f0; background: #fff; font-family: 'Nunito'; font-weight: 700; font-size: 0.85rem; cursor: pointer; text-align: left; transition: all 0.2s ease; }
+        .btn-quiz-opt.correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .btn-quiz-opt.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+        .quiz-example-feedback, .spelling-example-feedback { display: none; margin-bottom: 12px; font-size: 0.92rem; line-height: 1.35; color: #15803d; background: #dcfce7; padding: 8px 10px; border-radius: 8px; text-align: left; border-left: 4px solid #22c55e; }
 
-        .flashcard-hint {
-            position: absolute;
-            bottom: 10px;
-            font-size: 0.75rem;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-
-        .flashcard-back {
-            background: #ffffff;
-            color: #0f172a;
-            transform: rotateY(180deg);
-            border-color: #10b981;
-        }
-
-        .flashcard-back .word-header {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .flashcard-back .word-en {
-            font-size: 1.45rem;
-            font-weight: 800;
-            color: #059669;
-        }
-
-        .pos-badge {
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: #0284c7;
-            background: #e0f2fe;
-            padding: 2px 6px;
-            border-radius: 6px;
-            font-style: italic;
-        }
-
-        .btn-audio {
-            background: #e0e7ff;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .flashcard-back .ipa {
-            font-size: 0.88rem;
-            color: #64748b;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .flashcard-back .vi-meaning-back {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #334155;
-            background: #f1f5f9;
-            padding: 3px 10px;
-            border-radius: 6px;
-            margin-bottom: 8px;
-        }
-
-        .flashcard-back .example-box {
-            font-size: 0.92rem;
-            line-height: 1.35;
-            color: #1e293b;
-            font-style: italic;
-            background: #f0fdf4;
-            border-left: 4px solid #10b981;
-            padding: 8px 10px;
-            border-radius: 6px;
-            text-align: left;
-            width: 100%;
-        }
-
-        .btn-action {
-            width: 100%;
-            padding: 10px;
-            border-radius: 10px;
-            border: none;
-            background: var(--primary);
-            color: #ffffff;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 800;
-            font-size: 0.95rem;
-            cursor: pointer;
-            margin-top: 8px;
-        }
-
-        /* Nút Xem Đáp Án (Màu cam nổi bật) */
-        .btn-show-answer {
-            width: 100%;
-            padding: 9px;
-            border-radius: 10px;
-            border: none;
-            background: #f59e0b;
-            color: #ffffff;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 800;
-            font-size: 0.9rem;
-            cursor: pointer;
-            margin-top: 8px;
-            display: none; /* Mặc định ẩn, hiện sau 30s */
-        }
-
-        /* Style Trắc Nghiệm */
-        .quiz-options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        .btn-quiz-opt {
-            padding: 12px 10px;
-            border-radius: 10px;
-            border: 2px solid #e2e8f0;
-            background: #fff;
-            font-family: 'Nunito';
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            text-align: left;
-            transition: all 0.2s ease;
-        }
-
-        .btn-quiz-opt.correct {
-            background: #dcfce7 !important;
-            border-color: #22c55e !important;
-            color: #15803d !important;
-        }
-
-        .btn-quiz-opt.wrong {
-            background: #fee2e2 !important;
-            border-color: #ef4444 !important;
-            color: #b91c1c !important;
-        }
-
-        .quiz-example-feedback, .spelling-example-feedback {
-            display: none;
-            margin-bottom: 12px;
-            font-size: 0.92rem;
-            line-height: 1.35;
-            color: #15803d;
-            background: #dcfce7;
-            padding: 8px 10px;
-            border-radius: 8px;
-            text-align: left;
-            border-left: 4px solid #22c55e;
-        }
-
-        /* HOẠT CẢNH */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-8px); }
-            40%, 80% { transform: translateX(8px); }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
+        /* Hoạt cảnh */
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-8px); } 40%, 80% { transform: translateX(8px); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         .anim-shake { animation: shake 0.4s ease-in-out; }
         .anim-bounce { animation: bounce 0.4s ease-in-out; }
         .flash-success { background-color: #d1fae5 !important; }
         .flash-error { background-color: #ffe4e6 !important; }
 
-        /* Khối Kết Nối Với Thầy Danh */
-        .contact-section {
-            text-align: center;
-            padding: 20px 10px;
-            background: white;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            margin-top: 10px;
-        }
+        /* Khối Liên hệ */
+        .contact-section { text-align: center; padding: 20px 10px; background: white; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); margin-top: 10px; }
+        .contact-section h2 { font-size: 1.2rem; margin-bottom: 14px; color: var(--text-main); font-weight: 800; }
+        .social-buttons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .btn-social { display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 30px; font-size: 0.9rem; font-weight: 700; text-decoration: none; background-color: white; transition: all 0.3s ease; }
+        .btn-zalo { color: var(--zalo-color); border: 1.5px solid var(--zalo-color); }
+        .btn-zalo:hover { background-color: var(--zalo-color); color: white; }
+        .zalo-logo { width: 20px; height: 20px; border-radius: 4px; }
+        .btn-fb { color: var(--fb-color); border: 1.5px solid var(--fb-color); }
+        .btn-fb:hover { background-color: var(--fb-color); color: white; }
+        .fb-icon { width: 18px; height: 18px; fill: var(--fb-color); transition: fill 0.3s; }
+        .btn-fb:hover .fb-icon { fill: white; }
 
-        .contact-section h2 {
-            font-size: 1.2rem;
-            margin-bottom: 14px;
-            color: var(--text-main);
-            font-weight: 800;
+        /* KHU VỰC ADMIN DÀNH RIÊNG FOR THẦY DANH */
+        .admin-box {
+            background: white; border-radius: 16px; padding: 14px;
+            border: 2px solid #ea580c; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-top: 16px;
         }
-
-        .social-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
+        .admin-box label { font-size: 0.8rem; font-weight: 700; color: #475569; display: block; margin-bottom: 4px; }
+        .admin-box input[type="text"], .admin-box input[type="password"], .admin-box textarea {
+            width: 100%; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 8px;
+            font-family: 'Nunito'; font-size: 0.88rem; margin-bottom: 8px; box-sizing: border-box;
         }
-
-        .btn-social {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            text-decoration: none;
-            background-color: white;
-            transition: all 0.3s ease;
-        }
-
-        .btn-zalo {
-            color: var(--zalo-color);
-            border: 1.5px solid var(--zalo-color);
-        }
-        .btn-zalo:hover {
-            background-color: var(--zalo-color);
-            color: white;
-        }
-        .zalo-logo {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-        }
-
-        .btn-fb {
-            color: var(--fb-color);
-            border: 1.5px solid var(--fb-color);
-        }
-        .btn-fb:hover {
-            background-color: var(--fb-color);
-            color: white;
-        }
-        .fb-icon {
-            width: 18px;
-            height: 18px;
-            fill: var(--fb-color);
-            transition: fill 0.3s;
-        }
-        .btn-fb:hover .fb-icon {
-            fill: white;
-        }
+        .btn-admin-login { background: #2563eb; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-family: 'Nunito'; font-weight: 800; width: 100%; cursor: pointer; }
+        .btn-copy-prompt { background: #8b5cf6; color: white; border: none; padding: 8px; border-radius: 8px; font-family: 'Nunito'; font-weight: 800; width: 100%; cursor: pointer; margin-bottom: 8px; }
+        .btn-import-gh { background: #ea580c; color: white; border: none; padding: 10px; border-radius: 8px; font-family: 'Nunito'; font-weight: 800; width: 100%; cursor: pointer; }
+        .btn-admin-logout { background: #ef4444; color: white; border: none; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; float: right; cursor: pointer; }
+        
+        #adminDashboard { display: none; }
     </style>
 </head>
 <body>
@@ -534,12 +206,10 @@
             </div>
         </main>
 
-        <!-- Khung Chơi Game (Đã bỏ nút Đóng ✖) -->
+        <!-- Khung Chơi Game -->
         <section id="gameArena" class="game-arena">
             <div class="game-arena-header">
                 <h2 id="gameArenaTitle" class="game-arena-title">Màn chơi</h2>
-                
-                <!-- Nút Toggle Bật/Tắt Auto Next -->
                 <div class="auto-next-control">
                     <span>Tự chuyển</span>
                     <label class="switch">
@@ -569,9 +239,49 @@
             </div>
         </section>
 
+        <!-- KHU VỰC CÔNG CỤ QUẢN TRỊ ADMIN -->
+        <section class="admin-box">
+            <!-- 1. Form Đăng Nhập -->
+            <div id="adminLoginForm">
+                <label>🔐 Đăng nhập Admin để Import Từ Vựng:</label>
+                <input type="password" id="adminPassInput" placeholder="Nhập mật khẩu Admin..." onkeypress="if(event.key==='Enter') loginAdmin()">
+                <button class="btn-admin-login" onclick="loginAdmin()">Đăng Nhập Admin</button>
+            </div>
+
+            <!-- 2. Bảng Điều Khiển Admin -->
+            <div id="adminDashboard">
+                <button class="btn-admin-logout" onclick="logoutAdmin()">Đăng xuất ✖</button>
+                <h3 style="font-size: 1rem; color: #ea580c; margin-bottom: 10px;">👑 Bảng Điều Khiển Admin</h3>
+
+                <!-- BƯỚC A: TẠO PROMPT TỰ ĐỘNG -->
+                <div style="background: #fff7ed; padding: 10px; border-radius: 8px; border: 1px dashed #fdba74; margin-bottom: 12px;">
+                    <label style="color: #c2410c;">BƯỚC 1: Tạo Prompt gửi ChatGPT/Gemini</label>
+                    <input type="text" id="topicPromptInput" placeholder="Ví dụ: 5 từ vựng IELTS chủ đề Environment">
+                    <button class="btn-copy-prompt" onclick="copyPromptToClipboard()">📋 Copy Prompt Chuẩn JSON</button>
+                    <small style="color: #64748b; font-size: 0.75rem;">(Bấm nút trên ➔ Mở Gemini/ChatGPT Dán vào ➔ Copy mảng JSON trả về)</small>
+                </div>
+
+                <!-- BƯỚC B: DÁN JSON VÀ IMPORT -->
+                <div>
+                    <label style="color: #15803d;">BƯỚC 2: Dán kết quả JSON nhận được vào đây</label>
+                    <textarea id="jsonInputArea" rows="5" placeholder='Dán mảng JSON vào đây, ví dụ: [{"word": "Curriculum", ...}]'></textarea>
+                    <button class="btn-import-gh" onclick="importJsonToGitHub()">🚀 Import Ngay Vào GitHub Repo</button>
+                </div>
+            </div>
+        </section>
+
     </div>
 
     <script>
+        // CẤU HÌNH THÔNG TIN BẢO MẬT ADMIN & GITHUB API
+        const ADMIN_PASSWORD = "1903"; // Mật khẩu Admin
+        const GITHUB_TOKEN = "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"; // Token GitHub nhúng sẵn
+        
+        // ⚠️ THAY 2 DÒNG DƯỚI THÀNH USERNAME VÀ REPO CỦA BẠN TRÊN GITHUB
+        const GITHUB_USERNAME = "TEN_TAIKHOAN_GITHUB_CUA_BAN";
+        const GITHUB_REPO = "TEN_KHO_LUU_TRU_CUA_BAN";
+        const FILE_PATH = "vocabulary.json";
+
         const vocabularyData = {
             education: [
                 { word: "Curriculum", pos: "n", ipa: "/kəˈrɪkjələm/", meaning: "Chương trình học", defEn: "the subjects comprising a course of study in a school or college.", example: "The school curriculum has been updated to include coding." },
@@ -606,9 +316,15 @@
         let currentWordObj = null;
         let currentGameMode = '';
         let isTransitioning = false;
-        let spellingTimer = null; // Bộ đếm thời gian 30s cho Game Điền Từ
+        let spellingTimer = null;
 
-        // 🔊 BỘ PHÁT ÂM VỚI TỐC ĐỘ ĐỌC CHẬM (rate = 0.75)
+        window.onload = function() {
+            if (sessionStorage.getItem('isAdminLoggedIn') === 'true') {
+                showAdminDashboard();
+            }
+        };
+
+        // BỘ PHÁT ÂM
         function speakWord(text) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
@@ -681,7 +397,7 @@
 
         function startGame(mode) {
             isTransitioning = false;
-            clearSpellingTimer(); // Xóa đếm ngược cũ nếu có
+            clearSpellingTimer();
             currentGameMode = mode;
             const topicKey = document.getElementById('topicSelect').value;
             const words = getVocabularyList(topicKey);
@@ -755,7 +471,7 @@
 
             let optionsHtml = options.map((opt, idx) => `
                 <button class="btn-quiz-opt" onclick="checkQuizAnswer(this, '${opt}', '${currentWordObj.meaning}')">
-                    ${idx + 1}. ${opt}
+                    ${idx + 1}.${opt}
                 </button>
             `).join('');
 
@@ -799,7 +515,7 @@
             }
         }
 
-        // ĐIỀN TỪ (Tự hiện nút xem đáp án sau 30 giây)
+        // ĐIỀN TỪ
         function renderSpelling(words, container) {
             currentWordObj = words[Math.floor(Math.random() * words.length)];
             container.innerHTML = `
@@ -828,7 +544,6 @@
                 if(input) input.focus();
             }, 100);
 
-            // Đếm ngược 30s tự hiện nút Xem Đáp Án
             spellingTimer = setTimeout(() => {
                 const showAnswerBtn = document.getElementById('spellingShowAnswerBtn');
                 if (showAnswerBtn && !isTransitioning) {
@@ -867,7 +582,7 @@
 
             if (val.toLowerCase() === currentWordObj.word.toLowerCase()) {
                 isTransitioning = true;
-                clearSpellingTimer(); // Hủy đếm ngược 30s khi làm đúng
+                clearSpellingTimer();
 
                 input.style.borderColor = '#22c55e';
                 input.style.backgroundColor = '#dcfce7';
@@ -888,6 +603,125 @@
                 input.style.borderColor = '#ef4444';
                 input.style.backgroundColor = '#fee2e2';
                 triggerFeedback(false);
+            }
+        }
+
+        // --- CÁC HÀM XỬ LÝ ADMIN & IMPORT GITHUB ---
+        function loginAdmin() {
+            const pass = document.getElementById('adminPassInput').value.trim();
+            if (pass === ADMIN_PASSWORD) {
+                sessionStorage.setItem('isAdminLoggedIn', 'true');
+                showAdminDashboard();
+                document.getElementById('adminPassInput').value = '';
+            } else {
+                alert("❌ Mật khẩu Admin không chính xác!");
+            }
+        }
+
+        function showAdminDashboard() {
+            document.getElementById('adminLoginForm').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'block';
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem('isAdminLoggedIn');
+            document.getElementById('adminLoginForm').style.display = 'block';
+            document.getElementById('adminDashboard').style.display = 'none';
+        }
+
+        // 1. TẠO PROMPT VÀ COPY CHUẨN MẪU TỰ ĐỘNG
+        function copyPromptToClipboard() {
+            const topic = document.getElementById('topicPromptInput').value.trim();
+            if (!topic) return alert("Vui lòng nhập chủ đề từ vựng!");
+
+            const promptText = `Bạn là máy xuất dữ liệu. Hãy tạo danh sách từ vựng IELTS theo yêu cầu: "${topic}".
+Trả về duy nhất MẢNG JSON hợp lệ (không kèm markdown \`\`\`json, không văn bản bổ sung hay lời chào) theo đúng cấu trúc mẫu sau:
+[
+  {
+    "word": "Curriculum",
+    "pos": "n",
+    "ipa": "/kəˈrɪkjələm/",
+    "meaning": "Chương trình học",
+    "defEn": "the subjects comprising a course of study in a school or college.",
+    "example": "The school curriculum has been updated to include coding."
+  }
+]`;
+
+            navigator.clipboard.writeText(promptText).then(() => {
+                alert("📋 Đã copy Prompt thành công!\nBây giờ hãy dán prompt này vào Gemini/ChatGPT để lấy dữ liệu JSON.");
+            }).catch(() => {
+                alert("Lỗi copy tự động. Vui lòng thử lại!");
+            });
+        }
+
+        // 2. NHẬN MẢNG JSON VÀ ĐẨY LÊN GITHUB REST API
+        async function importJsonToGitHub() {
+            let rawJson = document.getElementById('jsonInputArea').value.trim();
+            if (!rawJson) return alert("Vui lòng dán chuỗi JSON vào ô nhập!");
+
+            // Xử lý làm sạch chuỗi nếu lỡ dán kèm markdown ```json
+            rawJson = rawJson.replace(/```json/g, '').replace(/```/g, '').trim();
+
+            let parsedWords = [];
+            try {
+                parsedWords = JSON.parse(rawJson);
+                if (!Array.isArray(parsedWords)) {
+                    throw new Error("Dữ liệu phải là một Mảng JSON [ ]");
+                }
+            } catch (err) {
+                return alert("❌ Lỗi cấu trúc JSON không hợp lệ! Vui lòng kiểm tra lại dữ liệu.");
+            }
+
+            const apiUrl = `[https://api.github.com/repos/$](https://api.github.com/repos/$){GITHUB_USERNAME}/${GITHUB_REPO}/contents/${FILE_PATH}`;
+
+            try {
+                let sha = "";
+                let currentWords = [];
+
+                // Lấy file vocabulary.json hiện tại trên GitHub
+                const getRes = await fetch(apiUrl, {
+                    headers: { "Authorization": `token ${GITHUB_TOKEN}` }
+                });
+
+                if (getRes.status === 200) {
+                    const fileInfo = await getRes.json();
+                    sha = fileInfo.sha;
+                    const contentUtf8 = decodeURIComponent(escape(atob(fileInfo.content)));
+                    currentWords = JSON.parse(contentUtf8);
+                }
+
+                // Nối từ vựng cũ và từ vựng mới
+                const finalWordsList = [...currentWords, ...parsedWords];
+                const updatedJsonString = JSON.stringify(finalWordsList, null, 2);
+                
+                // Mã hóa UTF-8 sang Base64 an toàn cho tiếng Việt
+                const base64Content = btoa(unescape(encodeURIComponent(updatedJsonString)));
+
+                // Gửi PUT request để ghi đè file trên Repo
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: {
+                        "Authorization": `token ${GITHUB_TOKEN}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        message: "Feat: Admin imported new vocabulary from JSON",
+                        content: base64Content,
+                        sha: sha ? sha : undefined
+                    })
+                });
+
+                if (putRes.ok) {
+                    alert(`🎉 [Admin] Đã Import thành công ${parsedWords.length} từ vựng mới vào GitHub!`);
+                    document.getElementById('jsonInputArea').value = '';
+                    document.getElementById('topicPromptInput').value = '';
+                } else {
+                    alert("Lỗi khi đẩy dữ liệu lên GitHub. Hãy kiểm tra lại Token hoặc Tên Repo/Username!");
+                }
+
+            } catch (err) {
+                alert("Lỗi kết nối GitHub API!");
+                console.error(err);
             }
         }
     </script>
