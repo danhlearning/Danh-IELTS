@@ -142,23 +142,6 @@
         .btn-fb:hover { background-color: var(--fb-color); color: white; }
         .fb-icon { width: 18px; height: 18px; fill: var(--fb-color); transition: fill 0.3s; }
         .btn-fb:hover .fb-icon { fill: white; }
-
-        /* KHU VỰC CÔNG CỤ QUẢN TRỊ ADMIN */
-        .admin-box {
-            background: white; border-radius: 16px; padding: 14px;
-            border: 2px solid #ea580c; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-top: 16px;
-        }
-        .admin-box label { font-size: 0.8rem; font-weight: 700; color: #475569; display: block; margin-bottom: 4px; }
-        .admin-box input[type="text"], .admin-box input[type="password"], .admin-box textarea {
-            width: 100%; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 8px;
-            font-family: 'Nunito'; font-size: 0.88rem; margin-bottom: 8px; box-sizing: border-box;
-        }
-        .btn-admin-login { background: #2563eb; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-family: 'Nunito'; font-weight: 800; width: 100%; cursor: pointer; }
-        .btn-copy-prompt { background: #8b5cf6; color: white; border: none; padding: 8px; border-radius: 8px; font-family: 'Nunito'; font-weight: 800; width: 100%; cursor: pointer; margin-bottom: 8px; }
-        .btn-import-gh { background: #ea580c; color: white; border: none; padding: 10px; border-radius: 8px; font-family: 'Nunito'; font-weight: 800; width: 100%; cursor: pointer; }
-        .btn-admin-logout { background: #ef4444; color: white; border: none; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; float: right; cursor: pointer; }
-        
-        #adminDashboard { display: none; }
     </style>
 </head>
 <body>
@@ -171,7 +154,7 @@
         <!-- Menu Thanh Sổ Xuống -->
         <div class="dropdown-wrapper">
             <select id="topicSelect" class="topic-select">
-                <option value="all">🔥 Luyện Tập Tổng Hợp</option>
+                <option value="all">🔥 Luyện Tập Tổng Hợp (225 Từ)</option>
                 <option value="education">1. Education (Giáo dục)</option>
                 <option value="environment">2. Environment (Môi trường)</option>
                 <option value="technology">3. Technology (Công nghệ)</option>
@@ -238,81 +221,265 @@
                 </a>
             </div>
         </section>
-
-        <!-- KHU VỰC CÔNG CỤ QUẢN TRỊ ADMIN -->
-        <section class="admin-box">
-            <!-- 1. Form Đăng Nhập -->
-            <div id="adminLoginForm">
-                <label>🔐 Mật khẩu Admin:</label>
-                <input type="password" id="adminPassInput" placeholder="...">
-                
-                <label>🔑 GitHub Access Token (ghp_...):</label>
-                <input type="password" id="adminTokenInput" placeholder="Dán token của bạn vào đây..." onkeypress="if(event.key==='Enter') loginAdmin()">
-                
-                <button class="btn-admin-login" onclick="loginAdmin()">Đăng Nhập Admin</button>
-            </div>
-
-            <!-- 2. Bảng Điều Khiển Admin -->
-            <div id="adminDashboard">
-                <button class="btn-admin-logout" onclick="logoutAdmin()">Đăng xuất ✖</button>
-                <h3 style="font-size: 1rem; color: #ea580c; margin-bottom: 10px;">👑 Bảng Điều Khiển Admin</h3>
-
-                <!-- BƯỚC A: TẠO PROMPT TỰ ĐỘNG -->
-                <div style="background: #fff7ed; padding: 10px; border-radius: 8px; border: 1px dashed #fdba74; margin-bottom: 12px;">
-                    <label style="color: #c2410c;">BƯỚC 1: Tạo Prompt gửi ChatGPT/Gemini</label>
-                    <input type="text" id="topicPromptInput" placeholder="Ví dụ: 5 từ vựng IELTS chủ đề Environment">
-                    <button class="btn-copy-prompt" onclick="copyPromptToClipboard()">📋 Copy Prompt Chuẩn JSON</button>
-                    <small style="color: #64748b; font-size: 0.75rem;">(Bấm nút trên ➔ Mở Gemini/ChatGPT Dán vào ➔ Copy mảng JSON nhận được)</small>
-                </div>
-
-                <!-- BƯỚC B: DÁN JSON VÀ IMPORT -->
-                <div>
-                    <label style="color: #15803d;">BƯỚC 2: Dán kết quả JSON nhận được vào đây</label>
-                    <textarea id="jsonInputArea" rows="5" placeholder='Dán mảng JSON vào đây, ví dụ: [{"word": "Curriculum", ...}]'></textarea>
-                    <button class="btn-import-gh" onclick="importJsonToGitHub()">🚀 Import Ngay Vào GitHub Repo</button>
-                </div>
-            </div>
-        </section>
-
     </div>
 
     <script>
-        // CẤU HÌNH THÔNG TIN ADMIN & GITHUB API
-        const ADMIN_PASSWORD = "1903"; // Mật khẩu Admin
-        
-        // CẤU HÌNH USERNAME VÀ REPO CHÍNH XÁC CỦA BẠN
-        const GITHUB_USERNAME = "danhlearning";
-        const GITHUB_REPO = "Danh-IELTS";
-        const FILE_PATH = "vocabulary.json";
-
+        // DỮ LIỆU TỪ VỰNG TĨNH TẬP TRUNG (15 CHỦ ĐỀ x 15 TỪ = 225 TỪ)
         const vocabularyData = {
             education: [
                 { word: "Curriculum", pos: "n", ipa: "/kəˈrɪkjələm/", meaning: "Chương trình học", defEn: "the subjects comprising a course of study in a school or college.", example: "The school curriculum has been updated to include coding." },
                 { word: "Pedagogy", pos: "n", ipa: "/ˈpedəɡɒdʒi/", meaning: "Phương pháp giảng dạy", defEn: "the method and practice of teaching.", example: "Modern pedagogy focuses on student-centered learning." },
                 { word: "Literacy", pos: "n", ipa: "/ˈlɪtərəsi/", meaning: "Trình độ biết đọc biết viết", defEn: "the ability to read and write.", example: "Adult literacy programs have seen great success." },
                 { word: "Qualification", pos: "n", ipa: "/ˌkwɒlɪfɪˈkeɪʃn/", meaning: "Bằng cấp, chứng chỉ", defEn: "an official record of achievement or competence.", example: "He has the necessary academic qualifications for the job." },
-                { word: "Tuition", pos: "n", ipa: "/tjuˈɪʃn/", meaning: "Học phí", defEn: "a sum of money charged for teaching by a college or university.", example: "Tuition fees have increased significantly this year." }
+                { word: "Tuition", pos: "n", ipa: "/tjuˈɪʃn/", meaning: "Học phí", defEn: "a sum of money charged for teaching by a college or university.", example: "Tuition fees have increased significantly this year." },
+                { word: "Academic", pos: "adj", ipa: "/ˌækəˈdemɪk/", meaning: "Thuộc về học thuật", defEn: "relating to education and scholarship.", example: "Her academic performance is outstanding." },
+                { word: "Assignment", pos: "n", ipa: "/əˈsaɪnmənt/", meaning: "Bài tập được giao", defEn: "a piece of work given to someone as part of a course of study.", example: "Students must submit their assignments by Friday." },
+                { word: "Discipline", pos: "n", ipa: "/ˈdɪsəplɪn/", meaning: "Kỷ luật, ngành học", defEn: "the practice of training people to obey rules.", example: "Self-discipline is essential for online learning." },
+                { word: "Scholarship", pos: "n", ipa: "/ˈskɒləʃɪp/", meaning: "Học bổng", defEn: "financial support given to a student based on academic achievement.", example: "She won a full scholarship to study abroad." },
+                { word: "Assessment", pos: "n", ipa: "/əˈsesmənt/", meaning: "Sự đánh giá", defEn: "the evaluation or estimation of the nature, quality, or ability of someone.", example: "Continuous assessment helps monitor student progress." },
+                { word: "Enrolment", pos: "n", ipa: "/ɪnˈrəʊlmənt/", meaning: "Sự nhập học, đăng ký", defEn: "the action of enrolling or being enrolled.", example: "School enrolment has increased by 10% this term." },
+                { word: "Graduate", pos: "v", ipa: "/ˈɡrædʒueɪt/", meaning: "Tốt nghiệp", defEn: "successfully complete a degree, course, or training.", example: "He plans to graduate with honors next year." },
+                { word: "Instruction", pos: "n", ipa: "/ɪnˈstrʌkʃn/", meaning: "Sự hướng dẫn, giảng dạy", defEn: "detailed information telling how something should be done.", example: "Clear instruction is key to efficient learning." },
+                { word: "Knowledge", pos: "n", ipa: "/ˈnɒlɪdʒ/", meaning: "Kiến thức", defEn: "facts, information, and skills acquired through experience or education.", example: "Books are a great source of knowledge." },
+                { word: "Vocational", pos: "adj", ipa: "/vəʊˈkeɪʃənl/", meaning: "Thuộc về học nghề", defEn: "relating to an occupation or employment.", example: "Vocational training prepares students for specific jobs." }
             ],
             environment: [
                 { word: "Biodiversity", pos: "n", ipa: "/ˌbaɪəʊdaɪˈvɜːsəti/", meaning: "Đa dạng sinh học", defEn: "the variety of plant and animal life in the world.", example: "The Amazon rainforest is famous for its rich biodiversity." },
                 { word: "Deforestation", pos: "n", ipa: "/ˌdiːˌfɒrɪˈsteɪʃn/", meaning: "Nạn phá rừng", defEn: "the action of clearing a wide area of trees.", example: "Deforestation threatens many endangered species." },
                 { word: "Contamination", pos: "n", ipa: "/kənˌtæmɪˈneɪʃn/", meaning: "Sự ô nhiễm", defEn: "the action of making something impure or unsuitable.", example: "Water contamination is a major public health concern." },
                 { word: "Ecosystem", pos: "n", ipa: "/ˈiːkəʊsɪstəm/", meaning: "Hệ sinh thái", defEn: "a biological community of interacting organisms.", example: "Pollution causes severe damage to the marine ecosystem." },
-                { word: "Sustainability", pos: "n", ipa: "/səˌsteɪnəˈbɪləti/", meaning: "Phát triển bền vững", defEn: "the ability to be maintained at a certain rate or level.", example: "Environmental sustainability should be a global goal." }
+                { word: "Sustainability", pos: "n", ipa: "/səˌsteɪnəˈbɪləti/", meaning: "Phát triển bền vững", defEn: "the ability to be maintained at a certain rate or level.", example: "Environmental sustainability should be a global goal." },
+                { word: "Conservation", pos: "n", ipa: "/ˌkɒnsəˈveɪʃn/", meaning: "Sự bảo tồn", defEn: "prevention of wasteful use of a resource.", example: "Wildlife conservation is essential for protecting nature." },
+                { word: "Emission", pos: "n", ipa: "/ɪˈmɪʃn/", meaning: "Sự phát thải", defEn: "the production and discharge of something, especially gas or radiation.", example: "Reducing carbon emissions is vital to combat climate change." },
+                { word: "Habitat", pos: "n", ipa: "/ˈhæbɪtæt/", meaning: "Môi trường sống", defEn: "the natural home or environment of an animal, plant, or other organism.", example: "Loss of habitat leads to species extinction." },
+                { word: "Pollutant", pos: "n", ipa: "/pəˈluːtənt/", meaning: "Chất gây ô nhiễm", defEn: "a substance that pollutes something, especially water or the atmosphere.", example: "Industrial pollutants pollute nearby rivers." },
+                { word: "Renewable", pos: "adj", ipa: "/rɪˈnjuːəbl/", meaning: "Có thể tái tạo", defEn: "not depleted by use, such as water, wind, or solar power.", example: "Solar energy is a clean, renewable energy source." },
+                { word: "Recycle", pos: "v", ipa: "/ˌriːˈsaɪkl/", meaning: "Tái chế", defEn: "convert waste into reusable material.", example: "We should recycle plastic bottles to reduce trash." },
+                { word: "Glacier", pos: "n", ipa: "/ˈɡlæsiə/", meaning: "Sông băng", defEn: "a slowly moving mass or river of ice.", example: "Melting glaciers cause sea levels to rise." },
+                { word: "Erosion", pos: "n", ipa: "/ɪˈrəʊʒn/", meaning: "Sự xói mòn", defEn: "the process of eroding or being eroded by wind, water, or other natural agents.", example: "Soil erosion can lead to severe landslides." },
+                { word: "Drought", pos: "n", ipa: "/draʊt/", meaning: "Hạn hán", defEn: "a prolonged period of abnormally low rainfall.", example: "The region suffered a severe drought last summer." },
+                { word: "Wildfire", pos: "n", ipa: "/ˈwaɪldfaɪə/", meaning: "Cháy rừng", defEn: "a large, destructive fire that spreads quickly over woodland.", example: "Wildfires destroyed thousands of hectares of forest." }
             ],
             technology: [
                 { word: "Automation", pos: "n", ipa: "/ˌɔːtəˈmeɪʃn/", meaning: "Tự động hóa", defEn: "the use of largely automatic equipment in a system.", example: "Automation has streamlined factory production lines." },
                 { word: "Breakthrough", pos: "n", ipa: "/ˈbreɪkθruː/", meaning: "Bước đột phá", defEn: "a sudden, dramatic, and important discovery.", example: "Scientists made a major breakthrough in renewable energy." },
                 { word: "Cybersecurity", pos: "n", ipa: "/ˈsaɪbəsɪkjʊərəti/", meaning: "An ninh mạng", defEn: "measures taken to protect computers against criminal use.", example: "Companies invest heavily in cybersecurity to protect data." },
                 { word: "Innovation", pos: "n", ipa: "/ˌɪnəˈveɪʃn/", meaning: "Sự đổi mới, sáng tạo", defEn: "a new method, idea, or product.", example: "Technological innovation drives economic growth." },
-                { word: "Obsolete", pos: "adj", ipa: "/ˈɒbsəliːt/", meaning: "Lỗi thời, lạc hậu", defEn: "no longer produced or used; out of date.", example: "Floppy disks became obsolete years ago." }
+                { word: "Obsolete", pos: "adj", ipa: "/ˈɒbsəliːt/", meaning: "Lỗi thời, lạc hậu", defEn: "no longer produced or used; out of date.", example: "Floppy disks became obsolete years ago." },
+                { word: "Artificial", pos: "adj", ipa: "/ˌɑːtɪˈfɪʃl/", meaning: "Nhân tạo", defEn: "made or produced by human beings rather than occurring naturally.", example: "Artificial intelligence is changing many industries." },
+                { word: "Algorithm", pos: "n", ipa: "/ˈælɡərɪðəm/", meaning: "Thuật toán", defEn: "a process or set of rules to be followed in calculations.", example: "Search engines use complex algorithms to rank pages." },
+                { word: "Database", pos: "n", ipa: "/ˈdeɪtəbeɪs/", meaning: "Cơ sở dữ liệu", defEn: "a structured set of data held in a computer.", example: "Customer info is stored securely in our database." },
+                { word: "Hardware", pos: "n", ipa: "/ˈhɑːdweə/", meaning: "Phần cứng", defEn: "the machines, wiring, and other physical components of a computer.", example: "Upgrading hardware improves system performance." },
+                { word: "Software", pos: "n", ipa: "/ˈsɒftweə/", meaning: "Phần mềm", defEn: "the programs used by a computer.", example: "Installing antivirus software protects your computer." },
+                { word: "Interface", pos: "n", ipa: "/ˈɪntəfeɪs/", meaning: "Giao diện", defEn: "a point where two systems, subjects, or organizations meet and interact.", example: "The app has a user-friendly interface." },
+                { word: "Virtual", pos: "adj", ipa: "/ˈvɜːtʃuəl/", meaning: "Ảo", defEn: "not physically existing as such but made by software to appear to do so.", example: "Virtual reality offers an immersive experience." },
+                { word: "Bandwidth", pos: "n", ipa: "/ˈbændwɪdtθ/", meaning: "Băng thông", defEn: "the capacity for data transfer over a network.", example: "High bandwidth allows faster video streaming." },
+                { word: "Digitalize", pos: "v", ipa: "/ˈdɪdʒɪtəlaɪz/", meaning: "Số hóa", defEn: "convert pictures or sound into a digital form.", example: "Libraries plan to digitalize all old documents." },
+                { word: "Revolutionize", pos: "v", ipa: "/ˌrevəˈluːʃənaɪz/", meaning: "Cách mạng hóa", defEn: "change something radically or fundamentally.", example: "Smartphones have revolutionized global communication." }
             ],
             health: [
                 { word: "Sedentary", pos: "adj", ipa: "/ˈsedntri/", meaning: "Ít vận động", defEn: "tending to spend much time seated; somewhat inactive.", example: "A sedentary lifestyle increases the risk of heart disease." },
                 { word: "Chronic", pos: "adj", ipa: "/ˈkrɒnɪk/", meaning: "Mãn tính", defEn: "persisting for a long time or constantly recurring.", example: "She suffers from chronic back pain." },
                 { word: "Nutritious", pos: "adj", ipa: "/njuːˈtrɪʃəs/", meaning: "Bổ dưỡng", defEn: "efficient as food; nourishing.", example: "Vegetables are a crucial part of a nutritious diet." },
                 { word: "Epidemic", pos: "n", ipa: "/ˌepɪˈdemɪk/", meaning: "Bệnh dịch", defEn: "a widespread occurrence of an infectious disease.", example: "The flu epidemic spread rapidly across the country." },
-                { word: "Immunity", pos: "n", ipa: "/ɪˈmjuːnəti/", meaning: "Hệ miễn dịch", defEn: "the ability of an organism to resist a particular infection.", example: "Vaccines help build immunity against dangerous viruses." }
+                { word: "Immunity", pos: "n", ipa: "/ɪˈmjuːnəti/", meaning: "Hệ miễn dịch", defEn: "the ability of an organism to resist a particular infection.", example: "Vaccines help build immunity against dangerous viruses." },
+                { word: "Diagnose", pos: "v", ipa: "/ˈdaɪəɡnəʊz/", meaning: "Chẩn đoán", defEn: "identify the nature of an illness by examination.", example: "Doctors diagnosed the patient with a mild fever." },
+                { word: "Obesity", pos: "n", ipa: "/əʊˈbiːsəti/", meaning: "Bệnh béo phì", defEn: "the state of being grossly fat or overweight.", example: "Childhood obesity is a growing concern worldwide." },
+                { word: "Symptom", pos: "n", ipa: "/ˈsɪmptəm/", meaning: "Triệu chứng", defEn: "a physical or mental feature indicating a condition of disease.", example: "Fever and cough are common symptoms of a cold." },
+                { word: "Prescription", pos: "n", ipa: "/prɪˈskrɪpʃn/", meaning: "Đơn thuốc", defEn: "an instruction written by a medical practitioner for a medicine.", example: "You need a prescription to buy these antibiotics." },
+                { word: "Vaccination", pos: "n", ipa: "/ˌvæksɪˈneɪʃn/", meaning: "Tiêm chủng", defEn: "treatment with a vaccine to produce immunity against a disease.", example: "Mass vaccination helped eradicate the virus." },
+                { word: "Infection", pos: "n", ipa: "/ɪnˈfekʃn/", meaning: "Sự nhiễm trùng", defEn: "the process of infecting or the state of being infected.", example: "Clean the wound properly to prevent infection." },
+                { word: "Therapy", pos: "n", ipa: "/ˈθerəpi/", meaning: "Liệu pháp điều trị", defEn: "treatment intended to relieve or heal a disorder.", example: "Physical therapy helps patients recover mobility." },
+                { word: "Hygiene", pos: "n", ipa: "/ˈhaɪdʒiːn/", meaning: "Vệ sinh", defEn: "conditions or practices conducive to maintaining health.", example: "Good personal hygiene prevents the spread of germs." },
+                { word: "Well-being", pos: "n", ipa: "/ˈwel biːɪŋ/", meaning: "Sức khỏe thể chất & tinh thần", defEn: "the state of being comfortable, healthy, or happy.", example: "Exercise is key to overall mental and physical well-being." },
+                { word: "Deficiency", pos: "n", ipa: "/dɪˈfɪʃnsi/", meaning: "Sự thiếu hụt (dinh dưỡng)", defEn: "a lack or shortage of something necessary.", example: "Iron deficiency can cause tiredness and anemia." }
+            ],
+            work: [
+                { word: "Colleague", pos: "n", ipa: "/ˈkɒliːɡ/", meaning: "Đồng nghiệp", defEn: "a person with whom one works in a profession or business.", example: "I get along very well with my new colleagues." },
+                { word: "Productivity", pos: "n", ipa: "/ˌprɒdʌkˈtɪvəti/", meaning: "Năng suất công việc", defEn: "the state or quality of being productive.", example: "Flexible working hours can boost employee productivity." },
+                { word: "Promotion", pos: "n", ipa: "/prəˈməʊʃn/", meaning: "Sự thăng tiến", defEn: "advancement in rank or position.", example: "Hard work earned her a promotion to team lead." },
+                { word: "Resignation", pos: "n", ipa: "/ˌrezɪɡˈneɪʃn/", meaning: "Sự thôi việc, xin nghỉ", defEn: "an act of retiring or giving up a position.", example: "He handed in his letter of resignation yesterday." },
+                { word: "Redundancy", pos: "n", ipa: "/rɪˈdʌndənsi/", meaning: "Sự cắt giảm nhân sự", defEn: "the state of being no longer needed or useful.", example: "Company restructuring led to several redundancies." },
+                { word: "Workforce", pos: "n", ipa: "/ˈwɜːkfɔːs/", meaning: "Lực lượng lao động", defEn: "the people engaged in or available for work.", example: "A skilled workforce attracts foreign investment." },
+                { word: "Compensation", pos: "n", ipa: "/ˌkɒmpenˈseɪʃn/", meaning: "Tiền bồi thường, thù lao", defEn: "something awarded to someone as a recompense for loss or work.", example: "Employees receive fair compensation for overtime work." },
+                { word: "Deadline", pos: "n", ipa: "/ˈdedlaɪn/", meaning: "Hạn chót", defEn: "the latest time or date by which something should be completed.", example: "We must complete the report before the deadline." },
+                { word: "Efficiency", pos: "n", ipa: "/ɪˈfɪʃnsi/", meaning: "Hiệu quả công việc", defEn: "the state or quality of being efficient.", example: "Automation improves operational efficiency." },
+                { word: "Workload", pos: "n", ipa: "/ˈwɜːkləʊd/", meaning: "Khối lượng công việc", defEn: "the amount of work to be done by a person or organization.", example: "He has a heavy workload this week." },
+                { word: "Occupation", pos: "n", ipa: "/ˌɒkjuˈpeɪʃn/", meaning: "Nghề nghiệp", defEn: "a job or profession.", example: "Please state your name, age, and occupation." },
+                { word: "Employment", pos: "n", ipa: "/ɪmˈplɔɪmənt/", meaning: "Việc làm", defEn: "the state of having paid work.", example: "Tourism creates new employment opportunities." },
+                { word: "Freelancer", pos: "n", ipa: "/ˈfriːlɑːnsə/", meaning: "Lao động tự do", defEn: "a person who works self-employed for different companies.", example: "She works as a freelance graphic designer." },
+                { word: "Internship", pos: "n", ipa: "/ˈɪntɜːnʃɪp/", meaning: "Kỳ thực tập", defEn: "the position of a student or trainee who works in an organization.", example: "An internship provides valuable hands-on experience." },
+                { word: "Appraisal", pos: "n", ipa: "/əˈpreɪzl/", meaning: "Sự đánh giá nhân viên", defEn: "an act of assessing something or someone.", example: "Annual performance appraisals help identify employee strengths." }
+            ],
+            society: [
+                { word: "Demographics", pos: "n", ipa: "/ˌdeməˈɡræfɪks/", meaning: "Nhân khẩu học", defEn: "statistical data relating to the population and particular groups within it.", example: "The demographics of the city have changed significantly." },
+                { word: "Inequality", pos: "n", ipa: "/ˌɪnɪˈkwɒləti/", meaning: "Bất bình đẳng", defEn: "difference in size, degree, circumstances, etc.; lack of equality.", example: "Income inequality remains a pressing global issue." },
+                { word: "Integration", pos: "n", ipa: "/ˌɪntɪˈɡreɪʃn/", meaning: "Sự hòa nhập", defEn: "the action or process of integrating.", example: "Cultural integration helps immigrants feel welcome." },
+                { word: "Urbanization", pos: "n", ipa: "/ˌɜːbənaɪˈzeɪʃn/", meaning: "Đô thị hóa", defEn: "the process of making an area more urban.", example: "Rapid urbanization puts pressure on city infrastructure." },
+                { word: "Poverty", pos: "n", ipa: "/ˈpɒvəti/", meaning: "Sự nghèo đói", defEn: "the state of being extremely poor.", example: "Programs aimed at reducing poverty are vital." },
+                { word: "Multicultural", pos: "adj", ipa: "/ˌmʌltiˈkʌltʃərəl/", meaning: "Đa văn hóa", defEn: "relating to or containing several cultural or ethnic groups.", example: "Canada is known for its vibrant multicultural society." },
+                { word: "Hierarchy", pos: "n", ipa: "/ˈhaɪərɑːki/", meaning: "Hệ thống thứ bậc", defEn: "a system or organization in which people or groups are ranked.", example: "The corporate hierarchy determines managerial levels." },
+                { word: "Welfare", pos: "n", ipa: "/ˈwelfeə/", meaning: "Phúc lợi xã hội", defEn: "statutory procedure or social effort designed to promote basic physical well-being.", example: "The government offers social welfare benefits to low-income families." },
+                { word: "Community", pos: "n", ipa: "/kəˈmjuːnəti/", meaning: "Cộng đồng", defEn: "a group of people living in the same place or having a particular characteristic in common.", example: "Volunteering strengthens the local community." },
+                { word: "Discrimination", pos: "n", ipa: "/dɪˌskrɪmɪˈneɪʃn/", meaning: "Sự phân biệt đối xử", defEn: "the unjust or prejudicial treatment of different categories of people.", example: "Laws strictly forbid age discrimination in hiring." },
+                { word: "Civilization", pos: "n", ipa: "/ˌsɪvəlaɪˈzeɪʃn/", meaning: "Nền văn minh", defEn: "the stage of human social development and organization that is considered most advanced.", example: "Ancient Roman civilization left a lasting heritage." },
+                { word: "Tradition", pos: "n", ipa: "/trəˈdɪʃn/", meaning: "Truyền thống", defEn: "the transmission of customs or beliefs from generation to generation.", example: "Celebrating Tet is a cherish Vietnamese tradition." },
+                { word: "Immigration", pos: "n", ipa: "/ˌɪmɪˈɡreɪʃn/", meaning: "Sự nhập cư", defEn: "the action of coming to live permanently in a foreign country.", example: "Immigration policies regulate incoming movement." },
+                { word: "Inclusion", pos: "n", ipa: "/ɪnˈkluːʒn/", meaning: "Sự hòa nhập, bao hàm", defEn: "the practice or policy of providing equal access to opportunities.", example: "Social inclusion ensures everyone has equal opportunities." },
+                { word: "Sterotype", pos: "n", ipa: "/ˈsteriətaɪp/", meaning: "Định kiến, khuôn mẫu", defEn: "a widely held but fixed and oversimplified image or idea of a particular type of person or thing.", example: "We must break down gender stereotypes in society." }
+            ],
+            travel: [
+                { word: "Itinerary", pos: "n", ipa: "/aɪˈtɪnərəri/", meaning: "Lịch trình chuyến đi", defEn: "a planned route or journey.", example: "We prepared a detailed travel itinerary for our Japan trip." },
+                { word: "Accommodation", pos: "n", ipa: "/əˌkɒməˈdeɪʃn/", meaning: "Chỗ ở", defEn: "a room, group of rooms, or building in which someone may live or stay.", example: "Hotel accommodation was included in the tour price." },
+                { word: "Destination", pos: "n", ipa: "/ˌdestɪˈneɪʃn/", meaning: "Điểm đến", defEn: "the place to which someone or something is going or being sent.", example: "Da Lat is a popular holiday destination in Vietnam." },
+                { word: "Excursion", pos: "n", ipa: "/ɪkˈskɜːʃn/", meaning: "Chuyến tham quan ngắn", defEn: "a short journey or trip, especially one engaged in as a leisure activity.", example: "We went on a day excursion to the nearby islands." },
+                { word: "Hospitality", pos: "n", ipa: "/ˌhɒspɪˈtæləti/", meaning: "Lòng hiếu khách", defEn: "the friendly and generous reception and entertainment of guests or strangers.", example: "Locals welcomed us with warmth and hospitality." },
+                { word: "Souvenir", pos: "n", ipa: "/ˌsuːvəˈnɪə/", meaning: "Quà lưu niệm", defEn: "a thing that is kept as a reminder of a person, place, or event.", example: "I bought a handcrafted magnet as a souvenir." },
+                { word: "Ecotourism", pos: "n", ipa: "/ˈiːkəʊtʊərɪzəm/", meaning: "Du lịch sinh thái", defEn: "tourism directed toward exotic, often threatened, natural environments.", example: "Ecotourism supports conservation and local communities." },
+                { word: "Boarding", pos: "n", ipa: "/ˈbɔːdɪŋ/", meaning: "Sự lên máy bay/tàu", defEn: "the action of getting on or entering a ship, aircraft, or other vehicle.", example: "Boarding will start 30 minutes before departure." },
+                { word: "Departure", pos: "n", ipa: "/dɪˈpɑːtʃə/", meaning: "Sự khởi hành", defEn: "the action of leaving, especially to start a journey.", example: "The departure time was delayed due to bad weather." },
+                { word: "Passenger", pos: "n", ipa: "/ˈpæsɪndʒə/", meaning: "Hành khách", defEn: "a traveler on a public or private conveyance other than the driver.", example: "All passengers must fasten their seatbelts." },
+                { word: "Sightseeing", pos: "n", ipa: "/ˈsaɪtsiːɪŋ/", meaning: "Sự ngắm cảnh", defEn: "the activity of visiting places of interest in a particular location.", example: "We spent the afternoon sightseeing around Paris." },
+                { word: "Expedition", pos: "n", ipa: "/ˌekspəˈdɪʃn/", meaning: "Cuộc thám hiểm", defEn: "a journey or voyage undertaken by a group of people with a particular purpose.", example: "An expedition to the North Pole requires rigorous training." },
+                { word: "Luggage", pos: "n", ipa: "/ˈlʌɡɪdʒ/", meaning: "Hành lý", defEn: "suitcases or other bags in which a traveler packs personal belongings.", example: "Please keep an eye on your personal luggage." },
+                { word: "Reservation", pos: "n", ipa: "/ˌrezəˈveɪʃn/", meaning: "Sự đặt chỗ trước", defEn: "an arrangement to have something kept for one's use.", example: "I made a dinner reservation for two at 7 PM." },
+                { word: "Picturesque", pos: "adj", ipa: "/ˌpɪktʃəˈresk/", meaning: "Đẹp như tranh vẽ", defEn: "visually attractive, especially in a quaint or charming way.", example: "We visited a picturesque coastal village." }
+            ],
+            crime: [
+                { word: "Deterrent", pos: "n", ipa: "/dɪˈterənt/", meaning: "Biện pháp răn đe", defEn: "a thing that discourages or is intended to discourage someone from doing something.", example: "Security cameras act as an effective deterrent to crime." },
+                { word: "Offender", pos: "n", ipa: "/əˈfendə/", meaning: "Kẻ phạm tội", defEn: "a person who commits an illegal act.", example: "First-time offenders are often given community service." },
+                { word: "Rehabilitation", pos: "n", ipa: "/ˌriːəˌbɪlɪˈteɪʃn/", meaning: "Sự cải tạo, phục hồi", defEn: "the action of restoring someone to health or normal life through training and therapy.", example: "Prisons should focus on the rehabilitation of criminals." },
+                { word: "Investigation", pos: "n", ipa: "/ɪnˌvestɪˈɡeɪʃn/", meaning: "Cuộc điều tra", defEn: "the action of investigating something or someone; formal or systematic examination.", example: "Police launched an investigation into the burglary." },
+                { word: "Sentence", pos: "n", ipa: "/ˈsentəns/", meaning: "Bản án, hình phạt", defEn: "the punishment assigned to a defendant found guilty by a court.", example: "The judge passed a five-year prison sentence." },
+                { word: "Vandalism", pos: "n", ipa: "/ˈvændəlɪzəm/", meaning: "Hành vi phá hoại tài sản công", defEn: "action involving deliberate destruction of or damage to public or private property.", example: "Graffiti on historical sites is considered vandalism." },
+                { word: "Verdict", pos: "n", ipa: "/ˈvɜːdɪkt/", meaning: "Phán quyết của tòa", defEn: "a decision on an issue of fact in a civil or criminal case.", example: "The jury reached a unanimous guilty verdict." },
+                { word: "Prosecute", pos: "v", ipa: "/ˈprɒsɪkjuːt/", meaning: "Truy tố", defEn: "institute legal proceedings against a person or institution.", example: "Shoplifters will be prosecuted to the full extent of the law." },
+                { word: "Penalty", pos: "n", ipa: "/ˈpenəlti/", meaning: "Hình phạt", defEn: "a punishment imposed for breaking a law, rule, or contract.", example: "Speeding carries a heavy financial penalty." },
+                { word: "Witness", pos: "n", ipa: "/ˈwɪtnəs/", meaning: "Nhân chứng", defEn: "a person who sees an event, typically a crime or accident, take place.", example: "The witness provided key details to the police." },
+                { word: "Evidence", pos: "n", ipa: "/ˈevɪdəns/", meaning: "Bằng chứng", defEn: "the available body of facts or information indicating whether a belief is true.", example: "There was insufficient evidence to convict the suspect." },
+                { word: "Innocent", pos: "adj", ipa: "/ˈɪnəsnt/", meaning: "Vô tội", defEn: "not guilty of a crime or offense.", example: "He claimed he was completely innocent of the charges." },
+                { word: "Convict", pos: "v", ipa: "/kənˈvɪkt/", meaning: "Kết án", defEn: "declare someone to be guilty of a criminal offense by the verdict of a jury.", example: "He was convicted of fraud after a long trial." },
+                { word: "Imprisonment", pos: "n", ipa: "/ɪmˈprɪznmənt/", meaning: "Sự bỏ tù", defEn: "the state of being imprisoned; captivity.", example: "The crime carries a maximum sentence of life imprisonment." },
+                { word: "Crime rate", pos: "n", ipa: "/kraɪm reɪt/", meaning: "Tỷ lệ tội phạm", defEn: "the ratio of crimes in a area to the population of that area.", example: "Installing street lights helped lower the local crime rate." }
+            ],
+            media: [
+                { word: "Censorship", pos: "n", ipa: "/ˈsensəʃɪp/", meaning: "Sự kiểm duyệt", defEn: "the suppression or prohibition of any parts of books, news, films, etc.", example: "Strict media censorship restricts freedom of speech." },
+                { word: "Broadcasting", pos: "n", ipa: "/ˈbrɔːdkɑːstɪŋ/", meaning: "Ngành phát sóng truyền thông", defEn: "the business or medium of broadcasting radio or television programs.", example: "Digital broadcasting has replaced traditional TV networks." },
+                { word: "Journalism", pos: "n", ipa: "/ˈdʒɜːnəlɪzəm/", meaning: "Ngành báo chí", defEn: "the activity or profession of writing for newspapers, magazines, or news websites.", example: "Investigative journalism uncovers hidden truths." },
+                { word: "Propaganda", pos: "n", ipa: "/ˌprɒpəˈɡændə/", meaning: "Sự tuyên truyền", defEn: "information, especially of a biased nature, used to promote a cause.", example: "Advertisements can sometimes act as political propaganda." },
+                { word: "Sensationalism", pos: "n", ipa: "/senˈseɪʃənəlɪzəm/", meaning: "Xử lý tin tức giật gân", defEn: "the use of exciting or shocking stories at the expense of accuracy.", example: "Sensationalism in the news attracts more clicks." },
+                { word: "Audience", pos: "n", ipa: "/ˈɔːdiəns/", meaning: "Khán giả, độc giả", defEn: "the assembled spectators or listeners at a public event.", example: "The live show attracted a massive global audience." },
+                { word: "Coverage", pos: "n", ipa: "/ˈkʌvərɪdʒ/", meaning: "Sự đưa tin truyền thông", defEn: "the reporting of a particular important event or subject.", example: "Media coverage of the election was extensive." },
+                { word: "Misinformation", pos: "n", ipa: "/ˌmɪsɪnfəˈmeɪʃn/", meaning: "Thông tin sai lệch", defEn: "false or inaccurate information, especially that which is intended to deceive.", example: "Social networks combat the spread of misinformation." },
+                { word: "Editorial", pos: "n", ipa: "/ˌedɪˈtɔːriəl/", meaning: "Bài xát báo, xã luận", defEn: "a newspaper article expressing the editor's opinion.", example: "The editorial criticized the government's new economic plan." },
+                { word: "Commercial", pos: "n", ipa: "/kəˈmɜːʃl/", meaning: "Quảng cáo truyền hình", defEn: "a television or radio advertisement.", example: "The Super Bowl features famous, high-budget commercials." },
+                { word: "Publisher", pos: "n", ipa: "/ˈpʌblɪʃə/", meaning: "Nhà xuất bản", defEn: "a person or company that prepares and issues books or magazines.", example: "The book publisher accepted her manuscript." },
+                { word: "Streamer", pos: "n", ipa: "/ˈstriːmə/", meaning: "Người phát trực tiếp", defEn: "a person who broadcasts live video over the internet.", example: "Online video streamers have millions of young followers." },
+                { word: "Circulation", pos: "n", ipa: "/ˌsɜːkjəˈleɪʃn/", meaning: "Số lượng bản in phát hành", defEn: "the number of copies of a newspaper or magazine sold.", example: "The newspaper has a daily circulation of over 100,000." },
+                { word: "Paparazzi", pos: "n", ipa: "/ˌpæpəˈrætsi/", meaning: "Thợ săn ảnh người nổi tiếng", defEn: "freelance photographers who pursue celebrities to take candid pictures.", example: "Paparazzi followed the actress everywhere she went." },
+                { word: "Influencer", pos: "n", ipa: "/ˈɪnfluənsə/", meaning: "Người có ảnh hưởng số", defEn: "a person with the ability to influence potential buyers of a product or service.", example: "Brands partner with social media influencers to reach youth." }
+            ],
+            arts: [
+                { word: "Aesthetics", pos: "n", ipa: "/iːsˈθetɪks/", meaning: "Tính thẩm mỹ", defEn: "a set of principles concerned with the nature and appreciation of beauty.", example: "The interior designer paid great attention to aesthetics." },
+                { word: "Masterpiece", pos: "n", ipa: "/ˈmɑːstəpiːs/", meaning: "Kiệt tác", defEn: "a work of outstanding artistry, skill, or workmanship.", example: "Da Vinci's Mona Lisa is universally recognized as a masterpiece." },
+                { word: "Exhibition", pos: "n", ipa: "/ˌeksɪˈbɪʃn/", meaning: "Cuộc triển lãm", defEn: "a public display of works of art or items of interest.", example: "An art exhibition opened at the national gallery." },
+                { word: "Abstract", pos: "adj", ipa: "/ˈæbstrækt/", meaning: "Trừu tượng", defEn: "existing in thought or as an idea but not having a physical existence.", example: "Abstract paintings encourage personal interpretation." },
+                { word: "Heritage", pos: "n", ipa: "/ˈherɪtɪdʒ/", meaning: "Di sản văn hóa", defEn: "valued objects and qualities such as historic buildings and cultural traditions.", example: "Preserving historical sites protects our cultural heritage." },
+                { word: "Sculpture", pos: "n", ipa: "/ˈskʌlptʃə/", meaning: "Tác phẩm điêu khắc", defEn: "the art of making two- or three-dimensional representative or abstract forms.", example: "Marble sculptures decorated the palace courtyard." },
+                { word: "Literature", pos: "n", ipa: "/ˈlɪtrətʃə/", meaning: "Văn học", defEn: "written works, especially those considered of superior or lasting artistic merit.", example: "She is studying classic English literature at university." },
+                { word: "Performance", pos: "n", ipa: "/pəˈfɔːməns/", meaning: "Buổi biểu diễn", defEn: "an act of staging or presenting a play, concert, or other form of entertainment.", example: "The orchestra gave an outstanding live performance." },
+                { word: "Portrait", pos: "n", ipa: "/ˈpɔːtreɪt/", meaning: "Bức chân dung", defEn: "a painting, drawing, photograph, or engraving of a person.", example: "The painter created a breathtaking portrait of the queen." },
+                { word: "Inspiration", pos: "n", ipa: "/ˌɪnspəˈreɪʃn/", meaning: "Nguồn cảm hứng", defEn: "the process of being mentally stimulated to do or feel something creative.", example: "Nature is a constant source of inspiration for artists." },
+                { word: "Symphony", pos: "n", ipa: "/ˈsɪmfəni/", meaning: "Bản nhạc giao hưởng", defEn: "an elaborate musical composition for full orchestra.", example: "Beethoven composed nine famous symphonies." },
+                { word: "Creativity", pos: "n", ipa: "/ˌkriːeɪˈtɪvəti/", meaning: "Sức sáng tạo", defEn: "the use of imagination or original ideas to create something.", example: "Art classes encourage imagination and creativity." },
+                { word: "Craftsmanship", pos: "n", ipa: "/ˈkrɑːftsmənʃɪp/", meaning: "Tay nghề thủ công tinh xảo", defEn: "skill in a particular craft.", example: "The handmade wooden furniture displays exquisite craftsmanship." },
+                { word: "Choreography", pos: "n", ipa: "/ˌkɒriˈɒɡrəfi/", meaning: "Nghệ thuật biên đạo múa", defEn: "the sequence of steps and movements in dance.", example: "The ballet featured modern choreography." },
+                { word: "Gallery", pos: "n", ipa: "/ˈɡæləri/", meaning: "Phòng trưng bày nghệ thuật", defEn: "a room or building for the display or sale of works of art.", example: "The private gallery hosted a contemporary art show." }
+            ],
+            globalization: [
+                { word: "Integration", pos: "n", ipa: "/ˌɪntɪˈɡreɪʃn/", meaning: "Sự hội nhập quốc tế", defEn: "the action or process of combining into an integral whole.", example: "Economic integration fosters smoother regional trade." },
+                { word: "Outsourcing", pos: "n", ipa: "/ˈaʊtsɔːsɪŋ/", meaning: "Sự thuê ngoài dịch vụ", defEn: "obtain goods or services from an outside or foreign supplier.", example: "Many tech companies use outsourcing to reduce operational costs." },
+                { word: "Homogenization", pos: "n", ipa: "/həˌmɒdʒənaɪˈzeɪʃn/", meaning: "Sự đồng nhất hóa văn hóa", defEn: "the process of making things uniform or similar.", example: "Global retail chains contribute to cultural homogenization." },
+                { word: "Multinational", pos: "adj", ipa: "/ˌmʌltiˈnæʃnəl/", meaning: "Đa quốc gia", defEn: "including or involving several countries or individuals of several nationalities.", example: "Multinational corporations operate in various continents." },
+                { word: "Interconnected", pos: "adj", ipa: "/ˌɪntəkəˈnektɪd/", meaning: "Có tính kết nối lẫn nhau", defEn: "having all constituent parts linked or connected.", example: "We live in an increasingly interconnected global market." },
+                { word: "Tariff", pos: "n", ipa: "/ˈtærɪf/", meaning: "Thuế quan", defEn: "a tax or duty to be paid on a particular class of imports or exports.", example: "High tariffs discourage importing foreign goods." },
+                { word: "Localization", pos: "n", ipa: "/ˌləʊkəlaɪˈzeɪʃn/", meaning: "Sự địa phương hóa", defEn: "the transformation of something to make it local.", example: "Global brands adapt their marketing through localization." },
+                { word: "Migration", pos: "n", ipa: "/maɪˈɡreɪʃn/", meaning: "Sự di cư", defEn: "movement from one region or country to another.", example: "Economic migration has reshaped labor markets globally." },
+                { word: "Standardization", pos: "n", ipa: "/ˌstændədaɪˈzeɪʃn/", meaning: "Sự tiêu chuẩn hóa", defEn: "the process of making something conform to a standard.", example: "International safety standardization protects consumers." },
+                { word: "Supply chain", pos: "n", ipa: "/səˈplaɪ tʃeɪn/", meaning: "Chuỗi cung ứng", defEn: "the sequence of processes involved in the production and distribution of a commodity.", example: "Disruptions in the global supply chain caused product shortages." },
+                { word: "Westernization", pos: "n", ipa: "/ˌwestənaɪˈzeɪʃn/", meaning: "Sự Tây hóa văn hóa", defEn: "assimilation of Western culture or values.", example: "Rapid modernization often leads to cultural Westernization." },
+                { word: "Monopolization", pos: "n", ipa: "/məˌnɒpəlaɪˈzeɪʃn/", meaning: "Sự độc quyền hóa", defEn: "obtaining exclusive control of the trade in a commodity or service.", example: "Laws prevent the monopolization of essential markets." },
+                { word: "Deregulation", pos: "n", ipa: "/diːˌreɡjuˈleɪʃn/", meaning: "Sự bãi bỏ quy định", defEn: "the removal of regulations or restrictions.", example: "Financial deregulation encourages rapid market expansion." },
+                { word: "Protectionism", pos: "n", ipa: "/prəˈtekʃənɪzəm/", meaning: "Chủ nghĩa bảo hộ thương mại", defEn: "the practice of shielding domestic industries from foreign competition.", example: "Trade protectionism can spark economic conflicts." },
+                { word: "Free trade", pos: "n", ipa: "/friː treɪd/", meaning: "Thương mại tự do", defEn: "international trade left to its natural course without tariffs or restrictions.", example: "Free trade agreements boost exports between nations." }
+            ],
+            family: [
+                { word: "Upbringing", pos: "n", ipa: "/ˈʌpbrɪŋɪŋ/", meaning: "Sự nuôi dưỡng, giáo dục gia đình", defEn: "the treatment and instruction received from parents during childhood.", example: "A loving upbringing helps children build self-confidence." },
+                { word: "Nuclear family", pos: "n", ipa: "/ˌnjuːkliə ˈfæməli/", meaning: "Gia đình hạt nhân (bố mẹ & con)", defEn: "a couple and their dependent children.", example: "The nuclear family is common in urban areas." },
+                { word: "Extended family", pos: "n", ipa: "/ɪkˌstendɪd ˈfæməli/", meaning: "Gia đình đa thế hệ", defEn: "a family that extends beyond the nuclear family.", example: "Living with an extended family offers mutual support." },
+                { word: "Sibling", pos: "n", ipa: "/ˈsɪblɪŋ/", meaning: "Anh chị em ruột", defEn: "each of two or more children or offspring having one or both parents in common.", example: "I have two siblings, an older brother and a sister." },
+                { word: "Generation gap", pos: "n", ipa: "/ˌdʒenəˈreɪʃn ɡæp/", meaning: "Khoảng cách thế hệ", defEn: "a difference of opinions between one generation and another.", example: "Open dialogue helps bridge the generation gap." },
+                { word: "Breadwinner", pos: "n", ipa: "/ˈbredwɪnə/", meaning: "Trụ cột gia đình", defEn: "a person who earns money to support a family.", example: "He became the primary breadwinner after his father retired." },
+                { word: "Paternity", pos: "n", ipa: "/pəˈtɜːnəti/", meaning: "Tư cách làm cha", defEn: "the state of being someone's father.", example: "New fathers can take paid paternity leave." },
+                { word: "Maternity", pos: "n", ipa: "/məˈtɜːnəti/", meaning: "Tư cách làm mẹ", defEn: "the state of being a mother.", example: "She is currently on maternity leave with her newborn." },
+                { word: "Kinship", pos: "n", ipa: "/ˈkɪnʃɪp/", meaning: "Quan hệ họ hàng, thân tộc", defEn: "blood relationship.", example: "Strong bonds of kinship tie the village members together." },
+                { word: "Inheritance", pos: "n", ipa: "/ɪnˈherɪtəns/", meaning: "Tài sản thừa kế", defEn: "a thing that is inherited.", example: "The siblings shared their parents' land inheritance." },
+                { word: "Domestic", pos: "adj", ipa: "/dəˈmestɪk/", meaning: "Thuộc việc nhà, nội trợ", defEn: "relating to the running of a home or to family relations.", example: "Sharing domestic chores reduces stress at home." },
+                { word: "Guardian", pos: "n", ipa: "/ˈɡɑːdiən/", meaning: "Người giám hộ", defEn: "a defender, protector, or keeper.", example: "Her uncle was appointed as her legal guardian." },
+                { word: "Nurture", pos: "v", ipa: "/ˈnɜːtʃə/", meaning: "Nuôi dưỡng, chăm sóc", defEn: "care for and encourage the growth or development of.", example: "Parents nurture their children with patience and care." },
+                { word: "Reconciliation", pos: "n", ipa: "/ˌrekənsɪliˈeɪʃn/", meaning: "Sự hòa giải gia đình", defEn: "the restoration of friendly relations.", example: "Family counseling aided in their reconciliation." },
+                { word: "Adoption", pos: "n", ipa: "/əˈdɒpʃn/", meaning: "Sự nhận con nuôi", defEn: "the action or fact of adopting a child.", example: "Child adoption gives orphans a loving home." }
+            ],
+            housing: [
+                { word: "Amenities", pos: "n", ipa: "/əˈmiːnətiz/", meaning: "Tiện ích xung quanh", defEn: "desirable or useful features of a building or place.", example: "The apartment complex has great amenities like a gym and pool." },
+                { word: "Mortgage", pos: "n", ipa: "/ˈmɔːɡɪdʒ/", meaning: "Khoản vay thế chấp mua nhà", defEn: "a legal agreement by which a bank lends money at interest in exchange for taking title of the debtor's property.", example: "They took out a 20-year mortgage to buy a house." },
+                { word: "Suburbs", pos: "n", ipa: "/ˈsʌbɜːbz/", meaning: "Khu vực ngoại ô", defEn: "an outlying district of a city, especially a residential one.", example: "Many families prefer living in the quiet suburbs." },
+                { word: "Residential", pos: "adj", ipa: "/ˌrezɪˈdenʃl/", meaning: "Thuộc khu dân cư", defEn: "designed for people to live in.", example: "Speed limits are lower in quiet residential areas." },
+                { word: "Landlord", pos: "n", ipa: "/ˈlændlɔːd/", meaning: "Chủ nhà cho thuê", defEn: "a person who rents land, a building, or an apartment to a tenant.", example: "The landlord agreed to repair the leaking roof." },
+                { word: "Tenant", pos: "n", ipa: "/ˈtenənt/", meaning: "Người thuê nhà", defEn: "a person who occupies land or property rented from a landlord.", example: "The tenant pays monthly rent on the first day." },
+                { word: "High-rise", pos: "n", ipa: "/ˈhaɪ raɪz/", meaning: "Tòa nhà cao tầng", defEn: "a building with many stories.", example: "High-rise apartments dominate the city skyline." },
+                { word: "Renovation", pos: "n", ipa: "/ˌrenəˈveɪʃn/", meaning: "Sự sửa chữa, cải tạo nhà", defEn: "the action of renovating a building.", example: "The house needs extensive interior renovation." },
+                { word: "Overcrowding", pos: "n", ipa: "/ˌəʊvəˈkraʊdɪŋ/", meaning: "Tình trạng quá tải dân số ở", defEn: "the presence of more people or things in a space than is comfortable.", example: "Urban overcrowding leads to rising housing costs." },
+                { word: "Slum", pos: "n", ipa: "/slʌm/", meaning: "Khu nhà ổ chuột", defEn: "a squalid and overcrowded urban street or district inhabited by very poor people.", example: "Government projects aim to improve slum conditions." },
+                { word: "Affordable", pos: "adj", ipa: "/əˈfɔːdəbl/", meaning: "Vừa túi tiền, giá cả phải chăng", defEn: "inexpensive; reasonably priced.", example: "Cities need more affordable housing for workers." },
+                { word: "Architecture", pos: "n", ipa: "/ˈɑːkɪtektʃə/", meaning: "Kiến trúc", defEn: "the art or practice of designing and constructing buildings.", example: "Modern architecture features sleek glass surfaces." },
+                { word: "Real estate", pos: "n", ipa: "/ˈrɪəl ɪsteɪt/", meaning: "Bất động sản", defEn: "property consisting of land or buildings.", example: "Investing in real estate offers long-term profits." },
+                { word: "Lease", pos: "n", ipa: "/liːs/", meaning: "Hợp đồng cho thuê", defEn: "a contract by which one party conveys land, property, services, etc.", example: "They signed a two-year lease for the office." },
+                { word: "Furnished", pos: "adj", ipa: "/ˈfɜːnɪʃt/", meaning: "Được trang bị đầy đủ nội thất", defEn: "available to be rented complete with furniture.", example: "She rented a fully furnished studio apartment." }
+            ],
+            money: [
+                { word: "Inflation", pos: "n", ipa: "/ɪnˈfleɪʃn/", meaning: "Lạm phát", defEn: "a general increase in prices and fall in the purchasing value of money.", example: "High inflation reduces consumer purchasing power." },
+                { word: "Investment", pos: "n", ipa: "/ɪnˈvestmənt/", meaning: "Khoản đầu tư", defEn: "the action or process of investing money for profit.", example: "Investing in stocks requires careful research." },
+                { word: "Transaction", pos: "n", ipa: "/trænˈzækʃn/", meaning: "Giao dịch tài chính", defEn: "an instance of buying or selling something.", example: "Online banking makes international transactions fast." },
+                { word: "Currency", pos: "n", ipa: "/ˈkʌrənsi/", meaning: "Tiền tệ", defEn: "a system of money in general use in a particular country.", example: "The Euro is the official currency of many EU states." },
+                { word: "Bankruptcy", pos: "n", ipa: "/ˈbæŋkrʌptsi/", meaning: "Sự phá sản", defEn: "the state of being bankrupt.", example: "Poor financial management led the company to bankruptcy." },
+                { word: "Revenue", pos: "n", ipa: "/ˈrevənjuː/", meaning: "Doanh thu", defEn: "income, especially of an organization.", example: "Company revenue grew by 15% this quarter." },
+                { word: "Expenditure", pos: "n", ipa: "/ɪkˈspendɪtʃə/", meaning: "Chi phí, sự chi tiêu", defEn: "the action of spending funds.", example: "The government increased expenditure on public health." },
+                { word: "Asset", pos: "n", ipa: "/ˈæset/", meaning: "Tài sản có giá trị", defEn: "a useful or valuable thing, person, or quality.", example: "Real estate is considered a safe long-term asset." },
+                { word: "Liability", pos: "n", ipa: "/ˌlaɪəˈbɪləti/", meaning: "Khoản nợ phải trả", defEn: "a thing for which someone is responsible, especially a debt.", example: "Unpaid loans are recorded as financial liabilities." },
+                { word: "Budget", pos: "n", ipa: "/ˈbʌdʒɪt/", meaning: "Ngân sách", defEn: "an estimate of income and expenditure for a set period of time.", example: "We must stay within our monthly family budget." },
+                { word: "Interest rate", pos: "n", ipa: "/ˈɪntrəst reɪt/", meaning: "Lãi suất", defEn: "the proportion of a loan charged as interest to the borrower.", example: "Central banks raised interest rates to control inflation." },
+                { word: "Capital", pos: "n", ipa: "/ˈkæpɪtl/", meaning: "Vốn đầu tư", defEn: "wealth in the form of money or other assets owned by a person or organization.", example: "Startups need capital to launch their products." },
+                { word: "Debt", pos: "n", ipa: "/det/", meaning: "Khoản nợ", defEn: "something, typically money, that is owed or due.", example: "He paid off all his student debt in five years." },
+                { word: "Dividend", pos: "n", ipa: "/ˈdɪvɪdend/", meaning: "Cổ tức", defEn: "a sum of money paid regularly by a company to its shareholders.", example: "Shareholders receive annual dividend payments." },
+                { word: "Savings", pos: "n", ipa: "/ˈseɪvɪŋz/", meaning: "Tiền tiết kiệm", defEn: "the money one has saved, especially through a bank.", example: "Setting aside money build a solid savings fund." }
+            ],
+            science: [
+                { word: "Hypothesis", pos: "n", ipa: "/haɪˈpɒθəsɪs/", meaning: "Giả thuyết khoa học", defEn: "a proposed explanation made on the basis of limited evidence.", example: "Researchers conducted tests to prove their hypothesis." },
+                { word: "Experiment", pos: "n", ipa: "/ɪkˈsperɪmənt/", meaning: "Thí nghiệm", defEn: "a scientific procedure undertaken to make a discovery.", example: "The laboratory experiment yielded positive results." },
+                { word: "Genetics", pos: "n", ipa: "/dʒəˈnetɪks/", meaning: "Di truyền học", defEn: "the study of heredity and the variation of inherited characteristics.", example: "Genetics plays a key role in eye color." },
+                { word: "Phenomenon", pos: "n", ipa: "/fəˈnɒmɪnən/", meaning: "Hiện tượng tự nhiên", defEn: "a fact or situation that is observed to exist or happen.", example: "The Northern Lights are a stunning natural phenomenon." },
+                { word: "Laboratory", pos: "n", ipa: "/ləˈbɒrətri/", meaning: "Phòng thí nghiệm", defEn: "a room or building equipped for scientific research or experiments.", example: "Scientists work daily in the biochemistry laboratory." },
+                { word: "Empirical", pos: "adj", ipa: "/ɪmˈpɪrɪkl/", meaning: "Dựa trên thực nghiệm", defEn: "based on, concerned with, or verifiable by observation or experience.", example: "The theory is supported by strong empirical evidence." },
+                { word: "Organism", pos: "n", ipa: "/ˈɔːɡənɪzəm/", meaning: "Sinh vật", defEn: "an individual animal, plant, or single-celled life form.", example: "Microscopic organisms live in the ocean water." },
+                { word: "Molecule", pos: "n", ipa: "/ˈmɒlɪkjuːl/", meaning: "Phân tử", defEn: "a group of atoms bonded together.", example: "A water molecule consists of hydrogen and oxygen." },
+                { word: "Gravity", pos: "n", ipa: "/ˈɡrævəti/", meaning: "Trọng lực", defEn: "the force that attracts a body toward the center of the earth.", example: "Gravity keeps the planets in orbit around the sun." },
+                { word: "Analysis", pos: "n", ipa: "/əˈnæləsɪs/", meaning: "Sự phân tích", defEn: "detailed examination of the elements or structure of something.", example: "Data analysis revealed interesting scientific trends." },
+                { word: "Evolution", pos: "n", ipa: "/ˌiːvəˈluːʃn/", meaning: "Sự tiến hóa", defEn: "the process by which different kinds of living organisms are thought to have developed.", example: "Darwin proposed the theory of natural evolution." },
+                { word: "Radiation", pos: "n", ipa: "/ˌreɪdiˈeɪʃn/", meaning: "Bức xạ", defEn: "the emission of energy as electromagnetic waves or subatomic particles.", example: "Sunscreen protects skin from harmful solar radiation." },
+                { word: "Discovery", pos: "n", ipa: "/dɪˈskʌvəri/", meaning: "Phát minh, sự khám phá", defEn: "the action or process of discovering or being discovered.", example: "The discovery of penicillin revolutionized medicine." },
+                { word: "Vaccine", pos: "n", ipa: "/ˈvæksiːn/", meaning: "Vắc-xin", defEn: "a substance used to stimulate the production of antibodies.", example: "Developing a safe vaccine requires extensive testing." },
+                { word: "Theory", pos: "n", ipa: "/ˈθɪəri/", meaning: "Lý thuyết khoa học", defEn: "a system of ideas intended to explain something.", example: "Einstein formulated the famous theory of relativity." }
             ]
         };
 
@@ -320,12 +487,6 @@
         let currentGameMode = '';
         let isTransitioning = false;
         let spellingTimer = null;
-
-        window.onload = function() {
-            if (sessionStorage.getItem('isAdminLoggedIn') === 'true') {
-                showAdminDashboard();
-            }
-        };
 
         // BỘ PHÁT ÂM
         function speakWord(text) {
@@ -338,6 +499,7 @@
             }
         }
 
+        // ÂM THANH PHẢN HỒI
         function playSoundEffect(type) {
             try {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -606,163 +768,6 @@
                 input.style.borderColor = '#ef4444';
                 input.style.backgroundColor = '#fee2e2';
                 triggerFeedback(false);
-            }
-        }
-
-        // --- CÁC HÀM XỬ LÝ ADMIN & IMPORT GITHUB (LƯU TOKEN PHIÊN TẠM THỜI) ---
-        function loginAdmin() {
-            const pass = document.getElementById('adminPassInput').value.trim();
-            const tokenInput = document.getElementById('adminTokenInput').value.trim();
-
-            if (pass !== ADMIN_PASSWORD) {
-                return alert("❌ Mật khẩu Admin không chính xác!");
-            }
-
-            if (!tokenInput.startsWith("ghp_") && !tokenInput.startsWith("github_pat_")) {
-                return alert("❌ Vui lòng nhập đúng định dạng GitHub Personal Access Token!");
-            }
-
-            // Lưu trạng thái & Token tạm thời vào sessionStorage (Xóa khi đóng Tab)
-            sessionStorage.setItem('isAdminLoggedIn', 'true');
-            sessionStorage.setItem('gh_token', tokenInput);
-
-            showAdminDashboard();
-            document.getElementById('adminPassInput').value = '';
-            document.getElementById('adminTokenInput').value = '';
-        }
-
-        function showAdminDashboard() {
-            document.getElementById('adminLoginForm').style.display = 'none';
-            document.getElementById('adminDashboard').style.display = 'block';
-        }
-
-        function logoutAdmin() {
-            sessionStorage.removeItem('isAdminLoggedIn');
-            sessionStorage.removeItem('gh_token');
-            document.getElementById('adminLoginForm').style.display = 'block';
-            document.getElementById('adminDashboard').style.display = 'none';
-        }
-
-        // 1. TẠO PROMPT VÀ COPY CHUẨN MẪU TỰ ĐỘNG
-        function copyPromptToClipboard() {
-            const topic = document.getElementById('topicPromptInput').value.trim();
-            if (!topic) return alert("Vui lòng nhập chủ đề từ vựng!");
-
-            const promptText = `Bạn là máy xuất dữ liệu. Hãy tạo danh sách từ vựng IELTS theo yêu cầu: "${topic}".
-Trả về duy nhất MẢNG JSON hợp lệ (không kèm markdown \`\`\`json, không văn bản bổ sung hay lời chào) theo đúng cấu trúc mẫu sau:
-[
-  {
-    "word": "Curriculum",
-    "pos": "n",
-    "ipa": "/kəˈrɪkjələm/",
-    "meaning": "Chương trình học",
-    "defEn": "the subjects comprising a course of study in a school or college.",
-    "example": "The school curriculum has been updated to include coding."
-  }
-]`;
-
-            navigator.clipboard.writeText(promptText).then(() => {
-                alert("📋 Đã copy Prompt thành công!\nBây giờ hãy dán prompt này vào Gemini/ChatGPT để lấy dữ liệu JSON.");
-            }).catch(() => {
-                alert("Lỗi copy tự động. Vui lòng thử lại!");
-            });
-        }
-
-        // 2. NHẬN MẢNG JSON VÀ ĐẨY LÊN GITHUB REST API
-        async function importJsonToGitHub() {
-            const GITHUB_TOKEN = sessionStorage.getItem('gh_token');
-            if (!GITHUB_TOKEN) {
-                alert("Phiên đăng nhập hết hạn! Vui lòng đăng nhập lại Admin.");
-                return logoutAdmin();
-            }
-
-            let rawJson = document.getElementById('jsonInputArea').value.trim();
-            if (!rawJson) return alert("Vui lòng dán chuỗi JSON vào ô nhập!");
-
-            rawJson = rawJson.replace(/```json/g, '').replace(/```/g, '').trim();
-
-            let parsedWords = [];
-            try {
-                parsedWords = JSON.parse(rawJson);
-                if (!Array.isArray(parsedWords)) {
-                    throw new Error("Dữ liệu phải là một Mảng JSON [ ]");
-                }
-            } catch (err) {
-                return alert("❌ Lỗi cấu trúc JSON không hợp lệ! Vui lòng kiểm tra lại dữ liệu.");
-            }
-
-            const apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/contents/${FILE_PATH}`;
-
-            try {
-                let sha = "";
-                let currentWords = [];
-
-                // Lấy file vocabulary.json hiện tại trên GitHub
-                const getRes = await fetch(apiUrl, {
-                    headers: { "Authorization": `token ${GITHUB_TOKEN}` }
-                });
-
-                if (getRes.status === 200) {
-                    const fileInfo = await getRes.json();
-                    sha = fileInfo.sha;
-                    const contentUtf8 = decodeURIComponent(escape(atob(fileInfo.content)));
-                    currentWords = JSON.parse(contentUtf8);
-                }
-
-                // --- BỘ LỌC TỪ TRÙNG LẶP ---
-                const existingWordsSet = new Set(currentWords.map(item => item.word.toLowerCase().trim()));
-                let duplicateCount = 0;
-
-                const uniqueNewWords = parsedWords.filter(item => {
-                    if (!item.word) return false;
-                    const wordClean = item.word.toLowerCase().trim();
-                    if (existingWordsSet.has(wordClean)) {
-                        duplicateCount++;
-                        return false;
-                    }
-                    existingWordsSet.add(wordClean);
-                    return true;
-                });
-
-                if (uniqueNewWords.length === 0) {
-                    return alert(`⚠️ Tất cả ${duplicateCount} từ vựng bạn dán ĐÃ TỒN TẠI trên GitHub! Không thêm từ nào.`);
-                }
-
-                const finalWordsList = [...currentWords, ...uniqueNewWords];
-                const updatedJsonString = JSON.stringify(finalWordsList, null, 2);
-                
-                const base64Content = btoa(unescape(encodeURIComponent(updatedJsonString)));
-
-                // Gửi request cập nhật
-                const putRes = await fetch(apiUrl, {
-                    method: 'PUT',
-                    headers: {
-                        "Authorization": `token ${GITHUB_TOKEN}`,
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        message: "Feat: Admin imported new unique vocabulary",
-                        content: base64Content,
-                        sha: sha ? sha : undefined
-                    })
-                });
-
-                if (putRes.ok) {
-                    let alertMsg = `🎉 [Admin] Đã Import thành công ${uniqueNewWords.length} từ vựng mới vào GitHub!`;
-                    if (duplicateCount > 0) {
-                        alertMsg += `\n(Đã tự động lọc bỏ ${duplicateCount} từ bị trùng lặp).`;
-                    }
-                    alert(alertMsg);
-
-                    document.getElementById('jsonInputArea').value = '';
-                    document.getElementById('topicPromptInput').value = '';
-                } else {
-                    alert("Lỗi khi đẩy dữ liệu lên GitHub. Hãy kiểm tra lại Token hoặc Tên Repo/Username!");
-                }
-
-            } catch (err) {
-                alert("Lỗi kết nối GitHub API!");
-                console.error(err);
             }
         }
     </script>
