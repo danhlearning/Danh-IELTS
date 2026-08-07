@@ -698,13 +698,13 @@
         let isTransitioning = false;
         let spellingTimer = null;
 
-        // BỘ PHÁT ÂM
+        // BỘ PHÁT ÂM (Đã giảm tốc độ đọc xuống 0.6)
         function speakWord(text) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'en-US';
-                utterance.rate = 0.75;
+                utterance.rate = 0.6; // Đã chỉnh tốc độ đọc chậm hơn một chút
                 window.speechSynthesis.speak(utterance);
             }
         }
@@ -965,12 +965,13 @@
                 if(input) input.focus();
             }, 100);
 
+            // Đã cập nhật thời gian đếm ngược hiện nút đáp án xuống 20000ms (20 giây)
             spellingTimer = setTimeout(() => {
                 const showAnswerBtn = document.getElementById('spellingShowAnswerBtn');
                 if (showAnswerBtn && !isTransitioning) {
                     showAnswerBtn.style.display = 'block';
                 }
-            }, 30000);
+            }, 20000);
         }
 
         function revealSpellingAnswer() {
