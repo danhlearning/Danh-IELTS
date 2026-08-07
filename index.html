@@ -16,6 +16,7 @@
             --text-main: #1e293b;
             --zalo-color: #0068ff;
             --fb-color: #1877f2;
+            --success: #10b981;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,13 +35,27 @@
         header { text-align: center; margin-bottom: 16px; }
         header h1 { font-weight: 800; color: var(--primary); font-size: 1.4rem; }
 
-        /* Menu Thanh Sổ Xuống */
-        .dropdown-wrapper { margin-bottom: 16px; }
+        /* Menu Thanh Sổ Xuống & Quản lý từ đã thuộc */
+        .dropdown-wrapper { margin-bottom: 10px; }
         .topic-select {
             width: 100%; padding: 10px 14px; font-family: 'Nunito', sans-serif;
             font-size: 0.95rem; font-weight: 700; color: #0f172a;
             background-color: #ffffff; border: 2px solid #cbd5e1; border-radius: 10px; outline: none;
         }
+        
+        /* Thanh trạng thái Đã thuộc */
+        .mastered-manager-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 14px; padding: 8px 12px; background: #ffffff;
+            border-radius: 10px; border: 1.5px solid #e2e8f0; font-size: 0.85rem;
+            font-weight: 700; color: #475569;
+        }
+        .btn-manage-mastered {
+            background: #eff6ff; color: var(--primary); border: 1px solid #bfdbfe;
+            padding: 5px 12px; border-radius: 6px; font-weight: 700; font-family: 'Nunito', sans-serif;
+            cursor: pointer; transition: all 0.2s ease;
+        }
+        .btn-manage-mastered:hover { background: var(--primary); color: #ffffff; }
 
         /* Thẻ Chọn Game */
         .game-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
@@ -89,18 +104,18 @@
         input:checked + .slider:before { transform: translateX(16px); }
 
         /* Flashcard */
-        .flashcard-container { perspective: 1000px; width: 100%; min-height: 230px; margin: 0 auto 12px auto; cursor: pointer; }
+        .flashcard-container { perspective: 1000px; width: 100%; min-height: 270px; margin: 0 auto 12px auto; cursor: pointer; }
         .flashcard-inner {
-            position: relative; width: 100%; height: 100%; min-height: 230px; text-align: center;
+            position: relative; width: 100%; height: 100%; min-height: 270px; text-align: center;
             transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d;
         }
         .flashcard-container.flipped .flashcard-inner { transform: rotateY(180deg); }
         .flashcard-front, .flashcard-back {
             position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
             border-radius: 14px; display: flex; flex-direction: column; align-items: center;
-            justify-content: center; padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 2px solid #3b82f6;
+            justify-content: space-between; padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 2px solid #3b82f6;
         }
-        .flashcard-front { background: #f0f9ff; color: #1e3a8a; }
+        .flashcard-front { background: #f0f9ff; color: #1e3a8a; justify-content: center; }
         .flashcard-front .en-definition { font-size: 1.1rem; font-weight: 700; color: #1d4ed8; line-height: 1.35; }
         .flashcard-hint { position: absolute; bottom: 10px; font-size: 0.75rem; color: #94a3b8; font-weight: 600; }
         .flashcard-back { background: #ffffff; color: #0f172a; transform: rotateY(180deg); border-color: #10b981; }
@@ -108,19 +123,36 @@
         .flashcard-back .word-en { font-size: 1.45rem; font-weight: 800; color: #059669; }
         .pos-badge { font-size: 0.75rem; font-weight: 800; color: #0284c7; background: #e0f2fe; padding: 2px 6px; border-radius: 6px; font-style: italic; }
         .btn-audio { background: #e0e7ff; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; }
-        .flashcard-back .ipa { font-size: 0.88rem; color: #64748b; font-weight: 700; margin-bottom: 4px; }
-        .flashcard-back .vi-meaning-back { font-size: 0.88rem; font-weight: 700; color: #475569; background: #f1f5f9; padding: 3px 10px; border-radius: 6px; margin-bottom: 8px; }
-        .flashcard-back .example-box { font-size: 0.92rem; line-height: 1.35; color: #1e293b; font-style: italic; background: #f0fdf4; border-left: 4px solid #10b981; padding: 8px 10px; border-radius: 6px; text-align: left; width: 100%; }
+        .flashcard-back .ipa { font-size: 0.88rem; color: #64748b; font-weight: 700; margin-bottom: 2px; }
+        .flashcard-back .vi-meaning-back { font-size: 0.88rem; font-weight: 700; color: #475569; background: #f1f5f9; padding: 3px 10px; border-radius: 6px; margin-bottom: 6px; }
+        .flashcard-back .example-box { font-size: 0.88rem; line-height: 1.3; color: #1e293b; font-style: italic; background: #f0fdf4; border-left: 4px solid #10b981; padding: 6px 8px; border-radius: 6px; text-align: left; width: 100%; }
 
         .btn-action { width: 100%; padding: 10px; border-radius: 10px; border: none; background: var(--primary); color: #ffffff; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem; cursor: pointer; margin-top: 8px; }
         .btn-show-answer { width: 100%; padding: 9px; border-radius: 10px; border: none; background: #f59e0b; color: #ffffff; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9rem; cursor: pointer; margin-top: 8px; display: none; }
+
+        /* Nút loại bỏ từ đã thuộc */
+        .btn-mark-mastered {
+            background: #ecfdf5; color: #047857; border: 1.5px solid #10b981;
+            padding: 7px 12px; border-radius: 8px; font-weight: 800; font-size: 0.82rem;
+            cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+            gap: 4px; transition: all 0.2s ease; width: 100%; font-family: 'Nunito', sans-serif;
+        }
+        .btn-mark-mastered:hover { background: #10b981; color: #ffffff; }
+        .btn-mark-mastered:active { transform: scale(0.97); }
 
         /* Quiz */
         .quiz-options-grid { display: flex; flex-direction: column; gap: 8px; }
         .btn-quiz-opt { padding: 10px 12px; border-radius: 10px; border: 2px solid #e2e8f0; background: #fff; font-family: 'Nunito'; font-weight: 700; font-size: 0.88rem; cursor: pointer; text-align: left; transition: all 0.2s ease; line-height: 1.3; }
         .btn-quiz-opt.correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
         .btn-quiz-opt.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
-        .quiz-example-feedback, .spelling-example-feedback { display: none; margin-bottom: 12px; font-size: 0.92rem; line-height: 1.35; color: #15803d; background: #dcfce7; padding: 8px 10px; border-radius: 8px; text-align: left; border-left: 4px solid #22c55e; }
+        .quiz-example-feedback, .spelling-example-feedback { display: none; margin-bottom: 8px; font-size: 0.92rem; line-height: 1.35; color: #15803d; background: #dcfce7; padding: 8px 10px; border-radius: 8px; text-align: left; border-left: 4px solid #22c55e; }
+
+        /* Danh sách từ đã thuộc */
+        .mastered-list-box { max-height: 260px; overflow-y: auto; text-align: left; margin-top: 10px; border: 1px solid #f1f5f9; border-radius: 8px; }
+        .mastered-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; }
+        .mastered-item:last-child { border-bottom: none; }
+        .btn-restore { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; padding: 4px 8px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; }
+        .btn-restore:hover { background: #dc2626; color: #ffffff; }
 
         /* Hoạt cảnh */
         @keyframes shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-8px); } 40%, 80% { transform: translateX(8px); } }
@@ -153,9 +185,15 @@
 
         <!-- Menu Thanh Sổ Xuống -->
         <div class="dropdown-wrapper">
-            <select id="topicSelect" class="topic-select">
-                <!-- Các option sẽ được Javascript tự động tạo kèm số lượng từ -->
+            <select id="topicSelect" class="topic-select" onchange="handleTopicChange()">
+                <!-- Các option sẽ được Javascript tự động tạo -->
             </select>
+        </div>
+
+        <!-- Quản lý từ đã thuộc -->
+        <div class="mastered-manager-bar">
+            <span>Đã thuộc: <b id="masteredCountText" style="color: var(--success);">0 từ</b></span>
+            <button class="btn-manage-mastered" onclick="showMasteredModal()">Xem / Khôi phục</button>
         </div>
 
         <!-- 3 Thẻ Chọn Game -->
@@ -178,7 +216,7 @@
         <section id="gameArena" class="game-arena">
             <div class="game-arena-header">
                 <h2 id="gameArenaTitle" class="game-arena-title">Màn chơi</h2>
-                <div class="auto-next-control">
+                <div class="auto-next-control" id="autoNextControlBox">
                     <span>Tự chuyển</span>
                     <label class="switch">
                         <input type="checkbox" id="autoNextToggle" checked>
@@ -209,7 +247,7 @@
     </div>
 
     <script>
-        // DỮ LIỆU TỪ VỰNG TĨNH TẬP TRUNG (15 CHỦ ĐỀ x 30 TỪ = 450 TỪ)
+        // DỮ LIỆU TỪ VỰNG TĨNH TẬP TRUNG (Để trống theo yêu cầu)
         const vocabularyData = {
             education: [
                 { word: "Curriculum", pos: "n", ipa: "/kəˈrɪkjələm/", meaning: "Chương trình học", defEn: "the subjects comprising a course of study in a school or college.", example: "The school curriculum has been updated to include coding." },
@@ -717,14 +755,59 @@
         let currentGameMode = '';
         let isTransitioning = false;
         let spellingTimer = null;
+        let quizTimer = null;
 
-        // BỘ PHÁT ÂM (Đã giảm tốc độ đọc xuống 0.6)
+        function clearTimers() {
+            if (spellingTimer) { clearTimeout(spellingTimer); spellingTimer = null; }
+            if (quizTimer) { clearTimeout(quizTimer); quizTimer = null; }
+        }
+
+        // TẢI VÀ QUẢN LÝ DỮ LIỆU TỪ ĐÃ THUỘC TỪ LOCALSTORAGE
+        function getMasteredWords() {
+            try {
+                return JSON.parse(localStorage.getItem('ielts_mastered_words')) || [];
+            } catch(e) {
+                return [];
+            }
+        }
+
+        function markAsMastered(wordStr) {
+            clearTimers();
+            isTransitioning = false;
+            let mastered = getMasteredWords();
+            if (!mastered.includes(wordStr)) {
+                mastered.push(wordStr);
+                localStorage.setItem('ielts_mastered_words', JSON.stringify(mastered));
+            }
+            initTopicDropdown();
+            if (currentGameMode) {
+                startGame(currentGameMode);
+            }
+        }
+
+        function restoreMasteredWord(wordStr) {
+            let mastered = getMasteredWords();
+            mastered = mastered.filter(w => w !== wordStr);
+            localStorage.setItem('ielts_mastered_words', JSON.stringify(mastered));
+            initTopicDropdown();
+            showMasteredModal();
+        }
+
+        function restoreAllMasteredWords() {
+            if (confirm("Bạn có chắc chắn muốn khôi phục lại tất cả các từ đã thuộc không?")) {
+                localStorage.removeItem('ielts_mastered_words');
+                initTopicDropdown();
+                showMasteredModal();
+            }
+        }
+
+        // BỘ PHÁT ÂM
         function speakWord(text) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'en-US';
-                utterance.rate = 0.6; // Đã chỉnh tốc độ đọc chậm hơn một chút
+                utterance.rate = 0.6;
                 window.speechSynthesis.speak(utterance);
             }
         }
@@ -733,9 +816,20 @@
             initTopicDropdown();
         };
 
+        function handleTopicChange() {
+            const arena = document.getElementById('gameArena');
+            if (arena.style.display === 'block' && currentGameMode) {
+                startGame(currentGameMode);
+            }
+        }
+
         function initTopicDropdown() {
             const topicSelect = document.getElementById('topicSelect');
             if (!topicSelect) return;
+
+            const mastered = getMasteredWords();
+            const masteredCountText = document.getElementById('masteredCountText');
+            if (masteredCountText) masteredCountText.innerText = `${mastered.length} từ`;
 
             const topicNames = {
                 education: "1. Education (Giáo dục)",
@@ -756,18 +850,25 @@
             };
 
             let totalWords = 0;
+            let unmasteredTotal = 0;
+
             Object.keys(vocabularyData).forEach(key => {
                 totalWords += vocabularyData[key].length;
+                unmasteredTotal += vocabularyData[key].filter(w => !mastered.includes(w.word)).length;
             });
 
-            let optionsHtml = `<option value="all">🔥 Luyện Tập Tổng Hợp (${totalWords} Từ)</option>`;
+            let optionsHtml = `<option value="all">🔥 Luyện Tập Tổng Hợp (${unmasteredTotal}/${totalWords} Từ)</option>`;
 
             Object.keys(topicNames).forEach(key => {
-                const count = vocabularyData[key] ? vocabularyData[key].length : 0;
-                optionsHtml += `<option value="${key}">${topicNames[key]} (${count} từ)</option>`;
+                const topicWords = vocabularyData[key] || [];
+                const totalCount = topicWords.length;
+                const activeCount = topicWords.filter(w => !mastered.includes(w.word)).length;
+                optionsHtml += `<option value="${key}">${topicNames[key]} (${activeCount}/${totalCount} từ)</option>`;
             });
 
+            const currentVal = topicSelect.value;
             topicSelect.innerHTML = optionsHtml;
+            if (currentVal) topicSelect.value = currentVal;
         }
 
         // ÂM THANH PHẢN HỒI
@@ -813,36 +914,53 @@
             }, 400);
         }
 
-        function getVocabularyList(topicKey) {
+        function getVocabularyList(topicKey, filterMastered = true) {
+            let list = [];
             if (topicKey === 'all') {
-                let allWords = [];
                 Object.keys(vocabularyData).forEach(key => {
-                    allWords = allWords.concat(vocabularyData[key]);
+                    list = list.concat(vocabularyData[key]);
                 });
-                return allWords;
+            } else {
+                list = vocabularyData[topicKey] || vocabularyData['education'] || [];
             }
-            return vocabularyData[topicKey] || vocabularyData['education'];
-        }
 
-        function clearSpellingTimer() {
-            if (spellingTimer) {
-                clearTimeout(spellingTimer);
-                spellingTimer = null;
+            if (filterMastered) {
+                const mastered = getMasteredWords();
+                return list.filter(item => !mastered.includes(item.word));
             }
+            return list;
         }
 
         function startGame(mode) {
             isTransitioning = false;
-            clearSpellingTimer();
+            clearTimers();
             currentGameMode = mode;
             const topicKey = document.getElementById('topicSelect').value;
-            const words = getVocabularyList(topicKey);
+            const words = getVocabularyList(topicKey, true);
 
             const arena = document.getElementById('gameArena');
             const arenaTitle = document.getElementById('gameArenaTitle');
             const arenaContent = document.getElementById('gameArenaContent');
+            const autoNextBox = document.getElementById('autoNextControlBox');
 
             arena.style.display = 'block';
+            autoNextBox.style.display = 'flex';
+
+            if (words.length === 0) {
+                arenaTitle.innerText = "🎉 Hoàn thành!";
+                arenaContent.innerHTML = `
+                    <div style="text-align: center; padding: 20px 10px;">
+                        <p style="font-size: 1.1rem; font-weight: 800; color: #10b981; margin-bottom: 8px;">
+                            Chúc mừng! Bạn đã thuộc hết từ vựng trong chủ đề này!
+                        </p>
+                        <p style="font-size: 0.88rem; color: #64748b; margin-bottom: 14px;">
+                            Hãy chọn chủ đề khác hoặc khôi phục từ đã thuộc để ôn luyện lại.
+                        </p>
+                        <button class="btn-action" onclick="showMasteredModal()">Quản lý từ đã thuộc</button>
+                    </div>
+                `;
+                return;
+            }
 
             if (mode === 'flashcard') {
                 arenaTitle.innerText = "🃏 Flashcard";
@@ -860,6 +978,45 @@
             return document.getElementById('autoNextToggle').checked;
         }
 
+        // BẢNG QUẢN LÝ TỪ ĐÃ THUỘC
+        function showMasteredModal() {
+            currentGameMode = '';
+            clearTimers();
+            const arena = document.getElementById('gameArena');
+            const arenaTitle = document.getElementById('gameArenaTitle');
+            const arenaContent = document.getElementById('gameArenaContent');
+            const autoNextBox = document.getElementById('autoNextControlBox');
+
+            arena.style.display = 'block';
+            autoNextBox.style.display = 'none';
+            arenaTitle.innerText = "✅ Từ vựng đã thuộc";
+
+            const mastered = getMasteredWords();
+            if (mastered.length === 0) {
+                arenaContent.innerHTML = `
+                    <div style="text-align: center; padding: 20px 10px;">
+                        <p style="font-weight: 700; color: #64748b;">Bạn chưa đánh dấu thuộc từ nào.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let itemsHtml = mastered.map(w => `
+                <div class="mastered-item">
+                    <span><b>${w}</b></span>
+                    <button class="btn-restore" onclick="restoreMasteredWord('${w}')">Khôi phục</button>
+                </div>
+            `).join('');
+
+            arenaContent.innerHTML = `
+                <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.85rem; font-weight: 700; color: #475569;">Đã thuộc: ${mastered.length} từ</span>
+                    <button class="btn-restore" style="background: #dc2626; color: white; border: none;" onclick="restoreAllMasteredWords()">Khôi phục tất cả</button>
+                </div>
+                <div class="mastered-list-box">${itemsHtml}</div>
+            `;
+        }
+
         // FLASHCARD
         function renderFlashcard(words, container) {
             currentWordObj = words[Math.floor(Math.random() * words.length)];
@@ -871,16 +1028,21 @@
                             <span class="flashcard-hint">👆 Chạm để xem đáp án</span>
                         </div>
                         <div class="flashcard-back">
-                            <div class="word-header">
-                                <span class="word-en">${currentWordObj.word}</span>
-                                <span class="pos-badge">[${currentWordObj.pos}]</span>
-                                <button class="btn-audio" onclick="event.stopPropagation(); speakWord('${currentWordObj.word}')">🔊</button>
+                            <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                                <div class="word-header">
+                                    <span class="word-en">${currentWordObj.word}</span>
+                                    <span class="pos-badge">[${currentWordObj.pos}]</span>
+                                    <button class="btn-audio" onclick="event.stopPropagation(); speakWord('${currentWordObj.word}')">🔊</button>
+                                </div>
+                                <span class="ipa">${currentWordObj.ipa}</span>
+                                <span class="vi-meaning-back">🇻🇳 ${currentWordObj.meaning}</span>
+                                <div class="example-box">
+                                    💡 <b>Ex:</b> "${currentWordObj.example}"
+                                </div>
                             </div>
-                            <span class="ipa">${currentWordObj.ipa}</span>
-                            <span class="vi-meaning-back">🇻🇳 ${currentWordObj.meaning}</span>
-                            <div class="example-box">
-                                💡 <b>Ex:</b> "${currentWordObj.example}"
-                            </div>
+                            <button class="btn-mark-mastered" onclick="event.stopPropagation(); markAsMastered('${currentWordObj.word}')">
+                                ✅ Đã thuộc từ này
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -893,12 +1055,12 @@
             if (isFlipped) speakWord(word);
         }
 
-        // TRẮC NGHIỆM (FULL ĐỊNH NGHĨA TIẾNG ANH CAMBRIDGE)
+        // TRẮC NGHIỆM
         function renderQuiz(words, container) {
             currentWordObj = words[Math.floor(Math.random() * words.length)];
 
             let options = [currentWordObj.defEn];
-            let allList = getVocabularyList('all');
+            let allList = getVocabularyList('all', false);
             while (options.length < 6 && options.length < allList.length) {
                 let randomDefEn = allList[Math.floor(Math.random() * allList.length)].defEn;
                 if (!options.includes(randomDefEn)) options.push(randomDefEn);
@@ -924,7 +1086,10 @@
                     </div>
                 </div>
                 <div class="quiz-options-grid">${optionsHtml}</div>
-                <div id="quizNextBtnBox" style="display: none; margin-top: 10px;">
+                <div id="quizActionBox" style="display: none; margin-top: 10px; text-align: center;">
+                    <button class="btn-mark-mastered" style="margin-bottom: 6px;" onclick="markAsMastered('${currentWordObj.word}')">
+                        ✅ Đã thuộc từ này (Không gặp lại)
+                    </button>
                     <button class="btn-action" onclick="startGame('quiz6')">Từ Tiếp Theo ➔</button>
                 </div>
             `;
@@ -940,13 +1105,16 @@
                 const quizExampleBox = document.getElementById('quizExampleFeedback');
                 if (quizExampleBox) quizExampleBox.style.display = 'block';
 
+                const quizActionBox = document.getElementById('quizActionBox');
+                if (quizActionBox) quizActionBox.style.display = 'block';
+
                 triggerFeedback(true);
                 speakWord(currentWordObj.word);
 
                 if (isAutoNextEnabled()) {
-                    setTimeout(() => startGame('quiz6'), 2000);
-                } else {
-                    document.getElementById('quizNextBtnBox').style.display = 'block';
+                    quizTimer = setTimeout(() => {
+                        if (isTransitioning) startGame('quiz6');
+                    }, 2200);
                 }
             } else {
                 btn.classList.add('wrong');
@@ -954,7 +1122,7 @@
             }
         }
 
-        // ĐIỀN TỪ (FULL ĐỊNH NGHĨA TIẾNG ANH CAMBRIDGE)
+        // ĐIỀN TỪ
         function renderSpelling(words, container) {
             currentWordObj = words[Math.floor(Math.random() * words.length)];
             container.innerHTML = `
@@ -975,6 +1143,12 @@
                         💡 <b>Ex:</b> "${currentWordObj.example}"
                     </div>
 
+                    <div id="spellingMasteredBox" style="display:none; margin-bottom: 8px;">
+                        <button class="btn-mark-mastered" onclick="markAsMastered('${currentWordObj.word}')">
+                            ✅ Đã thuộc từ này (Không gặp lại)
+                        </button>
+                    </div>
+
                     <button id="spellingSubmitBtn" class="btn-action" onclick="handleSpellingCheck()">Kiểm Tra</button>
                     <button id="spellingShowAnswerBtn" class="btn-show-answer" onclick="revealSpellingAnswer()">Xem Đáp Án 💡</button>
                 </div>
@@ -985,7 +1159,6 @@
                 if(input) input.focus();
             }, 100);
 
-            // Đã cập nhật thời gian đếm ngược hiện nút đáp án xuống 20000ms (20 giây)
             spellingTimer = setTimeout(() => {
                 const showAnswerBtn = document.getElementById('spellingShowAnswerBtn');
                 if (showAnswerBtn && !isTransitioning) {
@@ -995,11 +1168,12 @@
         }
 
         function revealSpellingAnswer() {
-            clearSpellingTimer();
+            clearTimers();
             const input = document.getElementById('spellingInput');
             const exampleBox = document.getElementById('spellingExampleFeedback');
             const submitBtn = document.getElementById('spellingSubmitBtn');
             const showAnswerBtn = document.getElementById('spellingShowAnswerBtn');
+            const masteredBox = document.getElementById('spellingMasteredBox');
 
             input.value = currentWordObj.word;
             input.style.borderColor = '#f59e0b';
@@ -1007,6 +1181,7 @@
 
             if (exampleBox) exampleBox.style.display = 'block';
             if (showAnswerBtn) showAnswerBtn.style.display = 'none';
+            if (masteredBox) masteredBox.style.display = 'block';
 
             speakWord(currentWordObj.word);
 
@@ -1020,23 +1195,25 @@
             const exampleBox = document.getElementById('spellingExampleFeedback');
             const submitBtn = document.getElementById('spellingSubmitBtn');
             const showAnswerBtn = document.getElementById('spellingShowAnswerBtn');
+            const masteredBox = document.getElementById('spellingMasteredBox');
             const val = input.value.trim();
 
             if (val.toLowerCase() === currentWordObj.word.toLowerCase()) {
                 isTransitioning = true;
-                clearSpellingTimer();
+                clearTimers();
 
                 input.style.borderColor = '#22c55e';
                 input.style.backgroundColor = '#dcfce7';
                 
                 if (exampleBox) exampleBox.style.display = 'block';
                 if (showAnswerBtn) showAnswerBtn.style.display = 'none';
+                if (masteredBox) masteredBox.style.display = 'block';
 
                 triggerFeedback(true);
                 speakWord(currentWordObj.word);
 
                 if (isAutoNextEnabled()) {
-                    setTimeout(() => startGame('spelling'), 2000);
+                    spellingTimer = setTimeout(() => startGame('spelling'), 2200);
                 } else {
                     submitBtn.innerText = "Từ Tiếp Theo ➔";
                     submitBtn.onclick = () => startGame('spelling');
